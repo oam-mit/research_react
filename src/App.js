@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StudentRoot from './components/student/StudentRoot';
+import FacultyRoot from './components/faculty/FacultyRoot';
 import { Route, Switch } from 'react-router';
 
 class App extends Component
@@ -17,7 +18,8 @@ class App extends Component
             <div>
                 
                 <Switch>
-                    <Route path="/" render={()=><StudentRoot/>}/>
+                    <Route path="/student" render={()=><StudentRoot/>}/>
+                    <Route path="/faculty" render={()=><FacultyRoot/>}></Route>
                 </Switch>
 
             </div>

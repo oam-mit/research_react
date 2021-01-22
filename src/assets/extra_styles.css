@@ -100,7 +100,7 @@
   }
 
   }
-  nav form button {
+  nav button {
       padding: 0 15px;
       background: #22316C;
       border: none;
@@ -286,7 +286,7 @@ vertical-align: middle;
 color: #050505;
 padding: 0.8rem;
 font-size: 14px;
-background-color: rgba(255, 255, 255, 0.212);
+/* background-color: rgba(255, 255, 255, 0.212); */
 text-transform: uppercase;
 border-radius: 4px;
 font-weight: 600;
@@ -297,7 +297,9 @@ border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn:hover {
-background-color: rgba(255, 255, 255, 0.12);
+background-color:white !important;
+color: black;
+border-color: rgb(15, 210, 245);
 }
 
 .cards {

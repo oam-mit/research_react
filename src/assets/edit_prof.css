@@ -1,0 +1,37 @@
+.sub_text {
+    font-size: 200%;
+    color: #22316c;
+    font-family: Bebas Neue;
+  }
+  .wrap_details {
+    margin: 1%;
+  }
+  .prof_details {
+    margin-top: 5%;
+  }
+  .profile_image {
+    border-radius: 4px;
+  }
+  .button-custom {
+    color: black;
+    width: 400px;
+  }
+  .icon-edit {
+    margin-left: 10%;
+    position: relative;
+    bottom: 15px;
+  }
+  .icon-edit:hover {
+    color: #fbb034;
+    cursor: pointer;
+  }
+  .edit-btn{
+    width: 150px;
+    background-color: #22316c;
+    color: white;
+    padding: 3%;
+  }
+  .edit-btn:hover{
+    background-color: #fff022e1;
+    color: black;
+  }

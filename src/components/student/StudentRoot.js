@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 import Navbar from './Navbar';
 import Home from './Home';
-import Footer from './Footer';
 import Profile from './Profile';
+import Department from './Department';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../assets/extra_styles.css';
+import ProjectRoot from './Project/ProjectRoot';
+
 
 class StudentRoot extends Component
 {
@@ -13,21 +14,36 @@ class StudentRoot extends Component
     {
         super(props);
         this.state={
+          showNavbar:true
 
         };
 
+        this.toggleNavbar=this.toggleNavbar.bind(this);
+
+    }
+
+    toggleNavbar(value)
+    {
+      console.log("hello");
+      this.setState(()=>{
+        return{
+          showNavbar:value
+        }
+      })
     }
 
     render() {
       return (
           <>
-            <Navbar/>
-            <Switch>
-                <Route exact path="/" render={(props)=><Home {...props}/>}/>
-                <Route exact path="/profile" render={(props)=><Profile {...props}/>}/>
-
-            </Switch>
-            <Footer/>
+            {this.state.showNavbar && <Navbar/>}
+              <Switch>
+                <Route path="/student/home" render={(props)=><Home {...props}/>}/>
+                <Route path="/student/profile" render={(props)=><Profile {...props}/>}/>
+                <Route path="/student/department/:department_slug" render={(props)=><Department {...props}/>}/>
+                <Route path="/student/:department_slug/project/:pk" render={(props)=><ProjectRoot {...props} toggleNavbar={(value)=>this.toggleNavbar(value)}/>}/>
+              </Switch>
+        
+           
           </>
       )
     };

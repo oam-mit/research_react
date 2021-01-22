@@ -19,7 +19,7 @@ const Navbar =()=>{
     <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item">
-                <Link className="nav-link" to="/student/home">Home</Link>
+                <Link className="nav-link" to="/faculty/home">Home</Link>
             </li>
             <li className="nav-item">
                 <a className="nav-link" href="/">About Us</a>
@@ -36,8 +36,8 @@ const Navbar =()=>{
                 <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                 
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <Link className="dropdown-item" to="/student/profile">Profile</Link>
-                    <Link className="dropdown-item" to="/">Saved Items</Link>
+                    <Link className="dropdown-item" to="/faculty/profile">Profile</Link>
+                    <Link className="dropdown-item" to="/faculty/project/add">Add Project</Link>
                     <div className="dropdown-divider"></div>
                     <Link className="dropdown-item" to="/logout">Logout</Link>
                 </div>
