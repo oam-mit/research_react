@@ -42,7 +42,7 @@ class Profile extends Component
      <div className="col-lg-4 col-sm-12" >
          <div className="uploads" id="font-mobile">
             <div className="mb-2">
-                <label for="formFile" className="form-label">Choose file or drag to upload CV</label>
+                <label htmlFor="formFile" className="form-label">Choose file or drag to upload CV</label>
                 <input className="form-control" type="file" id="formFile"/>
               </div>             
               <a href="/" className="btn btn-primary">Save</a>

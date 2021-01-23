@@ -21,14 +21,14 @@ class Department extends Component
     render_projects()
     {
         let projects=this.state.projects.map((project)=>
-            <div className="col-lg-3" key={project.pk}>
+            <div className="col-lg-3" key={project.pk} style={{cursor:'pointer'}} onClick={(event)=>{
+                this.navigateToProject(event, project);
+            }}>
                 <div className="card department-card-design" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
                     <div className="text-content">
                         <span className="department-card-design-title"><strong>{project.name}</strong></span>
                         <p className="department-card-design-p">{project.description}</p>
-                        <button class="btn btn-dark card_btn" onClick={(event)=>{
-                            this.navigateToProject(event, project);
-                        }}>Know More</button>
+                        <button class="btn btn-dark card_btn">Know More</button>
                     </div>
                 </div>
             </div>

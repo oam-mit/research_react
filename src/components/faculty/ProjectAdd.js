@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+
+
 class ProjectAdd extends Component
 {
     constructor(props)
@@ -21,9 +23,9 @@ class ProjectAdd extends Component
     {
         let tags=this.state.tags.split(',');
 
-        let output=tags.filter((tag)=>tag!=="").map((tag)=>{
+        let output=tags.filter((tag)=>tag!=="").map((tag,index)=>{
             return(
-                <span class="badge badge-secondary">{tag.trim()}</span>
+                <span key={index} className="badge badge-secondary mr-1">{tag.trim()}</span>
             );
         })
 
@@ -51,29 +53,31 @@ class ProjectAdd extends Component
         <div className="container padding-custom">
             <form className="my-4">
                 <div className="form-group">
-                <label for="exampleFormControlInput1">Title</label>
+                <label htmlFor="exampleFormControlInput1">Title</label>
                 <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="What is the project called?"/>
                 </div>
                 <div className="form-group">
-                    <label for="exampleFormControlTextarea1">Description</label>
+                    <label htmlFor="exampleFormControlTextarea1">Description</label>
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Describe the project"></textarea>
                 </div>
                 <div className="form-group">
-                    <label for="tags">Tags (Separate each one with '<b>,</b>')</label>
+                    <label htmlFor="tags">Tags (Separate each one with '<b>,</b>')</label>
                     <input type="text" className="form-control" id="tags" name="tags" value={this.state.tags} onChange={(event)=>this.changeHandler(event)}/>
-                    <small id="passwordHelpBlock" class="form-text text-muted">
+                    <span id="passwordHelpBlock" className="form-text text-muted">
                     {this.render_tags()}
-                    </small>
+                    </span>
                     
                 </div>
                 <div className="form-group">
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1"/>
-                        <label class="custom-control-label" for="customSwitch1">Is the project Restricted to your brach ?</label>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="gridCheck"/>
+                        <label className="form-check-label" htmlFor="gridCheck">
+                            Is your project restricted to your department ?
+                        </label>
                     </div>
                 </div>
                 <div className="form-group">
-                    <label for="max">Maximum number of students</label>
+                    <label htmlFor="max">Maximum number of students</label>
                     <input type="number" className="form-control col-2" id="max" name="max" min={1} />
                     
                 </div>
