@@ -21,9 +21,9 @@ class ProjectAdd extends Component
 
     render_tags()
     {
-        let tags=this.state.tags.split(',');
+        
 
-        let output=tags.filter((tag)=>tag!=="").map((tag,index)=>{
+        let output=this.state.tags.split(',').filter((tag)=>tag!=="").map((tag,index)=>{
             return(
                 <span key={index} className="badge badge-secondary mr-1">{tag.trim()}</span>
             );

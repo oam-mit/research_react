@@ -51,7 +51,7 @@ class Profile extends Component
             return({
                 edit_details:{
                     ...prev.edit_details,
-                    [event.target.name]:event.target.vale
+                    [event.target.name]:event.target.value
                 }
             })
         });
