@@ -10,18 +10,16 @@ class SideNav extends Component
             if(this.props.selected_project===project.pk)
             {
                 return(
-                    <span className="w3-bar-item w3-button w3-green" key={project.pk}>{project.name}</span>
+                    <li className="active" key={project.pk}><a href="/" onClick={(event)=>event.preventDefault()}>{project.name}</a></li>
                 );
             }
             else
             {
                 return(
-                    <span 
-                    onClick={()=>{
-                        console.log('selected');
-                        this.props.select_project(project.pk);
-                    }}
-                     className="w3-bar-item w3-button" key={project.pk}>{project.name}</span>
+                    <li key={project.pk}><a href="/"  onClick={(event)=>{
+                      event.preventDefault();
+                      this.props.select_project(project.pk);
+                  }}>{project.name}</a></li>
                 );
             }
         });
@@ -41,25 +39,7 @@ class SideNav extends Component
        
           <nav class="nav">
             <ul>
-              <li className="active"><a href="#">Lithium ion batteries</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Project</a></li>
-           
-              
-           
-         
-              
-
+              {this.render_projects()}
             </ul>
           </nav>
         </aside>
@@ -71,14 +51,3 @@ class SideNav extends Component
 }
 
 export default SideNav;
-
-
-{/* <div className="w3-sidebar w3-bar-block w3-collapse w3-card" style={{width:'20%'}} id="mySidebar">
-<div className="w3-bar w3-dark-grey">
-    <div className="w3-bar-item w3-padding-16">
-            Other Projects from this Department
-    </div>
-
-</div>
-{this.render_projects()}
-</div> */}

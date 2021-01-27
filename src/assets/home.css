@@ -209,11 +209,8 @@
 
       .navbar-nav li a {
           text-transform: uppercase;
-          font-size: 21px;
-          font-family: Bebas Neue;
-          
-          letter-spacing: 4.6px;
           position: relative;
+          font-family: Quicksand;
       }
 
           .navbar-nav li a:before {

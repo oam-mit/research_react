@@ -53,8 +53,8 @@ class ProjectAdd extends Component
         <div className="container padding-custom">
             <form className="my-4">
                 <div className="form-group">
-                <label htmlFor="exampleFormControlInput1">Title</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="What is the project called?"/>
+                    <label htmlFor="exampleFormControlInput1">Title</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="What is the project called?"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlTextarea1">Description</label>
@@ -69,11 +69,9 @@ class ProjectAdd extends Component
                     
                 </div>
                 <div className="form-group">
-                    <div className="form-check">
-                        <label className="form-check-label" htmlFor="gridCheck">
-Is your project restricted to your department ?</label> <br></br>
-                        <input className="form-check-input" type="checkbox" id="gridCheck"/>
-
+                    <div class="form-check">
+                        <input className="form-check-input" type="checkbox" id="department_specific" />
+                        <label className="form-check-label" htmlFor="department_specific">Is your project restricted to your department?</label>
                     </div>
                 </div>
                 <div className="form-group">

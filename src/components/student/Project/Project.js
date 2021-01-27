@@ -30,12 +30,6 @@ class Project extends Component
             
             <div class="w3-container mt-2 w3-animate-bottom text-center">
 
-
-    {/* <header class="w3-container">
-      <h3>{this.props.project.name}</h3>
-    </header> */}
-
-
     <div class="w3-container" style={{marginBottom:'6%'}}> 
       <p class="detail-content text-left"> <span class="detail-content-main">Professor In charge: </span> XYZ</p>
       <p class="detail-content text-left"> <span class="detail-content-main">Dates: </span> Today </p>
