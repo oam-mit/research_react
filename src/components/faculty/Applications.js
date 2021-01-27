@@ -34,7 +34,7 @@ class Applications extends Component
             {
                 return(
                     
-                     <table className="table table-bordered">
+                     <table className="table table-bordered table-style table-scroll">
                         <thead>
                             <tr className="color-custom">
                                 <th scope="col">Registration Number</th>
@@ -42,6 +42,7 @@ class Applications extends Component
                                 <th scope="col">Branch</th>
                                 <th scope="col">View CV</th>
                                 <th scope="col">Email ID</th>
+                                <th scope="col">Active/Inactive</th>
                                
                             </tr>
                         </thead>
@@ -54,6 +55,7 @@ class Applications extends Component
                                         <th>{applicant.branch}</th>
                                         <th><a href={applicant.cv} target="_blank" rel="noreferrer">Click Here</a></th>    
                                         <th><a href={`mailto:${applicant.email}`}>{applicant.email}</a></th>
+                                        <th><a href={`mailto:${applicant.email}`}>Status</a></th>
                                     </tr>
                                 );
                             })}

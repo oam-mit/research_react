@@ -70,8 +70,7 @@
       }
 
 .card:hover{
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.377), 0 2px 20px 0 rgba(0, 0, 0, 0.37);
-
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
       .cards_item {
@@ -210,7 +209,10 @@
 
       .navbar-nav li a {
           text-transform: uppercase;
-          font-size: 18px;
+          font-size: 21px;
+          font-family: Bebas Neue;
+          
+          letter-spacing: 4.6px;
           position: relative;
       }
 
@@ -320,6 +322,11 @@ overflow: hidden;
 z-index: 10;
 
 
+}
+.navbar-brand{
+    font-family: Bebas Neue;
+    letter-spacing: 4.5px;
+    font-size: 30px !important;
 }
 .navigation::-webkit-scrollbar {
 width: 16px;
@@ -479,7 +486,9 @@ overflow: hidden;
 text-align: center;
 color: rgb(245, 239, 239);
 text-transform: uppercase;
-font-size: 30px;
+font-size: 300%;
+font-family: Bebas Neue;
+letter-spacing: 3px;
 }
 .border{
 width: 160px;
@@ -525,14 +534,20 @@ background:           #dbe962
 color: rgb(39, 38, 38);
 }
 .service-title{
-font-size: 18px;
+font-size: 20px;
 text-transform: uppercase;
 margin-bottom: 10px;
+font-family: Bebas Neue;
+letter-spacing: 2.5px;
 }
 .service-desc{
-font-size: 14px;
+font-size: 15px;
+font-family: 'Quicksand';
 }
-
+.sub-text{
+    font-family: Bebas Neue;
+    letter-spacing: 0.6px;
+}
 @media screen and (max-width:960px) {
 .service-box{
   max-width: 45%;
@@ -595,13 +610,13 @@ padding-top: 20px;
 font-size: 24px;
 font-family: Bebas Neue;
 font-weight: 100;
-letter-spacing: 4.3px;
+letter-spacing: 2.2px;
 }
 
 .department-card-design-p{
 font-size: 15px;
 font-weight: 400;
-font-family: Roboto;
+font-family: Quicksand;
 line-height: 25px;
 padding: 4%;
 }
@@ -620,6 +635,7 @@ color: #fff;
 
 .department-card-design{
   width: 80%;
+
   background-color: #def2f1 !important;
   
 }
@@ -633,11 +649,178 @@ color: #fff;
 }
 .section-title-1{
     color: #130202 !important;
-    margin-top: 5% !important;
     font-size: 170% !important;
+    font-family: 'Quicksand';
 
 }
 .section-title-1 h1{
-    font-size: 170%;
+    margin-top: 5% !important;
+    font-family: 'Quicksand';
 
+
+    
+
+}
+.wrap-two{
+    height: 25vh !important;
+    color: white;
+}
+.heading{
+    font-family: Bebas Neue; 
+    font-size: 300%; 
+
+
+}
+
+.detail-content{
+    margin-top: 3%;
+    font-family: Quicksand;
+    font-size: 19px;
+
+
+}
+.detail-content-main{
+    font-weight: 600;
+    color: teal;
+}
+
+
+
+.sidebar {
+    position: fixed;
+    width: 20%;
+    left: 1px;
+    height: 100vh;
+    background: #1d1e4e;
+    font-size: 0.65em;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    
+
+  }
+  @media screen and (max-width:768px) {
+      
+      .main-wrap{
+        margin-left: 0 !important;
+    }
+  }
+  
+  .main-wrap{
+      margin-left: 20%;
+      height: 100vh;
+      background-color: #ffffff;
+background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
+  }
+  .nav {
+    position: relative;
+    margin: 0 15%;
+    text-align: right;
+    top: 35%;
+    font-family: Quicksand;
+    transform: translateY(-50%);
+    font-weight: bold;
+    max-height: 70vh;
+  }
+  
+  .nav ul {
+    list-style: none;
+  }
+  .nav ul li {
+    position: relative;
+    margin: 5em 0;
+
+  }
+  .nav ul li a {
+      width: 190px;
+    line-height: 2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.3em;
+    font-size: 129%;
+    color: rgba(255, 255, 255, 0.35);
+    display: block;
+    text-align: center;
+    transition: all ease-out 300ms;
+  }
+  .nav ul li.active a {
+    color: white;
+  }
+  .nav ul li:not(.active)::after {
+    opacity: 0.2;
+  }
+  .nav ul li:not(.active):hover a {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .nav ul li::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0.2em;
+    background: black;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to right, #80c4f1, #efeff0);
+  }
+  .header{
+      color: white;
+      padding: 3%;
+      font-family: Bebas Neue;
+      letter-spacing: 1.5px;
+      text-align: center;
+  }
+  .para-content{
+      text-align: justify;
+      font-family: Quicksand;
+      font-size: 19px;
+
+  }
+  .btn-mystyle{
+      background-color: #1d1e4e !important;
+      width: 200px;
+      margin: 0 auto;
+      font-family: Quicksand;
+      color: white !important;
+      transition: all 0.3s ease 0s;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      transition-duration: 1s;
+
+      border-radius: 45px !important;
+  }
+  .btn-mystyle:hover{
+    background-color: #009ffd !important;
+    box-shadow: 0px 11px 13px #77787977;
+    color: rgb(63, 61, 61) !important;
+    transform: translateY(-7px);
+  }
+  .style-text{
+      color: rgb(112, 109, 109);
+      letter-spacing: 0.75px;
+      padding: 2%;
+      font-family: 'Quicksand';
+      font-size: 110%;
+      
+  }
+  .label-style{
+      font-weight: 600;
+      font-family: Quicksand;
+      font-size: 130%;
+  }
+  .table-style {
+    font-family: Quicksand !important;
+    margin-bottom: 8% !important;
+}
+.table-scroll{
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    scrollbar-width: 2px ;
+    margin-top: 4%;
+   }
+.table-scroll thead{
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.sub-heading-faculty{
+    font-family: Quicksand !important;
+    font-size: 250%;
 }

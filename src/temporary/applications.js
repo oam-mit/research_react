@@ -26,7 +26,7 @@ const applications=[
         email:'pranav.kulkarni1@learner.manipal.edu',
         registration_number:'1809056756',
         first_name:'Pranav',
-        last_name:'Kukarni',
+        last_name:'Kulkarni',
         branch:'Computer and Communication Engineering'
     },
     {

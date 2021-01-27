@@ -28,7 +28,7 @@ class Department extends Component
                     <div className="text-content">
                         <span className="department-card-design-title"><strong>{project.name}</strong></span>
                         <p className="department-card-design-p">{project.description}</p>
-                        <button class="btn btn-dark card_btn">Know More</button>
+                        <button class="btn btn-mystyle">Know More</button>
                     </div>
                 </div>
             </div>
@@ -53,8 +53,8 @@ class Department extends Component
                 <p className="lead my-4" style={{fontFamily:'Quicksand'}}>Projects related to that department !</p>
             </div>
 
-            <div className="container-fluid">
-                <div className="row">
+            <div className="container-fluid ">
+                <div className="row" >
                     {this.render_projects()}
                 </div>
             </div>

@@ -70,10 +70,10 @@ class ProjectAdd extends Component
                 </div>
                 <div className="form-group">
                     <div className="form-check">
-                        <input className="form-check-input" type="checkbox" id="gridCheck"/>
                         <label className="form-check-label" htmlFor="gridCheck">
-                            Is your project restricted to your department ?
-                        </label>
+Is your project restricted to your department ?</label> <br></br>
+                        <input className="form-check-input" type="checkbox" id="gridCheck"/>
+
                     </div>
                 </div>
                 <div className="form-group">
@@ -81,7 +81,9 @@ class ProjectAdd extends Component
                     <input type="number" className="form-control col-2" id="max" name="max" min={1} />
                     
                 </div>
-                <button className="btn btn-primary">Submit</button>
+                <div className="center-btn text-center">
+                <button className="btn btn-mystyle">Publish</button>
+                </div>
             </form>
       </div>
   

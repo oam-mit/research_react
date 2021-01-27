@@ -2,7 +2,9 @@ const projects=[
     {
         pk:'1',
         name:'Testing 1',
-        description:'Demo of pixel perfect pure CSS simple responsive Title of Project. Project 1',
+        description:
+        'Demo of pixel perfect pure CSS Demo of pixel perfect pure CSS Demo of pixel perfect pure CSS simple responsive Title of Project. Project 1'
+        ,
     },
     {
         pk:'2',
