@@ -6,6 +6,7 @@
   .wrap_details {
     margin: 1%;
   }
+  
   .prof_details {
     margin-top: 5%;
   }
@@ -35,3 +36,12 @@
     background-color: #fff022e1;
     color: black;
   }
+  .padding-custom label{
+    font-family: Quicksand;
+    font-size: 120%;
+    letter-spacing: 0.75px;
+    
+}
+.label-style{
+  font-size: 15px;
+}

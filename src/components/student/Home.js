@@ -53,7 +53,7 @@ class Home extends Component
             <title>Home</title>
             <div className="jumbotron jumbotron-fluid text-white text-center my-3" id="jumbo-color">
                 <h3 className="display-1" id="jumbo-text">Welcome to the Research Portal!</h3>
-                <p className="lead my-4" style={{fontFamily:'Quicksand'}}>Finding projects made easy</p>
+                <p className="lead my-4" style={{fontFamily:'Quicksand'}}>Finding projects finally made easy!</p>
             </div>
             <div className="container section-title-1 text-center m-auto">
                 <h1 className="m-auto">Projects sorted department wise!</h1>
@@ -143,9 +143,9 @@ class Home extends Component
         data-aos-offset="300" data-aos-duration="800"
         data-aos-easing="ease-in-sine">
             <h1 className="sub-text">
-                By ISTE, Manipal
+                Indian Society for Technical Education, Manipal
             </h1>
-<p>This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. </p>
+<p className="style-text">This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. </p>
         </div>
         <hr style={{border:"1px solid rgb(58, 57, 57)",width:"100%",margin:"5%"}}/>
         <div className="col-lg-5 m-auto d-lg-none">
@@ -158,7 +158,7 @@ class Home extends Component
               <h1 className="sub-text">
                 Manipal Insitute of Technology
             </h1>
-            <p>This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. </p>
+            <p className="style-text">This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. This is a text about the vision for research portal and the working on the project. </p>
 
         </div>
 

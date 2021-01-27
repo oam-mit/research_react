@@ -92,19 +92,21 @@ class Profile extends Component
                                 <legend>Details</legend>
                                 <div className="form-row">
                                     <div className="col-md-2 mb-3">
-                                        <label htmlFor="designation">Designation</label>
+                                        <label className="label-style" htmlFor="designation">Designation</label>
                                         <input type="text" name="designation" className={`form-control${!this.state.is_editable ? '-plaintext': ''}`} id="designation" value={this.state.edit_details.designation} onChange={this.changeHandler}/>
                                     </div>
                                     <div className="col-md-5 mb-3">
-                                        <label htmlFor="first_name">First Name</label>
+                                        <label className="label-style" htmlFor="first_name">First Name</label>
                                         <input type="text" name="first_name" className={`form-control${!this.state.is_editable ? '-plaintext': ''}`} id="first_name" value={this.state.edit_details.first_name} onChange={this.changeHandler} />
                                     </div>
                                     <div className="col-md-5 mb-3">
-                                        <label htmlFor="last_name">Last Name</label>
+                                        <label className="label-style" htmlFor="last_name">Last Name</label>
                                         <input type="text" name="last_name" className={`form-control${!this.state.is_editable ? '-plaintext': ''}`} id="last_name" value={this.state.edit_details.last_name} onChange={this.changeHandler}/>
                                     </div>
                                 </div>
-                                { this.state.is_editable ? <button type="submit" className="btn btn-primary">Submit</button> : <></>}
+                                { this.state.is_editable ? <div className="center-btn text-center">
+                <button className="btn btn-mystyle">Submit</button>
+                </div>: <></>}
                             </fieldset>
                         </form>
                     </div>
@@ -118,8 +120,10 @@ class Profile extends Component
                         width="400"
                         alt="Profile_image"
                       />
-                      <div className="btn edit-btn my-4">Change</div>
-                    </div>
+<div className="center-btn text-center my-5">
+                <button className="btn btn-mystyle">Update</button>
+                </div>
+                </div>
                   </div>
                 </div>
               </div>

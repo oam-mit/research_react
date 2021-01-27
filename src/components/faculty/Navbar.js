@@ -13,7 +13,7 @@ const Navbar =()=>{
     
         <a className="navbar-brand" href="/" onClick={(event)=>event.preventDefault()}><img src={logo} className="img-responsive logo" alt="Iste logo"/></a>
 
-        <a className="navbar-brand" href="/" onClick={(event)=>event.preventDefault()}>ISTE Manipal</a>
+        <a className="navbar-brand " href="/" onClick={(event)=>event.preventDefault()}>ISTE Manipal</a>
 
 
     <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -31,11 +31,11 @@ const Navbar =()=>{
                 <a className="nav-link" href="/">Members</a>
             </li>
         </ul>
-        <ul className="navbar-nav ml-auto">
-            <li className="nav-item dropdown">
+        <ul className="navbar-nav ml-auto dropdown-menu-left">
+            <li className="nav-item dropdown ">
                 <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                 
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div className="dropdown-menu dropdown-style" aria-labelledby="navbarDropdown">
                     <Link className="dropdown-item" to="/faculty/profile">Profile</Link>
                     <Link className="dropdown-item" to="/faculty/project/add">Add Project</Link>
                     <div className="dropdown-divider"></div>

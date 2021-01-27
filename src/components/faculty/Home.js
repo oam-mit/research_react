@@ -135,14 +135,14 @@ class Home extends Component
             <h3 className="display-1" id="jumbo-text">Your Projects</h3>
             <p className="lead my-4" style={{fontFamily:'Quicksand'}}>View applications and add more!</p><br/>
         
-              <button onClick={()=>this.props.history.push('/faculty/project/add')} className="w3-button w3-black w3-round-xxlarge"> <h5>Add Project</h5> </button>
+              <button onClick={()=>this.props.history.push('/faculty/project/add')} className="btn-mystyle"> <h5>Add Project</h5> </button>
           
         </div>
 
         <div className="container-fluid">
             <div className="row text-center">
                 <div className="col-12">
-                    <h2 onClick={()=>this.toggle_show_variable('active_projects_shown')} style={{cursor:'pointer'}}>
+                    <h2 className="sub-heading-faculty" onClick={()=>this.toggle_show_variable('active_projects_shown')} style={{cursor:'pointer'}}>
                         Active Projects { this.render_arrow(this.state.active_projects_shown)}
                     </h2>
                 </div>
@@ -157,7 +157,7 @@ class Home extends Component
             <div className="container-fluid">
             <div className="row text-center">
                 <div className="col-12">
-                    <h2 onClick={()=>this.toggle_show_variable('past_projects_shown')} style={{cursor:'pointer'}}>
+                    <h2 className="sub-heading-faculty" onClick={()=>this.toggle_show_variable('past_projects_shown')} style={{cursor:'pointer'}}>
                         Past Projects { this.render_arrow(this.state.past_projects_shown)}
                     </h2>
                 </div>

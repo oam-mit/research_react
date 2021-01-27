@@ -70,7 +70,7 @@ class Profile extends Component
     render_edit_detials()
     {
             return(
-                <div className="container prof_details">
+                <div className="container prof_details" style={{height:'95vh'}}>
                 <div className="row">
                   <div className="col-lg-7 details_prof">
                     <span className="sub_text">About me</span>
@@ -100,15 +100,18 @@ class Profile extends Component
                                 <legend>Details</legend>
                                 <div className="form-row">
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="first_name">First Name</label>
+                                        <label htmlFor="first_name" className="label-style">First Name</label>
                                         <input type="text" name="first_name" className={`form-control${!this.state.is_editable ? '-plaintext': ''}`} id="first_name" value={this.state.edit_details.first_name} onChange={this.changeHandler} />
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="last_name">Last Name</label>
+                                        <label htmlFor="last_name" className="label-style">Last Name</label>
                                         <input type="text" name="last_name" className={`form-control${!this.state.is_editable ? '-plaintext': ''}`} id="last_name" value={this.state.edit_details.last_name} onChange={this.changeHandler}/>
                                     </div>
                                 </div>
-                                { this.state.is_editable ? <button type="submit" className="btn btn-primary">Submit</button> : <></>}
+                                { this.state.is_editable ?
+                                    <div className="center-btn text-center">
+                <button className="btn btn-mystyle">Submit</button>
+                </div>                                  : <></>}
                             </fieldset>
                         </form>
                     </div>
@@ -120,6 +123,7 @@ class Profile extends Component
                             <div className="custom-file">
                                 <input type="file" className="custom-file-input" id="customFile" onChange={(event)=>this.cvUploadChangeHandler(event)} accept="application/pdf"/>
                                 <label className="custom-file-label" htmlFor="customFile">{this.state.cv ? <>Chosen file: {this.state.cv.name}</>: <>Upload File</>}</label>
+                                {/* <button type="submit" className="btn btn-mystyle my-5">Submit</button> */}
                             </div>
 
                         </form>
