@@ -7,19 +7,19 @@ class SideNav extends Component
     render_projects()
     {
         let project_names=this.props.projects.map((project)=>{
-            if(this.props.selected_project===project.pk)
+            if(this.props.selected_project===project.uuid_field)
             {
                 return(
-                    <li className="active" key={project.pk}><a href="/" onClick={(event)=>event.preventDefault()}>{project.name}</a></li>
+                    <li className="active" key={project.uuid_field}><a href="/" onClick={(event)=>event.preventDefault()}>{project.title}</a></li>
                 );
             }
             else
             {
                 return(
-                    <li key={project.pk}><a href="/"  onClick={(event)=>{
+                    <li key={project.uuid_field}><a href="/"  onClick={(event)=>{
                       event.preventDefault();
-                      this.props.select_project(project.pk);
-                  }}>{project.name}</a></li>
+                      this.props.select_project(project.uuid_field);
+                  }}>{project.title}</a></li>
                 );
             }
         });
@@ -37,7 +37,7 @@ class SideNav extends Component
             <hr></hr>
         </header>
        
-          <nav class="nav">
+          <nav className="nav">
             <ul>
               {this.render_projects()}
             </ul>

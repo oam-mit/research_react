@@ -6,6 +6,8 @@ import Profile from './Profile';
 import Department from './Department';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProjectRoot from './Project/ProjectRoot';
+import Applications from './Applications'
+import NotFound from '../common/404'
 
 
 class StudentRoot extends Component
@@ -40,7 +42,9 @@ class StudentRoot extends Component
                 <Route path="/student/home" render={(props)=><Home {...props}/>}/>
                 <Route path="/student/profile" render={(props)=><Profile {...props}/>}/>
                 <Route path="/student/department/:department_slug" render={(props)=><Department {...props}/>}/>
-                <Route path="/student/:department_slug/project/:pk" render={(props)=><ProjectRoot {...props} toggleNavbar={(value)=>this.toggleNavbar(value)}/>}/>
+                <Route path="/student/:department_slug/project/:uuid_field" render={(props)=><ProjectRoot {...props} toggleNavbar={(value)=>this.toggleNavbar(value)}/>}/>
+                <Route path="/student/applications" render={(props)=><Applications {...props}/>}/>
+                <Route path="/student/not-found" render={()=><NotFound/>}/>
               </Switch>
         
            

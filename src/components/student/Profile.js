@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import user from '../../temporary/user_details'
 import '../../assets/edit_prof.css';
+
+import UserProvider from '../../providers/UserProvider'
 
 class Profile extends Component
 {
@@ -21,7 +22,7 @@ class Profile extends Component
     {
         //code for fetching details
 
-        this.setState({student:user,isLoaded:true,edit_details:user})
+        this.setState({student:this.context.user,isLoaded:true,edit_details:this.context.user})
     }
 
     render_display()
@@ -123,6 +124,8 @@ class Profile extends Component
                             <div className="custom-file">
                                 <input type="file" className="custom-file-input" id="customFile" onChange={(event)=>this.cvUploadChangeHandler(event)} accept="application/pdf"/>
                                 <label className="custom-file-label" htmlFor="customFile">{this.state.cv ? <>Chosen file: {this.state.cv.name}</>: <>Upload File</>}</label>
+                                {this.state.edit_details.cv ? <small id="fileHelp" className="form-text text-muted">Uploaded File: <a href={this.state.edit_details.cv} rel="noreferrer" target="_blank">Click here</a></small>: <></>}
+                                
                                 {/* <button type="submit" className="btn btn-mystyle my-5">Submit</button> */}
                             </div>
 
@@ -144,4 +147,5 @@ class Profile extends Component
     }
 }
 
+Profile.contextType=UserProvider;
 export default Profile;

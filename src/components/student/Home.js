@@ -1,11 +1,13 @@
 import React from 'react';
 import { Component } from 'react';
-import departments from '../../temporary/departments';
+
 import TopButton from './TopButton';
 import '../../assets/home.css';
 import logo from '../../assets/iste_logo.png';
 
 import Footer from './Footer';
+
+import Spinner from '../common/Spinner';
 
 class Home extends Component
 {
@@ -13,7 +15,8 @@ class Home extends Component
     {
         super(props);
         this.state={
-            departments:departments
+            loading:true,
+            departments:null
 
         };
         document.body.scrollTop = 0;
@@ -21,18 +24,30 @@ class Home extends Component
      
     }
 
+    componentDidMount()
+    {
+        fetch('/student/api/get_departments/')
+        .then((response)=>response.json())
+        .then((data)=>{
+            this.setState({
+                departments:data.departments,
+                loading:false
+            })
+        })
+    }
+
     render_departments()
     {
-        let department_output=this.state.departments.map((department)=>{
+        let department_output=this.state.departments.map((department,index)=>{
             return(
            
-                <div className="col-lg-3" key={department.pk}>
+                <div className="col-lg-3" key={index}>
                     <div className="card department-card-design" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" 
                     onClick={()=>this.props.history.push(`/student/department/${department.slug}`)} 
                     style={{cursor:'pointer'}}>
                         <div className="text-content">
                             <span className="department-card-design-title"><strong>{department.name}</strong></span>
-                            <p className="department-card-design-p">{department.description}</p>
+                            <p className="department-card-design-p"><b>Department Building: </b>{department.department_building}</p>
 
                         </div>
                     </div>
@@ -61,7 +76,8 @@ class Home extends Component
             <hr/>
             <div className="container-fluid">
                 <div className="row">
-                    {this.render_departments()}
+                    {!this.state.loading ? this.render_departments() : <Spinner size={50} position={'relative'}/> }
+                    
                 </div>
             </div>
 
