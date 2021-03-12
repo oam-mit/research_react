@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import faculty from '../../temporary/faculty'
+import Swal from 'sweetalert2';
 import '../../assets/edit_prof.css';
+import UserProvider from '../../providers/UserProvider';
+import Spinner from '../common/Spinner';
 
 class Profile extends Component
 {
@@ -8,29 +10,31 @@ class Profile extends Component
     {
         super(props);
         this.state={
-            isLoaded:false,
+            loading:true,
             faculty:null,
             is_editable:false,
+            submitted:false
         }
 
         this.changeHandler=this.changeHandler.bind(this);
+        this.imageFormHandler=this.imageFormHandler.bind(this);
     }
 
     componentDidMount()
     {
         //code for fetching details
 
-        this.setState({faculty:faculty,isLoaded:true,edit_details:faculty})
+        this.setState({faculty:this.context.user,loading:false,edit_details:this.context.user})
     }
 
     render_display()
     {
-        if(this.state.isLoaded)
+        if(!this.state.loading && !this.state.submitted)
         {
             return(
             <>
             <div className="jumbotron jumbotron-fluid text-white text-center my-3" id="jumbo-color">
-                <h3 className="display-1" id="jumbo-text">{this.state.faculty.designation}. {this.state.faculty.first_name} {this.state.faculty.last_name}</h3>
+                <h3 className="display-1" id="jumbo-text">{/*{this.state.faculty.designation}.*/} {this.state.faculty.first_name} {this.state.faculty.last_name}</h3>
                 <p className="lead my-4" style={{fontFamily:'Quicksand'}}>
                     Welcome to the research portal!
                 </p>
@@ -41,6 +45,13 @@ class Profile extends Component
             </>
             );
 
+        }
+
+        else
+        {
+            return (
+                <Spinner position={'absolute'} size={50}/>
+            );
         }
 
     }
@@ -57,6 +68,68 @@ class Profile extends Component
         });
 
 
+    }
+
+    imageUploadHandler(event)
+    {
+        this.setState((prev)=>{
+            return(
+                {
+                    edit_details:{
+                        ...prev.edit_details,
+                        profile_picture:event.target.files[0]
+                    }
+                }
+            );
+        })
+    }
+
+    imageFormHandler(event)
+    {
+        event.preventDefault();
+        this.setState({
+            submitted:true
+        },()=>{
+            let form_data=new FormData()
+            form_data.append('profile_picture',this.state.edit_details.profile_picture)
+
+            fetch('/faculty/api/update_profile_picture/',{
+                'method':'POST',
+                'body':form_data,
+                'headers':{
+                    'X-CSRFToken':this.context.getCookie('csrftoken'),
+                }
+
+            })
+            .then((resp)=>resp.json())
+            .then((data)=>{
+                if(data.status==='successful')
+                {
+                    
+                   
+                        this.setState({
+                            submitted:false
+                        },()=>{
+                            this.context.updateUser(data.user)
+                        })
+                   
+                    
+                }
+                else
+                {
+                    this.setState({
+                        submitted:false
+                    },()=>{
+                        Swal.fire({
+                            title:'Error',
+                            icon:'error',
+                            text:data.error
+                        })
+                    })
+                }
+            })
+            .catch(err=>console.log(err))
+        })
     }
 
     render_edit_detials()
@@ -91,10 +164,10 @@ class Profile extends Component
                             <fieldset disabled={!this.state.is_editable}>
                                 <legend>Details</legend>
                                 <div className="form-row">
-                                    <div className="col-md-2 mb-3">
+                                    {/* <div className="col-md-2 mb-3">
                                         <label className="label-style" htmlFor="designation">Designation</label>
                                         <input type="text" name="designation" className={`form-control${!this.state.is_editable ? '-plaintext': ''}`} id="designation" value={this.state.edit_details.designation} onChange={this.changeHandler}/>
-                                    </div>
+                                    </div> */}
                                     <div className="col-md-5 mb-3">
                                         <label className="label-style" htmlFor="first_name">First Name</label>
                                         <input type="text" name="first_name" className={`form-control${!this.state.is_editable ? '-plaintext': ''}`} id="first_name" value={this.state.edit_details.first_name} onChange={this.changeHandler} />
@@ -114,15 +187,23 @@ class Profile extends Component
                   </div>
                   <div className="col-lg-5">
                     <div className="profile-image">
-                      <img
-                        className="img-responsive profile_image"
-                        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/8041e6ce-6445-45c3-91aa-0fc71cb86551/ddv71b9-2f099983-525a-4c1c-832a-f6fc9c26d81a.png/v1/fill/w_999,h_800,q_70,strp/baby_toucan_by_beastmother_ddv71b9-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD04MjAiLCJwYXRoIjoiXC9mXC84MDQxZTZjZS02NDQ1LTQ1YzMtOTFhYS0wZmM3MWNiODY1NTFcL2RkdjcxYjktMmYwOTk5ODMtNTI1YS00YzFjLTgzMmEtZjZmYzljMjZkODFhLnBuZyIsIndpZHRoIjoiPD0xMDI0In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.yijYZBz8N5D36EcoV5AG25UTu1TeTE7ONkYXByYthTY"
-                        width="400"
-                        alt="Profile_image"
-                      />
-<div className="center-btn text-center my-5">
-                <button className="btn btn-mystyle">Update</button>
-                </div>
+                        {
+                        this.context.user.profile_picture ? 
+                        <img src={this.context.user.profile_picture} className="img-responsive profile_image" width="400" alt="Profile_image" /> : 
+                        <img  className="img-responsive profile_image" width="400" alt="Profile_image" src={'/media/default.jpg'}/>
+                        }
+                        <form onSubmit={this.imageFormHandler}>
+                            <div className="custom-file">
+                                <input type="file" className="custom-file-input" id="customFile" onChange={(event)=>this.imageUploadHandler(event)} accept="image/*"/>
+                                <label className="custom-file-label" htmlFor="customFile">{this.state.edit_details.profile_picture ? <>Chosen file: {this.state.edit_details.profile_picture.name}</>: <>Upload Image</>}</label>
+                                
+                                <div className="center-btn text-center my-5">
+                                    <button type="submit" className="btn btn-mystyle">Update</button>
+                                </div>
+                            </div>
+
+                        </form>
+
                 </div>
                   </div>
                 </div>
@@ -140,5 +221,7 @@ class Profile extends Component
         );
     }
 }
+
+Profile.contextType=UserProvider;
 
 export default Profile;

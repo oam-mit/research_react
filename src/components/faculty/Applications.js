@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import applications from '../../temporary/applications'
+import Spinner from '../common/Spinner';
 
 class Applications extends Component
 {
@@ -7,9 +7,9 @@ class Applications extends Component
     {
         super(props);
         this.state={
-            isAllowed:null,
+            isAllowed:false,
             applications:null,
-            isLoaded:false,
+            loading:true,
             project_name:null
         }
     }
@@ -18,17 +18,33 @@ class Applications extends Component
     {
         //code for fetching applications
 
-        this.setState({
-            applications:applications,
-            isLoaded:true,
-            isAllowed:true,
-            project_name:'Testing'
-        });
+        fetch(`/faculty/api/get_applicants/${this.props.match.params.project_uuid}`)
+        .then((resp)=>resp.json())
+        .then((data)=>{
+            if(data.status==='successful')
+            {
+                this.setState({
+                    applications:data.applications,
+                    loading:false,
+                    isAllowed:true
+                })
+            }
+
+            else
+            {
+                this.setState({
+                    loading:false
+                })
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     }
 
     render_applications()
     {
-        if(this.state.isLoaded)
+        if(!this.state.loading)
         {
             if(this.state.isAllowed)
             {
@@ -47,13 +63,13 @@ class Applications extends Component
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.applications.map((applicant,index)=>{
+                            {this.state.applications.map((applicant)=>{
                                 return(
-                                    <tr key={index}>
+                                    <tr key={applicant.registration_number}>
                                         <th scope ="row">{applicant.registration_number}</th>
                                         <th>{applicant.first_name} {applicant.last_name}</th>
-                                        <th>{applicant.branch}</th>
-                                        <th><a href={applicant.cv} target="_blank" rel="noreferrer">Click Here</a></th>    
+                                        <th>{applicant.department}</th>
+                                        <th><a href={applicant.cv} target="_blank" rel="noreferrer" style={{color:'red'}}>Click Here</a></th>    
                                         <th><a href={`mailto:${applicant.email}`}>{applicant.email}</a></th>
                                         <th><a href={`mailto:${applicant.email}`}>Status</a></th>
                                     </tr>
@@ -80,13 +96,7 @@ class Applications extends Component
         else
         {
             return(
-                <div className="row">
-                        <div className="col-12 text-center">
-                            <h3>Loading...</h3>
-
-                        </div>
-
-                    </div>
+                <Spinner size={50} position={'relative'}/>
             );
         }
         

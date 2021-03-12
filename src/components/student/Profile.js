@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import '../../assets/edit_prof.css';
 
 import UserProvider from '../../providers/UserProvider'
+import Spinner from '../common/Spinner';
 
 class Profile extends Component
 {
@@ -9,25 +11,27 @@ class Profile extends Component
     {
         super(props);
         this.state={
-            isLoaded:false,
+            loading:true,
+            submitted:false,
             student:null,
             is_editable:false,
             cv:null
         }
 
         this.changeHandler=this.changeHandler.bind(this);
+        this.cvUploadSubmitHandler=this.cvUploadSubmitHandler.bind(this);
     }
 
     componentDidMount()
     {
         //code for fetching details
 
-        this.setState({student:this.context.user,isLoaded:true,edit_details:this.context.user})
+        this.setState({student:this.context.user,loading:false,edit_details:this.context.user})
     }
 
     render_display()
     {
-        if(this.state.isLoaded)
+        if(!this.state.loading && !this.state.submitted)
         {
             return(
             <>
@@ -43,6 +47,12 @@ class Profile extends Component
             </>
             );
 
+        }
+        else
+        {
+            return (
+                <Spinner position={'absolute'} size={50}/>
+            );
         }
 
     }
@@ -63,9 +73,64 @@ class Profile extends Component
 
     cvUploadChangeHandler(event)
     {
-        this.setState({
-            cv:event.target.files[0]
+        this.setState((prev)=>{
+            return(
+                {
+                    edit_details:{
+                        ...prev.edit_details,
+                        cv:event.target.files[0]
+                    },
+                    cv:event.target.files[0]
+                }
+            )
         });
+    }
+    cvUploadSubmitHandler(event)
+    {
+        event.preventDefault();
+        this.setState({
+            submitted:true
+        },()=>{
+            let form_data=new FormData()
+            form_data.append('cv',event.target.cv.files[0])
+
+            fetch('/student/api/submit_cv/',{
+                'method':'POST',
+                'body':form_data,
+                'headers':{
+                    'X-CSRFToken':this.context.getCookie('csrftoken'),
+                }
+
+            })
+            .then((resp)=>resp.json())
+            .then((data)=>{
+                if(data.status==='successful')
+                {
+                    
+                    
+                    this.setState({
+                        submitted:false,
+                        cv:null
+                    },()=>{
+                        this.context.updateUser(data.user)
+                    })
+                }
+                else
+                {
+                    this.setState({
+                        submitted:false
+                    },()=>{
+                        Swal.fire({
+                            title:'Error',
+                            icon:'error',
+                            text:data.error
+                        })
+                    })
+                }
+            })
+            .catch(err=>console.log(err))
+        })
+
     }
 
     render_edit_detials()
@@ -119,14 +184,14 @@ class Profile extends Component
                     
                   </div>
                   <div className="col-lg-5">
-                        <form>
+                        <form onSubmit={this.cvUploadSubmitHandler}>
                         <legend>Upload CV</legend>
                             <div className="custom-file">
-                                <input type="file" className="custom-file-input" id="customFile" onChange={(event)=>this.cvUploadChangeHandler(event)} accept="application/pdf"/>
+                                <input type="file" name="cv" className="custom-file-input" id="customFile" onChange={(event)=>this.cvUploadChangeHandler(event)} accept="application/pdf"/>
                                 <label className="custom-file-label" htmlFor="customFile">{this.state.cv ? <>Chosen file: {this.state.cv.name}</>: <>Upload File</>}</label>
-                                {this.state.edit_details.cv ? <small id="fileHelp" className="form-text text-muted">Uploaded File: <a href={this.state.edit_details.cv} rel="noreferrer" target="_blank">Click here</a></small>: <></>}
+                                {this.context.user.cv ? <small id="fileHelp" className="form-text text-muted">Uploaded File: <a href={this.context.user.cv} rel="noreferrer" target="_blank">Click here</a></small>: <></>}
                                 
-                                {/* <button type="submit" className="btn btn-mystyle my-5">Submit</button> */}
+                                <button disabled={this.state.cv===null} type="submit" className="btn btn-mystyle my-5">Submit</button>
                             </div>
 
                         </form>
@@ -140,7 +205,7 @@ class Profile extends Component
     {
         return(
             <>
-            <title>Faculty | Profile</title>
+            <title>Profile</title>
             {this.render_display()}
             </>
         );

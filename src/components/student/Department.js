@@ -62,7 +62,7 @@ class Department extends Component
                         
                             <span className="department-card-design-title"><strong>{project.title}</strong></span>
                             <p className="department-card-design-p"><strong>Faculty:</strong> {project.faculty.first_name} {project.faculty.last_name}</p>
-                            <p className="department-card-design-p"><strong>Start Date: </strong><DateComponent date={project.end_date} locale={'en-GB'} year={'numeric'} day={'numeric'} month={'long'}/>
+                            <p className="department-card-design-p"><strong>Start Date: </strong><DateComponent date={project.start_date} locale={'en-GB'} year={'numeric'} day={'numeric'} month={'long'}/>
                             </p>
                             <button className="btn btn-mystyle">Know More</button>
                             

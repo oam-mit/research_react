@@ -4,6 +4,8 @@ import UserProvider from '../../../providers/UserProvider'
 
 import DateComponent from '../../common/Date';
 
+import Swal from 'sweetalert2';
+
 class Project extends Component
 {
     constructor(props)
@@ -19,42 +21,72 @@ class Project extends Component
 
     submit_application()
     {
-        this.setState({
-            submitted:true
-        },()=>{
+        Swal.fire({
+            title:'Confirmation',
+            text:'Please click on OK to confirm',
+            confirmButtonText:'OK',
+            cancelButtonText:'Exit',
+            showCancelButton:true,
+            icon:'info',
 
-            let form_data=new FormData();
-            form_data.append('project_uuid_field',this.props.project.uuid_field);
 
-            fetch('/student/api/submit_application/',{
-                'method':'POST',
-                'body':form_data,
-                'headers':{'X-CSRFToken':this.context.getCookie('csrftoken')}
-            })
-            .then((resp)=>resp.json())
-            .then((data)=>{
-                if(data.status==='successful')
-                { 
-                    this.props.redirect_to_department();
-
-                }
-                else
-                {
-                    this.setState({
-                        submitted:false
-                    },()=>{
-                        alert(data.error)
-                    })
-                }
-    
-            })
-            .catch((err)=>{
-                console.log(err);
-            });
-
-            
-        });
+        })
+        .then(result=>{
+            if(result.value)
+            {
+                this.setState({
+                    submitted:true
+                },()=>{
         
+                    let form_data=new FormData();
+                    form_data.append('project_uuid_field',this.props.project.uuid_field);
+        
+                    fetch('/student/api/submit_application/',{
+                        'method':'POST',
+                        'body':form_data,
+                        'headers':{'X-CSRFToken':this.context.getCookie('csrftoken')}
+                    })
+                    .then((resp)=>resp.json())
+                    .then((data)=>{
+                        if(data.status==='successful')
+                        { 
+                            Swal.fire({
+                                title:'Success',
+                                text:'Submission successful',
+                                icon:'success'
+
+
+                            })
+                            .then((res)=>{
+                                this.props.redirect_to_department();
+                            })
+                            
+        
+                        }
+                        else
+                        {
+                            Swal.fire({
+                                title:'Error',
+                                text:data.error,
+                                icon:'error'
+                            })
+                        }
+            
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                    });
+        
+                    
+                });
+                
+
+            }
+
+
+        });
+
+
     }
     componentDidMount()
     {
@@ -126,6 +158,7 @@ class Project extends Component
                             <h1>Faculty In-charge</h1>
                             <p><b>Name:</b> {this.props.project.faculty.first_name} {this.props.project.faculty.last_name}</p>
                             <p><b>Department:</b> {this.props.project.faculty.department}</p>
+                            {this.props.project.faculty.profile_picture ? <img alt="" src={this.props.project.faculty.profile_picture}/>:<></>}
                         </div>
                         <div className="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue w3-hover-border-indigo">
                             <h1>Other Details</h1>

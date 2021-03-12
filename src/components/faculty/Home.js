@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import projects from '../../temporary/projects'
+
 
 import {CSSTransition} from 'react-transition-group';
+import Spinner from '../common/Spinner';
+import DateComponent from '../common/Date';
 
 class Home extends Component
 {
@@ -10,8 +12,9 @@ class Home extends Component
     {
         super(props);
         this.state={
-            active_projects:projects,
-            past_projects:projects,
+            loading:true,
+            active_projects:[],
+            past_projects:[],
             active_projects_shown:true,
             past_projects_shown:false,
 
@@ -21,18 +24,36 @@ class Home extends Component
         document.documentElement.scrollTop = 0;
     }
 
-    render_projects()
+    componentDidMount()
     {
-       
-            let output=this.state.active_projects.map((project)=>{
+        fetch('/faculty/api/get_active_projects/')
+        .then((resp)=>resp.json())
+        .then((data)=>{
+            this.setState({
+                loading:false,
+                active_projects:data.active_projects,
+                past_projects:data.past_projects
+            })
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+
+    }
+
+    render_active_projects()
+    {
+        if(this.state.active_projects.length>0)
+        {
+            let projects=this.state.active_projects.map((project)=>{
                 return(
-                    <CSSTransition in={this.state.active_projects_shown} classNames="department-card-design-" timeout={500} unmountOnExit={true}  key={project.pk}>
-                        <div className="col-lg-3" onClick={()=>this.props.history.push(`/faculty/applications/${project.pk}`)}>
+                    <CSSTransition in={this.state.active_projects_shown} classNames="department-card-design-" timeout={500} unmountOnExit={true}  key={project.uuid_field}>
+                        <div className="col-lg-3" onClick={()=>this.props.history.push(`/faculty/applications/${project.uuid_field}`)}>
                             
                             <div className="card department-card-design" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" style={{cursor:'pointer'}}>
                                 <div className="text-content">
-                                    <span className="department-card-design-title"><strong>{project.name}</strong></span>
-                                    <p className="department-card-design-p">{project.description}</p>
+                                    <span className="department-card-design-title"><strong>{project.title}</strong></span>
+                                    <p className="department-card-design-p"><strong>Start Date:</strong> <DateComponent date={project.start_date} locale={'en-GB'} year={'numeric'} day={'numeric'} month={'long'}/></p>
 
                                 </div>
                             </div>
@@ -46,39 +67,74 @@ class Home extends Component
                 );
             });
 
-            return output;
+            return projects;
+        }
+        else
+        {
+            return(
+                <CSSTransition in={this.state.active_projects_shown} classNames="department-card-design-" timeout={500} unmountOnExit={true} >
+                    <div className="col-12">                    
+                        <div className="w3-container text-center" style={{marginBottom:'6%'}}> 
+                            <div className="text-center w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue w3-hover-border-indigo">
+                                <h4>No active projects to show</h4>
+                            </div>
+                        </div>
+                    </div>
+                </CSSTransition>
+           
+            );
+        }
     }
 
     render_past_projects()
     {
+        
         if(this.state.past_projects_shown)
         {
-            let output=this.state.past_projects.map((project)=>{
-                return(
-                    
-                        <div className="col-lg-3" key={project.pk}>
-                            <div className="card department-card-design" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" 
-                            onClick={()=>this.props.history.push(`/faculty/project/edit/${project.pk}`)} 
-                            style={{cursor:'pointer'}}>
-                                <div className="text-content">
-                                    <span className="department-card-design-title"><strong>{project.name}</strong></span>
-                                    <p className="department-card-design-p">{project.description}</p>
+            if(this.state.past_projects.length>0)
+            {                
+                let output=this.state.past_projects.map((project)=>{
+                    return(
+                            
+                                <div className="col-lg-3" key={project.uuid_field}>
+                                    <div className="card department-card-design" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" 
+                                    onClick={()=>this.props.history.push(`/faculty/project/edit/${project.pk}`)} 
+                                    style={{cursor:'pointer'}}>
+                                        <div className="text-content">
+                                            <span className="department-card-design-title"><strong>{project.title}</strong></span>
+                                            <p className="department-card-design-p"><strong>Start Date:</strong> <DateComponent date={project.start_date} locale={'en-GB'} year={'numeric'} day={'numeric'} month={'long'}/></p>
 
+                                        </div>
+                                    </div>
                                 </div>
+                            
+                    
+
+                    );
+                });
+
+                return output;
+            }
+            else
+            {
+                return(
+                    <div className="col-12">                    
+                        <div className="w3-container text-center" style={{marginBottom:'6%'}}> 
+                            <div className="text-center w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue w3-hover-border-indigo">
+                                <h4>No past projects to show</h4>
                             </div>
                         </div>
-                    
-            
-
+                    </div>
+               
                 );
-            });
-
-            return output;
+            }
         }
         else
         {
             return <></>
         }
+     
+       
     }
 
     render_arrow(variable)
@@ -138,36 +194,39 @@ class Home extends Component
               <button onClick={()=>this.props.history.push('/faculty/project/add')} className="btn-mystyle"> <h5>Add Project</h5> </button>
           
         </div>
-
-        <div className="container-fluid">
-            <div className="row text-center">
-                <div className="col-12">
-                    <h2 className="sub-heading-faculty" onClick={()=>this.toggle_show_variable('active_projects_shown')} style={{cursor:'pointer'}}>
-                        Active Projects { this.render_arrow(this.state.active_projects_shown)}
-                    </h2>
-                </div>
-
-            </div>
-                <div className="row align-items-center">
-                    
-                        {this.render_projects()}
-                </div>
-            </div>
-
+        {!this.state.loading ? 
+            <>
             <div className="container-fluid">
-            <div className="row text-center">
-                <div className="col-12">
-                    <h2 className="sub-heading-faculty" onClick={()=>this.toggle_show_variable('past_projects_shown')} style={{cursor:'pointer'}}>
-                        Past Projects { this.render_arrow(this.state.past_projects_shown)}
-                    </h2>
+                <div className="row text-center">
+                    <div className="col-12">
+                        <h2 className="sub-heading-faculty" onClick={()=>this.toggle_show_variable('active_projects_shown')} style={{cursor:'pointer'}}>
+                            Active Projects { this.render_arrow(this.state.active_projects_shown)}
+                        </h2>
+                    </div>
+
+                </div>
+                    <div className="row align-items-center">
+                        
+                            {this.render_active_projects()}
+                    </div>
                 </div>
 
-            </div>
-                <div className="row">
-                    {this.render_past_projects()}
-                </div>
-            </div>
+                <div className="container-fluid">
+                    <div className="row text-center">
+                        <div className="col-12">
+                            <h2 className="sub-heading-faculty" onClick={()=>this.toggle_show_variable('past_projects_shown')} style={{cursor:'pointer'}}>
+                                Past Projects { this.render_arrow(this.state.past_projects_shown)}
+                            </h2>
+                        </div>
 
+                    </div>
+                    <div className="row">
+                        {this.render_past_projects()}
+                    </div>
+                </div>
+                </>
+                   : <Spinner size={50} position={'relative'}/>
+                   }
      
 
         </>

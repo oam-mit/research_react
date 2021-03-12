@@ -7,6 +7,7 @@ import UserProvider from './providers/UserProvider'
 
 
 import Spinner from './components/common/Spinner';
+import Swal from 'sweetalert2';
 
 class App extends Component
 {
@@ -22,6 +23,7 @@ class App extends Component
         };
 
         this.getCookie=this.getCookie.bind(this);
+        this.updateUser=this.updateUser.bind(this)
 
 
     }
@@ -49,11 +51,22 @@ class App extends Component
         .then((data)=>{
             this.setState({
                 user:data.user,
-                loading:false
+                loading:false,
+                updateUser:this.updateUser
             })
         })
         .catch((err)=>console.log(err))
 
+    }
+
+    updateUser(user)
+    {
+        this.setState({user:user},()=>{
+            Swal.fire({
+                title:'Updated Successfully',
+                icon:'success'
+            })
+        })
     }
     
     render()

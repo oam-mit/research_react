@@ -15,7 +15,7 @@ class FacultyRoot extends Component
             <Navbar/>
             <Switch>
                 <Route exact path="/faculty/home" component={(props)=><Home {...props}/>}/>
-                <Route exact path="/faculty/applications/:pk" component={(props)=><Applications {...props}/>}/>
+                <Route exact path="/faculty/applications/:project_uuid" component={(props)=><Applications {...props}/>}/>
                 <Route exact path="/faculty/profile" component={(props)=><Profile {...props}/>}/>
                 <Route exact path="/faculty/project/add" component={(props)=><ProjectAdd {...props}/>}/>
             </Switch>

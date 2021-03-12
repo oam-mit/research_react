@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Spinner from '../common/Spinner';
 import DateComponent from '../common/Date'
-
+import Tags from '../common/Tags';
+import {APPLIED,ACCEPTED,REJECTED} from '../common/ProjectStatus';
 
 class Applications extends Component
 {
@@ -29,6 +30,23 @@ class Applications extends Component
 
     }
 
+    render_status(status)
+    {
+        if(status===ACCEPTED)
+        {
+            return <Tags tag_string="Accepted" bootstrap_color={'success'}/>
+        }
+        else if(status===REJECTED)
+        {
+            return <Tags tag_string="Rejected" bootstrap_color={'danger'}/>
+
+        }
+        else if(status===APPLIED)
+        {
+            return <Tags tag_string="Applied" bootstrap_color={'info'}/>
+        }
+    }
+
     render_projects()
     {
         if(this.state.loading)
@@ -45,6 +63,7 @@ class Applications extends Component
                             this.props.history.push(`/student/${project.department_slug}/project/${project.uuid_field}`)
                         }}>
                             <div className="card department-card-design" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                                {this.render_status(project.status)}
                                 <div className="text-content">
                                 
                                     <span className="department-card-design-title"><strong>{project.title}</strong></span>

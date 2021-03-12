@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../assets/iste_logo.png';
-import { Link } from 'react-router-dom';
+import { Link ,NavLink} from 'react-router-dom';
+import UserProvider from '../../providers/UserProvider'
 import '../../assets/navbar.css';
 
 const Navbar =()=>{
@@ -19,7 +20,7 @@ const Navbar =()=>{
     <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item">
-                <Link className="nav-link" to="/faculty/home">Home</Link>
+                <NavLink activeClassName={'active'} className="nav-link" to="/faculty/home">Home</NavLink>
             </li>
             <li className="nav-item">
                 <a className="nav-link" href="/">About Us</a>
@@ -33,7 +34,13 @@ const Navbar =()=>{
         </ul>
         <ul className="navbar-nav ml-auto dropdown-menu-left">
             <li className="nav-item dropdown ">
-                <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <UserProvider.Consumer>
+                        {(context)=>{
+                            return <>{context.user.first_name} {context.user.last_name}</>
+                        }}
+                    </UserProvider.Consumer>
+                </a>
                 
                 <div className="dropdown-menu dropdown-style" aria-labelledby="navbarDropdown">
                     <Link className="dropdown-item" to="/faculty/profile">Profile</Link>
