@@ -179,16 +179,16 @@ class ProjectAdd extends Component
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-4">
+                <div className="form-row">
+                    <div className="form-group col-md-4">
                         <label htmlFor="start_date">Start Date</label>
                         <input readOnly type="date" className="form-control-plaintext" id="start_date" value={this.state.submit_data.start_date}/>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div className="form-group col-md-4">
                         <label htmlFor="inputPassword4">End Date</label>
                         <input readOnly type="date" className="form-control-plaintext" id="end_date" value={this.state.submit_data.end_date}/>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div className="form-group col-md-4">
                         <label htmlFor="">Duration</label>
                         <input readOnly type="text" className="form-control-plaintext" id="duration" value={`${this.render_difference_between_dates()} months`}/>
                     </div>
@@ -291,8 +291,8 @@ class ProjectAdd extends Component
         
         </div>
         <div className="container padding-custom">
-        <div class="progress" style={{height:'5px'}}>
-            <div class="progress-bar progress-bar-striped progress-bar-animated" style={{width:`${JSON.stringify((100*this.state.page/3))}%`}} role="progressbar" aria-valuenow={JSON.stringify((100*this.state.page/3))}  aria-valuemin="0" aria-valuemax="100"></div>
+        <div className="progress" style={{height:'5px'}}>
+            <div className="progress-bar progress-bar-striped progress-bar-animated" style={{width:`${JSON.stringify((100*this.state.page/3))}%`}} role="progressbar" aria-valuenow={JSON.stringify((100*this.state.page/3))}  aria-valuemin="0" aria-valuemax="100"></div>
         </div>
             <form onSubmit={this.submit_handler} className="my-4">
                 {this.render_form()}

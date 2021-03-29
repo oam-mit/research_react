@@ -46,7 +46,7 @@ const Navbar =()=>{
                     <Link className="dropdown-item" to="/student/profile">Profile</Link>
                     <Link className="dropdown-item" to="/student/applications">Applications</Link>
                     <div className="dropdown-divider"></div>
-                    <Link className="dropdown-item" to="/logout">Logout</Link>
+                    <a className="dropdown-item" href="/logout">Logout</a>
                 </div>
             </li>
         </ul>
