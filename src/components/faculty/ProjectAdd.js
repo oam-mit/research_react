@@ -134,8 +134,11 @@ class ProjectAdd extends Component
                 </div>
 
                 <div className="center-btn text-center align-items-center mt-3">
-                    <button onClick={(event)=>this.togglePage(event,1)} className="btn btn-mystyle mr-1">Previous</button>
-                    <button disabled={this.state.max_students===0 || this.state.submit_data.start_date.length===0 || this.state.submit_data.end_date.length===0} onClick={(event)=>this.togglePage(event,3)} className="btn btn-mystyle">Next</button>
+                    <div className="btn-group" role="group" aria-label="Basic example"  >
+                        <button className="btn mr-1" onClick={(event)=>this.togglePage(event,1)} style={{backgroundColor:'#1d1e4e',color:'white'}}>Previous</button>
+                        <button className="btn" disabled={this.state.max_students===0 || this.state.submit_data.start_date.length===0 || this.state.submit_data.end_date.length===0}  onClick={(event)=>this.togglePage(event,3)} style={{backgroundColor:'#1d1e4e',color:'white'}}>Next</button>
+                        
+                    </div>
                 </div>
             </>
             );
@@ -195,12 +198,15 @@ class ProjectAdd extends Component
                 </div>
 
                 <div className="center-btn text-center align-items-center mt-3">
-                    <button onClick={(event)=>this.togglePage(event,2)} className="btn btn-mystyle mr-1">Previous</button>
-                    <button disabled={
+                    <div className="btn-group" role="group" aria-label="Basic example"  >
+                        <button className="btn mr-1" onClick={(event)=>this.togglePage(event,2)} style={{backgroundColor:'#1d1e4e',color:'white'}}>Previous</button>
+                        <button className="btn" disabled={
                         this.state.max_students===0 || this.state.submit_data.start_date.length===0 || this.state.submit_data.end_date.length===0 || this.state.submit_data.title.length===0 || this.state.submit_data.description.length===0 || this.state.submit_data.tags.length===0 || this.state.submitted 
                         } 
-                        type="submit" 
-                        className="btn btn-mystyle">Submit</button>
+                        type="submit" style={{backgroundColor:'#1d1e4e',color:'white'}}>Submit</button>
+                        
+                    </div>
+
                 </div>
                 
                 </>
