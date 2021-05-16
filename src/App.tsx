@@ -2,34 +2,27 @@ import React, { Component } from 'react';
 import StudentRoot from './components/student/StudentRoot';
 import FacultyRoot from './components/faculty/FacultyRoot';
 import { Route, Switch } from 'react-router';
-
-import UserProvider from './providers/UserProvider'
-
-
+import UserProvider, { StateType } from './providers/UserProvider'
 import Spinner from './components/common/Spinner';
-import Swal from 'sweetalert2';
 
-class App extends Component
+
+
+
+class App extends Component <{},StateType>
 {
-    constructor(props)
+    constructor(props:any)
     {
         super(props);
         this.state={
             loading:true,
             user:null,
             getCookie:this.getCookie
-
-
         };
-
-        this.getCookie=this.getCookie.bind(this);
-        this.updateUser=this.updateUser.bind(this)
-
 
     }
 
-    getCookie(name)
-    {
+    getCookie =(name:string)=> {
+
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
             const cookies = document.cookie.split(';');
@@ -44,6 +37,7 @@ class App extends Component
         }
         return cookieValue;
     }
+
     componentDidMount()
     {
         fetch('/api/get_logged_in_user/')
@@ -52,21 +46,10 @@ class App extends Component
             this.setState({
                 user:data.user,
                 loading:false,
-                updateUser:this.updateUser
             })
         })
         .catch((err)=>console.log(err))
 
-    }
-
-    updateUser(user)
-    {
-        this.setState({user:user},()=>{
-            Swal.fire({
-                title:'Updated Successfully',
-                icon:'success'
-            })
-        })
     }
     
     render()
@@ -87,11 +70,8 @@ class App extends Component
 
         else 
         {
-            return(
-                
-                    
+            return(    
                 <Spinner size={100} position={'absolute'}/>
-                
             );
 
         }

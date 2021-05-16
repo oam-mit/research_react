@@ -1,8 +1,7 @@
 import React, { Component } from "react";
+import { ProjectType } from "../../../backend/student/DepartmentProvider";
 
-
-
-class SideNav extends Component
+class SideNav extends Component<PropsType>
 {
     render_projects()
     {
@@ -51,3 +50,11 @@ class SideNav extends Component
 }
 
 export default SideNav;
+
+type PropsType={
+  projects:Array<ProjectType>,
+  selected_project:string,
+  department_slug:string,
+  select_project:(project_uuid:string)=>void
+}
+

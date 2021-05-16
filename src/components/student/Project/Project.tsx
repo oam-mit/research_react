@@ -41,7 +41,6 @@ class Project extends Component<IProps,IState>
 
     render_button(cv_null:boolean)
     {
-        console.log(cv_null);
         if(!cv_null && this.props.project && !this.props.project.applied)
         {
             return(

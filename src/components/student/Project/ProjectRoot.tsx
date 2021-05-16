@@ -39,6 +39,8 @@ class ProjectRoot extends Component<IProps,StateType>
 
     select_project(project_uuid_field:string,props:ContextType)
     {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
         this.props.history.push(`/student/${props.department_slug}/project/${project_uuid_field}`)
         
     }

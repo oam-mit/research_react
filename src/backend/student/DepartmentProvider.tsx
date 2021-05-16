@@ -1,6 +1,6 @@
 import React, { Component, createContext } from 'react';
 import { RouteComponentProps,withRouter } from 'react-router';
-import { FacultyType } from './CommonTypes';
+import { FacultyType } from '../common/CommonTypes';
 
 
 export const DepartmentContext= createContext<ContextType>({

@@ -1,5 +1,5 @@
 import { Component, createContext } from "react";
-import { FacultyType } from "./CommonTypes";
+import { FacultyType } from "../common/CommonTypes";
 
 export const ApplicationContext= createContext<ApplicationContextType>({
     loading:true,
