@@ -4,106 +4,63 @@ import UserProvider from '../../../providers/UserProvider'
 
 import DateComponent from '../../common/Date';
 
-import Swal from 'sweetalert2';
+import { ProjectType } from '../../../backend/student/DepartmentProvider';
+import { ContextType, ProjectContext } from '../../../backend/student/ProjectProvider';
+import { showLoadingAlert, yesNoAlert } from '../../../services/AlertService';
+import { RouteComponentProps,withRouter } from 'react-router';
 
-class Project extends Component
+class Project extends Component<IProps,IState>
 {
-    constructor(props)
-    {
-        super(props);
-
-        this.state={
-            submitted:false,
-            already_submitted:false
-        }
-    }
     
-
-    submit_application()
-    {
-        Swal.fire({
-            title:'Confirmation',
-            text:'Please click on OK to confirm',
-            confirmButtonText:'OK',
-            cancelButtonText:'Exit',
-            showCancelButton:true,
-            icon:'info',
-
-
-        })
-        .then(result=>{
-            if(result.value)
-            {
-                this.setState({
-                    submitted:true
-                },()=>{
-        
-                    let form_data=new FormData();
-                    form_data.append('project_uuid_field',this.props.project.uuid_field);
-        
-                    fetch('/student/api/submit_application/',{
-                        'method':'POST',
-                        'body':form_data,
-                        'headers':{'X-CSRFToken':this.context.getCookie('csrftoken')}
-                    })
-                    .then((resp)=>resp.json())
-                    .then((data)=>{
-                        if(data.status==='successful')
-                        { 
-                            Swal.fire({
-                                title:'Success',
-                                text:'Submission successful',
-                                icon:'success'
-
-
-                            })
-                            .then((res)=>{
-                                this.props.redirect_to_department();
-                            })
-                            
-        
-                        }
-                        else
-                        {
-                            Swal.fire({
-                                title:'Error',
-                                text:data.error,
-                                icon:'error'
-                            })
-                        }
-            
-                    })
-                    .catch((err)=>{
-                        console.log(err);
-                    });
-        
-                    
-                });
-                
-
-            }
-
-
-        });
-
-
-    }
     componentDidMount()
     {
         if(!this.props.project)
         { 
-            this.props.redirect_404();
+            this.props.history.replace('/student/not-found');
             
         }
     }
 
-    render_button(cv_null)
+    submit_application(props:ContextType)
+    {
+        yesNoAlert('Confirmation','Are you sure you want to proceed?','Yes','No','warning')
+        .then((res)=>{
+            if(res && this.props.project)
+            {
+                showLoadingAlert();
+                props.submit_application(this.props.project.uuid_field);
+            }
+        })
+    }
+
+    clickHandler(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) 
+    {
+        event.preventDefault();
+        this.props.history.goBack();
+    }
+
+    render_button(cv_null:boolean)
     {
         console.log(cv_null);
-        if(!cv_null && !this.props.project.applied)
+        if(!cv_null && this.props.project && !this.props.project.applied)
         {
             return(
-                <button disabled={this.state.submitted} onClick={()=>this.submit_application()} className="btn btn-mystyle">{this.state.submitted ? <div className="spinner-border text-primary" role="status"><span className="sr-only">Loading...</span></div>:'Submit'}</button>
+                <ProjectContext.Consumer>
+                    {(props)=>
+                        <button 
+                        disabled={props.submitted} 
+                        onClick={()=>this.submit_application(props)} 
+                        className="btn btn-mystyle">
+                            {props.submitted ? 
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="sr-only">Loading...</span>
+                                </div>
+                                :
+                                'Submit'
+                                }
+                        </button>
+                    }
+                </ProjectContext.Consumer>
             ) 
         }
         else
@@ -195,10 +152,24 @@ class Project extends Component
         
     }
 
-    clickHandler(event) {
-        event.preventDefault();
-        this.props.goBack();
-    }
 }
-Project.contextType=UserProvider
-export default Project;
+
+Project.contextType=UserProvider;
+
+
+type IState={
+    
+}
+
+interface IProps extends RouteComponentProps<{}>
+{
+    project:ProjectType |undefined;
+
+}
+
+
+
+export default withRouter(Project);
+
+
+
