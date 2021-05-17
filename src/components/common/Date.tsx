@@ -1,5 +1,13 @@
 
-const DateComponent =({date,locale,month,year,day})=>{
+type PropType={
+    date:string,
+    locale:string,
+    month:"long",
+    year:"numeric",
+    day:"numeric"
+}
+
+const DateComponent =({date,locale,month,year,day}:PropType)=>{
     let date_return=new Date(date);
 
     return(

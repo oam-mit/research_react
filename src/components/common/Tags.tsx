@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const Tags =({tag_string,bootstrap_color})=>{
+const Tags =({tag_string,bootstrap_color}:{tag_string:string,bootstrap_color:string})=>{
 
         let output=tag_string.split(',').filter((tag)=>tag!=="").map((tag,index)=>{
             return(
@@ -11,7 +11,7 @@ const Tags =({tag_string,bootstrap_color})=>{
 
         if(output.length>0)
         {
-            return output;
+            return <>{output}</>;
         }
         else
         {

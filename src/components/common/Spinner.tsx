@@ -5,7 +5,7 @@ import { css } from "@emotion/core";
 
 
 
-const Spinner=({size,position})=>{
+const Spinner=({size,position}:{size:number,position:string})=>{
     const override = css`
         position: ${position};
             height: 100px;

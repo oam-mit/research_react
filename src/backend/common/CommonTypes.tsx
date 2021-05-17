@@ -10,11 +10,11 @@ interface UserType
 
 export interface FacultyType extends UserType
 {
-    profile_picture?:string
+    profile_picture:string
 }
 
 export interface StudentType extends UserType
 {
-    registration_number?:string;
+    registration_number:string;
     cv:string;
 }

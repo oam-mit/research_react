@@ -1,5 +1,6 @@
 import React, { Component, createContext } from 'react';
 import { RouteComponentProps,withRouter } from 'react-router';
+import { showNetworkError } from '../../services/AlertService';
 import { FacultyType } from '../common/CommonTypes';
 
 
@@ -44,7 +45,10 @@ class DepartmentProvider extends Component <PropsType,ContextType>
             }
         })
         .catch((err)=>{
-            console.log(err);
+            showNetworkError();
+            this.setState({
+                loading:false
+            })
         })
     }
 

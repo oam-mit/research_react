@@ -36,9 +36,9 @@ const Navbar =()=>{
             <li className="nav-item dropdown ">
                 <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <UserProvider.Consumer>
-                        {(context)=>{
-                            return <>{context.user.first_name} {context.user.last_name}</>
-                        }}
+                        {(context)=>
+                            context.user? <> {context.user.first_name} {context.user.last_name}</> :<></>
+                        }
                     </UserProvider.Consumer>
                 </a>
                 

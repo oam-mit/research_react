@@ -1,4 +1,5 @@
 import { Component, createContext } from "react";
+import { showNetworkError } from "../../services/AlertService";
 import { FacultyType } from "../common/CommonTypes";
 
 export const ApplicationContext= createContext<ApplicationContextType>({
@@ -28,7 +29,12 @@ class ApplicationProvider extends Component <{},ApplicationContextType>
                 projects:data.projects
             })
         })
-        .catch(err=>console.log(err))
+        .catch(err=>{
+            showNetworkError();
+            this.setState({
+                loading:false
+            })
+        })
     }
 
     render()

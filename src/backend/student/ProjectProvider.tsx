@@ -4,30 +4,6 @@ import { ProjectType } from "./DepartmentProvider";
 import { showErrorAlert, showNetworkError, showSuccessAlert } from "../../services/AlertService";
 import UserProvider from "../../providers/UserProvider";
 
-export type ContextType ={
-
-    loading:boolean,
-    projects:Array<ProjectType>,
-    department_slug:string,
-    submitted:boolean,
-    submit_application:(uuid_field:string)=>void
-}
-
-interface IProps extends RouteComponentProps<{uuid_field:string,department_slug:string}>
-{
-    toggleNavbar:(value:boolean)=>void
-}
-
-
-export const ProjectContext = createContext<ContextType>({
-    loading:true,
-    projects:[],
-    department_slug:'',
-    submitted:false,
-    submit_application:(uuid_field:string)=>{}
- 
-});
-
 class ProjectProvider extends Component<IProps,ContextType>
 {
     constructor(props:IProps)
@@ -63,7 +39,10 @@ class ProjectProvider extends Component<IProps,ContextType>
             
         })
         .catch((err)=>{
-            console.log(err);
+            showNetworkError();
+            this.setState({
+                loading:false
+            })
         })
         
 
@@ -132,3 +111,28 @@ class ProjectProvider extends Component<IProps,ContextType>
 ProjectProvider.contextType= UserProvider;
 
 export default withRouter (ProjectProvider);
+
+
+export type ContextType ={
+
+    loading:boolean,
+    projects:Array<ProjectType>,
+    department_slug:string,
+    submitted:boolean,
+    submit_application:(uuid_field:string)=>void
+}
+
+interface IProps extends RouteComponentProps<{uuid_field:string,department_slug:string}>
+{
+    toggleNavbar:(value:boolean)=>void
+}
+
+
+export const ProjectContext = createContext<ContextType>({
+    loading:true,
+    projects:[],
+    department_slug:'',
+    submitted:false,
+    submit_application:(uuid_field:string)=>{}
+ 
+});

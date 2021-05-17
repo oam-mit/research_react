@@ -16,6 +16,7 @@
     "react-css-modules": "^4.7.11",
     "react-date-picker": "^8.1.0",
     "react-dom": "^17.0.1",
+    "react-reveal": "^1.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",

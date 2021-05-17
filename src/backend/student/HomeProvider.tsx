@@ -1,15 +1,5 @@
 import { Component, createContext } from "react";
-
-export type DepartmentType={
-    name:string,
-    department_building:string,
-    slug:string
-}
-
-type ContextType={
-    loading:boolean,
-    departments:Array<DepartmentType>
-}
+import { showNetworkError } from "../../services/AlertService";
 
 
 export const HomeContext = createContext<ContextType>({
@@ -40,6 +30,12 @@ class HomeProvider extends Component <{},ContextType>
                 loading:false
             })
         })
+        .catch(()=>{
+            showNetworkError();
+            this.setState({
+                loading:false
+            })
+        });
     }
 
     render()
@@ -52,6 +48,18 @@ class HomeProvider extends Component <{},ContextType>
 
     }
 }
+
+export type DepartmentType={
+    name:string,
+    department_building:string,
+    slug:string
+}
+
+type ContextType={
+    loading:boolean,
+    departments:Array<DepartmentType>
+}
+
 
 export default HomeProvider;
 

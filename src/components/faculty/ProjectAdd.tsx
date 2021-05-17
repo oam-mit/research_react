@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
-import Swal from 'sweetalert2';
 import UserProvider from '../../providers/UserProvider';
 import Tags from '../common/Tags';
+import {ProjectAddContext, SubmitDataType,ContextType} from '../../backend/faculty/ProjectAddProvider';
+
+type StateType={
+    submit_data:SubmitDataType,
+    page:number,
+}
 
 
-
-class ProjectAdd extends Component
+class ProjectAdd extends Component<{},StateType>
 {
-    constructor(props)
+    constructor(props:any)
     {
         super(props);
         this.state={
@@ -21,14 +25,12 @@ class ProjectAdd extends Component
                 end_date:""
             },
             page:1,
-            submitted:false
         }
 
-        this.submit_handler=this.submit_handler.bind(this);
     }
     
 
-    changeHandler(event)
+    changeHandler(event:React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>)
     {
 
             this.setState((prev)=>{
@@ -52,14 +54,14 @@ class ProjectAdd extends Component
         return Math.abs(Math.round(diff));
     }
 
-    togglePage(event,page)
+    togglePage(event:React.MouseEvent<HTMLButtonElement, MouseEvent>,page:number)
     {
         event.preventDefault();
         this.setState({page:page});
 
     }
 
-    render_form()
+    render_form(props:ContextType)
     {
         if(this.state.page===1)
         {
@@ -69,15 +71,15 @@ class ProjectAdd extends Component
                 <legend>Basic Information</legend>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput1">Title</label>
-                    <input defaultValue={this.state.submit_data.title} onChange={(event)=>this.changeHandler(event)} name="title" type="text" className="form-control" id="exampleFormControlInput1" placeholder="What is the project called?"/>
+                    <input value={this.state.submit_data.title} onChange={(event)=>this.changeHandler(event)} name="title" type="text" className="form-control" id="exampleFormControlInput1" placeholder="What is the project called?"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlTextarea1">Description</label>
-                    <textarea defaultValue={this.state.submit_data.description} onChange={(event)=>this.changeHandler(event)} name="description" className="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Describe the project"></textarea>
+                    <textarea value={this.state.submit_data.description} onChange={(event)=>this.changeHandler(event)} name="description" className="form-control" id="exampleFormControlTextarea1" rows={4} placeholder="Describe the project"></textarea>
                 </div>
                 <div className="form-group">
                     <label htmlFor="tags">Tags (Separate each one with '<b>,</b>')</label>
-                    <input defaultValue={this.state.submit_data.tags} type="text" className="form-control" id="tags" name="tags" value={this.state.tags} onChange={(event)=>this.changeHandler(event)}/>
+                    <input type="text" className="form-control" id="tags" name="tags" value={this.state.submit_data.tags} onChange={(event)=>this.changeHandler(event)}/>
                     <span id="passwordHelpBlock" className="form-text text-muted">
                         <Tags tag_string={this.state.submit_data.tags} bootstrap_color={'secondary'}/>
                     </span>
@@ -99,7 +101,7 @@ class ProjectAdd extends Component
                 <legend>Management Information</legend>
                 <div className="form-group">
                     <div className="form-check">
-                        <input defaultChecked={this.state.submit_data.is_department_specific} name="is_department_specific" onChange={(event)=>this.setState((prev)=>{
+                        <input checked={this.state.submit_data.is_department_specific} name="is_department_specific" onChange={(event)=>this.setState((prev)=>{
                             return(
                                 {
                                     submit_data:{
@@ -120,12 +122,12 @@ class ProjectAdd extends Component
                 <div className="form-row">
                     <div className="col-6">
                             <label htmlFor="start_date">Start Date</label>
-                            <input defaultValue={this.state.submit_data.start_date} type="date" onChange={(event)=>this.changeHandler(event)} name="start_date" className="form-control"/>
+                            <input value={this.state.submit_data.start_date} type="date" onChange={(event)=>this.changeHandler(event)} name="start_date" className="form-control"/>
                     </div>
                     {this.state.submit_data.start_date.length>0 ? 
                         <div className="col">
                             <label htmlFor="end_date">End Date</label>
-                            <input defaultValue={this.state.submit_data.end_date} type="date" onChange={(event)=>this.changeHandler(event)} min={this.state.submit_data.start_date} name="end_date" className="form-control"/>
+                            <input value={this.state.submit_data.end_date} type="date" onChange={(event)=>this.changeHandler(event)} min={this.state.submit_data.start_date} name="end_date" className="form-control"/>
                         </div>
                         :
                         <>
@@ -136,7 +138,7 @@ class ProjectAdd extends Component
                 <div className="center-btn text-center align-items-center mt-3">
                     <div className="btn-group" role="group" aria-label="Basic example"  >
                         <button className="btn mr-1" onClick={(event)=>this.togglePage(event,1)} style={{backgroundColor:'#1d1e4e',color:'white'}}>Previous</button>
-                        <button className="btn" disabled={this.state.max_students===0 || this.state.submit_data.start_date.length===0 || this.state.submit_data.end_date.length===0}  onClick={(event)=>this.togglePage(event,3)} style={{backgroundColor:'#1d1e4e',color:'white'}}>Next</button>
+                        <button className="btn" disabled={this.state.submit_data.max_students===0 || this.state.submit_data.start_date.length===0 || this.state.submit_data.end_date.length===0}  onClick={(event)=>this.togglePage(event,3)} style={{backgroundColor:'#1d1e4e',color:'white'}}>Next</button>
                         
                     </div>
                 </div>
@@ -198,13 +200,15 @@ class ProjectAdd extends Component
                 </div>
 
                 <div className="center-btn text-center align-items-center mt-3">
-                    <div className="btn-group" role="group" aria-label="Basic example"  >
+                <div className="btn-group" role="group" aria-label="Basic example"> 
+
                         <button className="btn mr-1" onClick={(event)=>this.togglePage(event,2)} style={{backgroundColor:'#1d1e4e',color:'white'}}>Previous</button>
                         <button className="btn" disabled={
-                        this.state.max_students===0 || this.state.submit_data.start_date.length===0 || this.state.submit_data.end_date.length===0 || this.state.submit_data.title.length===0 || this.state.submit_data.description.length===0 || this.state.submit_data.tags.length===0 || this.state.submitted 
+                        this.state.submit_data.max_students===0 || this.state.submit_data.start_date.length===0 || this.state.submit_data.end_date.length===0 || this.state.submit_data.title.length===0 || this.state.submit_data.description.length===0 || this.state.submit_data.tags.length===0 || props.submitted
                         } 
                         type="submit" style={{backgroundColor:'#1d1e4e',color:'white'}}>Submit</button>
-                        
+                    
+                  
                     </div>
 
                 </div>
@@ -216,74 +220,10 @@ class ProjectAdd extends Component
 
     }
 
-    submit_handler(event)
+    submit_handler(event:React.FormEvent<HTMLFormElement>,props:ContextType)
     {
         event.preventDefault();
-
-        Swal.fire({
-            title:'Confirmation',
-            text:'Please click on OK to confirm',
-            confirmButtonText:'OK',
-            cancelButtonText:'Exit',
-            showCancelButton:true,
-            icon:'info',
-
-
-        })
-        .then(result=>{
-            if(result.value)
-            {
-
-                this.setState({submitted:true},()=>{
-
-                    // let form_data=new FormData();
-        
-                    // for (let data in this.state.submit_data)
-                    // {
-                    //     form_data.append(data,JSON.stringify(this.state.submit_data[data]))
-                    // }
-            
-            
-            
-                    fetch('/faculty/api/submit_project/',{
-                        'method':'POST',
-                        'body':JSON.stringify(this.state.submit_data),
-                        'headers':{
-                            'X-CSRFToken':this.context.getCookie('csrftoken'),
-                            'Content-Type':'application/json'
-                        }
-                    })
-                    .then((resp)=>resp.json())
-                    .then((data)=>{
-                        if(data.status==='successful')
-                        {
-                            Swal.fire({
-                                title:'Success',
-                                text:'Successfully Submitted',
-                                icon:'success'
-            
-            
-                            })
-                            .then((res)=>{
-                                this.props.history.push('/faculty/home');
-                            })
-                        }
-                        else
-                        {
-                            Swal.fire({
-                                title:'Error',
-                                text:data.error,
-                                icon:'error'
-                            })
-                        }
-                    })
-                    .catch(err=>console.log(err))
-            
-        
-                })
-
-            }
-        })
+        props.submit_data(this.state.submit_data);
 
     }
 
@@ -292,18 +232,29 @@ class ProjectAdd extends Component
         return(
             <>
             <title>Faculty | New Project</title>
-        <div className="jumbotron jumbotron-fluid text-white text-center my-3" id="jumbo-color">
-            <h3 className="display-1" id="jumbo-text">Add a new Project</h3>
-        
+            <div className="jumbotron jumbotron-fluid text-white text-center my-3" id="jumbo-color">
+                <h3 className="display-1" id="jumbo-text">Add a new Project</h3>
+            
+            </div>
+            <div className="container padding-custom">
+            <div className="progress" style={{height:'5px'}}>
+                <div
+                className="progress-bar progress-bar-striped progress-bar-animated" 
+                style={{width:`${JSON.stringify((100*this.state.page/3))}%`}} 
+                role="progressbar" 
+                aria-valuenow={Math.floor(100*this.state.page/3)}  
+                aria-valuemin={0} aria-valuemax={100}>
+
+                </div>
+            </div>
+            <ProjectAddContext.Consumer>
+               {(props)=>
+                <form onSubmit={(event)=>this.submit_handler(event,props)} className="my-4">
+                    {this.render_form(props)}
+                </form> 
+               }
+            </ProjectAddContext.Consumer>
         </div>
-        <div className="container padding-custom">
-        <div className="progress" style={{height:'5px'}}>
-            <div className="progress-bar progress-bar-striped progress-bar-animated" style={{width:`${JSON.stringify((100*this.state.page/3))}%`}} role="progressbar" aria-valuenow={JSON.stringify((100*this.state.page/3))}  aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-            <form onSubmit={this.submit_handler} className="my-4">
-                {this.render_form()}
-            </form>
-      </div>
   
     </>
         );
