@@ -8,7 +8,7 @@ import HomeCard from '../../widgets/faculty/HomeCard';
 import NoProjects from '../../backend/common/NoProjectToShow';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { HomeContext } from '../../backend/faculty/HomeProvider';
-import { ProjectType } from '../../backend/student/DepartmentProvider';
+import { ProjectType } from "../../backend/common/ProjectType";
 
 
 

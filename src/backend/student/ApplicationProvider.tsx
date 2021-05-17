@@ -1,6 +1,6 @@
 import { Component, createContext } from "react";
 import { showNetworkError } from "../../services/AlertService";
-import { FacultyType } from "../common/CommonTypes";
+import { FacultyType } from "../common/UserTypes";
 
 export const ApplicationContext= createContext<ApplicationContextType>({
     loading:true,

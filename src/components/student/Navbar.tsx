@@ -12,7 +12,7 @@ const Navbar =()=>{
         <span className="navbar-toggler-icon"></span>
     </button>
     
-        <a className="navbar-brand" href="/" onClick={(event)=>event.preventDefault()}><img src={logo} className="img-responsive logo" alt="Iste logo"/></a>
+        <a className="navbar-brand" href="/" onClick={(event)=>event.preventDefault()}><img src={logo} className="img-responsive logo" alt="Iste logo" height={100}/></a>
 
         <a className="navbar-brand" href="/" onClick={(event)=>event.preventDefault()}>ISTE Manipal</a>
 
@@ -50,12 +50,6 @@ const Navbar =()=>{
                 </div>
             </li>
         </ul>
-        
-        {/* <div className="search-box">
-            <input className="search-txt mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-            <span className="search-btn"> <i className="fa fa-search" style={{color:'black'}}></i>
-            </span>
-        </div> */}
 
     </div>
 </nav>

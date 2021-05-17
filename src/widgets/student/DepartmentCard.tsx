@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { ProjectType } from '../../backend/student/DepartmentProvider';
+import { ProjectType } from "../../backend/common/ProjectType";
 import DateComponent from '../../components/common/Date';
 import Tags from '../../components/common/Tags';
 import Fade from 'react-reveal/Fade';

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ProjectType } from "../../../backend/student/DepartmentProvider";
+import { ProjectType } from "../../../backend/common/ProjectType";
 
 class SideNav extends Component<PropsType>
 {

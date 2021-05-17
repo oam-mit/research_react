@@ -4,7 +4,7 @@ import UserProvider from '../../../providers/UserProvider'
 
 import DateComponent from '../../common/Date';
 
-import { ProjectType } from '../../../backend/student/DepartmentProvider';
+import { ProjectType } from "../../../backend/common/ProjectType";
 import { ContextType, ProjectContext } from '../../../backend/student/ProjectProvider';
 import { showLoadingAlert, yesNoAlert } from '../../../services/AlertService';
 import { RouteComponentProps,withRouter } from 'react-router';

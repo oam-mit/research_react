@@ -3,7 +3,7 @@ import Footer from './Footer'
 import Spinner from '../common/Spinner';
 import DepartmentCard from '../../widgets/student/DepartmentCard';
 import {DepartmentContext} from '../../backend/student/DepartmentProvider';
-import {ProjectType} from '../../backend/student/DepartmentProvider';
+import { ProjectType } from "../../backend/common/ProjectType";
 
 const Department = ()=>{
 

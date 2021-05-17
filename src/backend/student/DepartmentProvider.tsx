@@ -1,7 +1,7 @@
 import React, { Component, createContext } from 'react';
 import { RouteComponentProps,withRouter } from 'react-router';
 import { showNetworkError } from '../../services/AlertService';
-import { FacultyType } from '../common/CommonTypes';
+import { ProjectType } from '../common/ProjectType';
 
 
 export const DepartmentContext= createContext<ContextType>({
@@ -69,20 +69,6 @@ type ContextType={
     projects:Array<ProjectType>,
     department_name:string | null,
     department_slug:string | null
-}
-
-export type ProjectType={
-    uuid_field:string,
-    title:string,
-    description:string,
-    faculty:FacultyType
-    applied:boolean,
-    tags:string,
-    max_students:number,
-    start_date:string,
-    end_date:string,
-    is_active:boolean
-
 }
 
 interface PropsType extends RouteComponentProps<{department_slug:string}>

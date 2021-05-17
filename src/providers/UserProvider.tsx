@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacultyType, StudentType } from '../backend/common/CommonTypes';
+import { FacultyType, StudentType } from '../backend/common/UserTypes';
 
 export interface StateType
 {

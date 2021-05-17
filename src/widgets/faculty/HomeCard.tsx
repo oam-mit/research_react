@@ -1,5 +1,5 @@
 import { useHistory } from "react-router";
-import { ProjectType } from "../../backend/student/DepartmentProvider";
+import { ProjectType } from "../../backend/common/ProjectType";
 
 import DateComponent from '../../components/common/Date';
 

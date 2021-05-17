@@ -1,6 +1,6 @@
 import { Component, createContext } from "react";
 import { showNetworkError } from "../../services/AlertService";
-import { ProjectType } from "../student/DepartmentProvider";
+import { ProjectType } from "../common/ProjectType";
 
 export const HomeContext = createContext<ContextType>({
     loading:true,

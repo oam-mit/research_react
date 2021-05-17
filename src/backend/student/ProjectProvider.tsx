@@ -1,6 +1,6 @@
 import { Component, createContext } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
-import { ProjectType } from "./DepartmentProvider";
+import { ProjectType } from "../common/ProjectType";
 import { showErrorAlert, showNetworkError, showSuccessAlert } from "../../services/AlertService";
 import UserProvider from "../../providers/UserProvider";
 
