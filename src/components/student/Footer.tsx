@@ -1,17 +1,16 @@
-
-
-const Footer = ()=>{
-    return(
-        <footer id="footer-size">
-        <div className="waves ">
-            <svg width="100%" height="200px" fill="none">
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#2a2a72" />
-                    <stop offset="74%" stopColor="#009ffd" />
-                    <stop offset="74%" stopColor="#009ffd" />
-                </linearGradient>
-                <path fill="url(#grad1)"
-                      d="
+const Footer = () => {
+	return (
+		<footer id="footer-size">
+			<div className="waves ">
+				<svg width="100%" height="200px" fill="none">
+					<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+						<stop offset="0%" stopColor="#2a2a72" />
+						<stop offset="74%" stopColor="#009ffd" />
+						<stop offset="74%" stopColor="#009ffd" />
+					</linearGradient>
+					<path
+						fill="url(#grad1)"
+						d="
                         M 0 67
                         C 273,183
                           822,-40
@@ -20,12 +19,14 @@ const Footer = ()=>{
                         V 359
                         H 0
                         V 67
-                        Z">
-                    <animate repeatCount="indefinite"
-                             fill="#454599"
-                             attributeName="d"
-                             dur="15s"
-                             values="
+                        Z"
+					>
+						<animate
+							repeatCount="indefinite"
+							fill="#454599"
+							attributeName="d"
+							dur="15s"
+							values="
                           M0 77
                           C 473,283
                             822,-40
@@ -65,15 +66,13 @@ const Footer = ()=>{
                           H 0
                           V 67
                           Z
-                          ">
-                    </animate>
-                </path>
-            </svg>
-        </div>
-
-    </footer>
-    );
-}
-
+                          "
+						></animate>
+					</path>
+				</svg>
+			</div>
+		</footer>
+	);
+};
 
 export default Footer;
