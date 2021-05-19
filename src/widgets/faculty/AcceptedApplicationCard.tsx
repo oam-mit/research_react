@@ -1,10 +1,10 @@
 import { ApplicantType } from "../../backend/faculty/types/ApplicantType";
 
-const AcceptedApplicationCard = ({
-	applicant,
-}: {
+type PropsType = {
 	applicant: ApplicantType;
-}) => {
+};
+
+const AcceptedApplicationCard = ({ applicant }: PropsType) => {
 	return (
 		<tr key={applicant.registration_number}>
 			<th scope="row">{applicant.registration_number}</th>

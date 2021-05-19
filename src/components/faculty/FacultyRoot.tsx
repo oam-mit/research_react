@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import { Route, Switch } from "react-router";
 import Home from "./Home";
 import Navbar from "./Navbar";
