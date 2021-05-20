@@ -42,7 +42,12 @@ class Project extends Component<IProps, IState> {
 	}
 
 	render_button(cv_null: boolean) {
-		if (!cv_null && this.props.project && !this.props.project.applied) {
+		if (
+			!cv_null &&
+			this.props.project &&
+			!this.props.project.applied &&
+			this.props.project.is_active
+		) {
 			return (
 				<ProjectContext.Consumer>
 					{props => (
@@ -67,6 +72,12 @@ class Project extends Component<IProps, IState> {
 				return (
 					<button className="btn btn-mystyle" disabled={true}>
 						Please submit your resume
+					</button>
+				);
+			} else if (!this.props.project?.is_active) {
+				return (
+					<button className="btn btn-mystyle" disabled={true}>
+						The Faculty has stopped accepting Applications currently
 					</button>
 				);
 			} else {

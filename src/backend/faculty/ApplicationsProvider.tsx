@@ -14,11 +14,13 @@ export type ContextType = {
 	applications: Array<ApplicantType>;
 	loading: boolean;
 	project_title: string;
+	is_active: boolean;
 	change_applicant_status: (
 		applicant: ApplicantType,
 		status: string,
 		status_show: string
 	) => void;
+	change_project_status: () => void;
 };
 
 interface PropsType extends RouteComponentProps<{ project_uuid: string }> {}
@@ -26,9 +28,11 @@ interface PropsType extends RouteComponentProps<{ project_uuid: string }> {}
 export const ApplicationsContext = createContext<ContextType>({
 	isAllowed: false,
 	applications: [],
-	loading: true,
+	loading: false,
 	project_title: "",
+	is_active: true,
 	change_applicant_status: () => {},
+	change_project_status: () => {},
 });
 
 class ApplicationsProvider extends Component<PropsType, ContextType> {
@@ -39,7 +43,9 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			applications: [],
 			loading: true,
 			project_title: "",
+			is_active: false,
 			change_applicant_status: this.change_application_status,
+			change_project_status: this.change_project_status,
 		};
 	}
 
@@ -48,13 +54,21 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 	}
 
 	fetch_applicants() {
+		type DataType = {
+			status: "successful" | "unsuccessful";
+			applications: Array<ApplicantType>;
+			is_active: boolean;
+			title: string;
+		};
+
 		fetch(`/faculty/api/get_applicants/${this.props.match.params.project_uuid}`)
 			.then(resp => resp.json())
-			.then(data => {
+			.then((data: DataType) => {
 				if (data.status === "successful") {
 					this.setState({
 						applications: data.applications,
 						project_title: data.title,
+						is_active: data.is_active,
 						loading: false,
 						isAllowed: true,
 					});
@@ -128,6 +142,50 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 				);
 			}
 		});
+	};
+
+	change_project_status = () => {
+		type DataType = {
+			status: "successful" | "unsuccessful";
+			error: string;
+		};
+		yesNoAlert("Confirmation", "Are you sure?", "Yes", "No", "warning").then(
+			value => {
+				if (value) {
+					this.setState(
+						{
+							loading: true,
+						},
+						() => {
+							let form_data = new FormData();
+							form_data.append(
+								"uuid_field",
+								this.props.match.params.project_uuid
+							);
+
+							fetch("/faculty/api/change_project_status/", {
+								method: "POST",
+								body: form_data,
+								headers: {
+									"X-CSRFToken": this.context.getCookie("csrftoken"),
+								},
+							})
+								.then(resp => resp.json())
+								.then((data: DataType) => {
+									if (data.status === "successful") {
+										this.props.history.replace(`/faculty/home`);
+									} else {
+										showErrorAlert(data.error);
+									}
+								})
+								.catch(err => {
+									showNetworkError();
+								});
+						}
+					);
+				}
+			}
+		);
 	};
 
 	render() {

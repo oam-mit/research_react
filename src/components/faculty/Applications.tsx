@@ -4,7 +4,6 @@ import {
 	ApplicationsContext,
 	ContextType,
 } from "../../backend/faculty/ApplicationsProvider";
-import UserProvider from "../../providers/UserProvider";
 import ApplicationCard from "../../widgets/faculty/ApplicationsCard";
 import Spinner from "../common/Spinner";
 
@@ -25,14 +24,13 @@ const Applications = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{state.applications.map(applicant => {
-								return (
-									<ApplicationCard
-										applicant={applicant}
-										change_application_status={state.change_applicant_status}
-									/>
-								);
-							})}
+							{state.applications.map(applicant => (
+								<ApplicationCard
+									key={applicant.email}
+									applicant={applicant}
+									change_application_status={state.change_applicant_status}
+								/>
+							))}
 						</tbody>
 					</table>
 				);
@@ -51,6 +49,13 @@ const Applications = () => {
 		} else {
 			return <Spinner size={50} position={"relative"} />;
 		}
+	};
+
+	const change_project_status = (
+		event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+	) => {
+		event.preventDefault();
+		state.change_project_status();
 	};
 
 	let state = useContext(ApplicationsContext);
@@ -80,21 +85,25 @@ const Applications = () => {
 			</div>
 			<div className="container">
 				<div className="row justify-content-center">
-					<div className="btn-grp dropdown show">
-						<a
-							className="btn dropdown-toggle"
-							href="/"
-							role="button"
-							id="dropdownMenuMakeInactive"
+					<div className="dropdown">
+						<button
+							className="btn btn-danger dropdown-toggle"
+							type="button"
+							id="dropdownMenuButton"
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false"
 						>
-							<h5>{state.project_title}</h5>
-						</a>
-
-						<div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							<button className="btn btn-danger">Make Project Inactive</button>
+							{state.project_title}
+						</button>
+						<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a
+								className="dropdown-item"
+								href="/"
+								onClick={event => change_project_status(event)}
+							>
+								{`Make Project ${state.is_active ? "Inactive" : "Active"}`}
+							</a>
 						</div>
 					</div>
 				</div>
@@ -103,7 +112,5 @@ const Applications = () => {
 		</>
 	);
 };
-
-Applications.contextType = UserProvider;
 
 export default Applications;

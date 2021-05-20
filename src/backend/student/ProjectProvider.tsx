@@ -71,6 +71,9 @@ class ProjectProvider extends Component<IProps, ContextType> {
 								this.redirect_to_department
 							);
 						} else {
+							this.setState({
+								submitted: false,
+							});
 							showErrorAlert(data.error);
 						}
 					})
