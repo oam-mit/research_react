@@ -2,22 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Important Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000) to view it in the browser.
 
 The page will reload if you make edits.\
-You will also see any lint errors in the console.
+You will also see any lint errors in the console.\
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Please note that the requests are proxied to **_127.0.0.1:8000_**. Hence you will need to run the Django Server first.
 
 ### `npm run build`
 
@@ -29,42 +26,96 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Important
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Project Structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+src/
+├── App.test.js
+├── App.tsx
+├── assets
+│   ├── edit_prof.css
+│   ├── extra_styles.css
+│   ├── home.css
+│   ├── iste_logo.png
+│   ├── navbar.css
+│   └── profile.css
+├── backend
+│   ├── common
+│   │   ├── NoProjectToShow.tsx
+│   │   ├── ProjectType.tsx
+│   │   └── UserTypes.tsx
+│   ├── faculty
+│   │   ├── AcceptedApplicationsProvider.tsx
+│   │   ├── ApplicationsProvider.tsx
+│   │   ├── HomeProvider.tsx
+│   │   ├── ProjectAddProvider.tsx
+│   │   └── types
+│   │       └── ApplicantType.tsx
+│   └── student
+│       ├── ApplicationProvider.tsx
+│       ├── DepartmentProvider.tsx
+│       ├── HomeProvider.tsx
+│       └── ProjectProvider.tsx
+├── components
+│   ├── common
+│   │   ├── 404.tsx
+│   │   ├── Date.tsx
+│   │   ├── ProjectStatus.tsx
+│   │   ├── Spinner.tsx
+│   │   └── Tags.tsx
+│   ├── faculty
+│   │   ├── AccecptedApplicants.tsx
+│   │   ├── Applications.tsx
+│   │   ├── FacultyRoot.tsx
+│   │   ├── Home.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Profile.js
+│   │   └── ProjectAdd.tsx
+│   └── student
+│       ├── Applications.tsx
+│       ├── Department.tsx
+│       ├── Footer.tsx
+│       ├── Home.tsx
+│       ├── Navbar.tsx
+│       ├── Profile.js
+│       ├── Project
+│       │   ├── ProjectRoot.tsx
+│       │   ├── Project.tsx
+│       │   └── SideNav.tsx
+│       ├── StudentRoot.tsx
+│       └── TopButton.tsx
+├── index.tsx
+├── providers
+│   └── UserProvider.tsx
+├── react-app-env.d.ts
+├── reportWebVitals.js
+├── services
+│   └── AlertService.tsx
+├── setupTests.js
+├── temporary
+│   ├── applications.js
+│   ├── departments.js
+│   ├── faculty.js
+│   ├── home_projects.js
+│   ├── projects.js
+│   └── user_details.js
+└── widgets
+    ├── faculty
+    │   ├── AcceptedApplicationCard.tsx
+    │   ├── ApplicationsCard.tsx
+    │   └── HomeCard.tsx
+    └── student
+        ├── ApplicationCard.tsx
+        ├── DepartmentCard.tsx
+        └── HomeCard.tsx
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+17 directories, 61 files
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Coding Standards followed
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. The API Logic and the Front-end logic is kept separately in different files. The `backend` folder contains all the API Logic and context API is used for the same.
+2. The code is formatted using the VS Code Extension **Prettier**. This extension **must** be strictly used while coding to ensure uniformity and proper React guidlines are followed.
+3. The Types declared are named **PropTypes** for props, **ContextType** for Context and **StateType** for state. The naming conventions must be strictly followed. In general, while declaring any type, ensure that the name ends with **Type**
