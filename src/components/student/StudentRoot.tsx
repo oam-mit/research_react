@@ -19,17 +19,15 @@ class StudentRoot extends Component<{}, StateType> {
 		this.state = {
 			showNavbar: true,
 		};
-
-		this.toggleNavbar = this.toggleNavbar.bind(this);
 	}
 
-	toggleNavbar(value: boolean) {
+	toggleNavbar = (value: boolean) => {
 		this.setState(() => {
 			return {
 				showNavbar: value,
 			};
 		});
-	}
+	};
 
 	render() {
 		return (

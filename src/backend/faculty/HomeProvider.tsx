@@ -1,6 +1,7 @@
 import { Component, createContext } from "react";
 import { showNetworkError } from "../../services/AlertService";
 import { ProjectType } from "../common/ProjectType";
+import instance from "./axiosInstance";
 
 export const HomeContext = createContext<ContextType>({
 	loading: true,
@@ -25,16 +26,21 @@ class HomeProvider extends Component<{}, ContextType> {
 	}
 
 	componentDidMount() {
-		fetch("/faculty/api/get_active_projects/")
-			.then(resp => resp.json())
-			.then(data => {
+		type DataType = {
+			active_projects: Array<ProjectType>;
+			past_projects: Array<ProjectType>;
+		};
+
+		instance
+			.get("get_active_projects/")
+			.then(({ data }: { data: DataType }) => {
 				this.setState({
 					loading: false,
 					active_projects: data.active_projects,
 					past_projects: data.past_projects,
 				});
 			})
-			.catch(err => {
+			.catch(() => {
 				showNetworkError();
 				this.setState({
 					loading: false,

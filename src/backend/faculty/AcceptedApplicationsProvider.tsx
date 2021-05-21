@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { createContext } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
+import { showNetworkError } from "../../services/AlertService";
+import instance from "./axiosInstance";
 import { ApplicantType } from "./types/ApplicantType";
 
 export type ContextType = {
@@ -34,11 +36,15 @@ class AcceptedApplicationsProvider extends Component<PropsType, ContextType> {
 	}
 
 	componentDidMount() {
-		fetch(
-			`/faculty/api/get_accepted_applicants/${this.props.match.params.project_uuid}`
-		)
-			.then(resp => resp.json())
-			.then(data => {
+		type DataType = {
+			applications: Array<ApplicantType>;
+			title: string;
+			status: "successful" | "unsuccessful";
+		};
+
+		instance
+			.get(`get_accepted_applicants/${this.props.match.params.project_uuid}`)
+			.then(({ data }: { data: DataType }) => {
 				if (data.status === "successful") {
 					this.setState({
 						applications: data.applications,
@@ -52,8 +58,11 @@ class AcceptedApplicationsProvider extends Component<PropsType, ContextType> {
 					});
 				}
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(() => {
+				showNetworkError();
+				this.setState({
+					loading: false,
+				});
 			});
 	}
 

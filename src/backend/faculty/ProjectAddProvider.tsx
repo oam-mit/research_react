@@ -8,6 +8,7 @@ import {
 	showSuccessAlert,
 	yesNoAlert,
 } from "../../services/AlertService";
+import instance from "./axiosInstance";
 
 export type ContextType = {
 	submitted: boolean;
@@ -57,16 +58,13 @@ class ProjectAddProvider extends Component<PropsType, ContextType> {
 						submitted: true,
 					},
 					() => {
-						fetch("/faculty/api/submit_project/", {
-							method: "POST",
-							body: JSON.stringify(data),
-							headers: {
-								"X-CSRFToken": this.context.getCookie("csrftoken"),
-								"Content-Type": "application/json",
-							},
-						})
-							.then(resp => resp.json())
-							.then(data => {
+						type DataType = {
+							status: "successful" | "unsuccessful";
+							error: string;
+						};
+						instance
+							.post("submit_project/", data)
+							.then(({ data }: { data: DataType }) => {
 								if (data.status === "successful") {
 									showSuccessAlert("Project Saved Successfully", () =>
 										this.props.history.push("/faculty/home")

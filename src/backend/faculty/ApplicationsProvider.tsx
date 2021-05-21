@@ -7,6 +7,7 @@ import {
 	showSuccessAlert,
 	yesNoAlert,
 } from "../../services/AlertService";
+import instance from "./axiosInstance";
 import { ApplicantType } from "./types/ApplicantType";
 
 export type ContextType = {
@@ -61,9 +62,9 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			title: string;
 		};
 
-		fetch(`/faculty/api/get_applicants/${this.props.match.params.project_uuid}`)
-			.then(resp => resp.json())
-			.then((data: DataType) => {
+		instance
+			.get(`get_applicants/${this.props.match.params.project_uuid}`)
+			.then(({ data }: { data: DataType }) => {
 				if (data.status === "successful") {
 					this.setState({
 						applications: data.applications,
@@ -78,8 +79,11 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 					});
 				}
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(() => {
+				showNetworkError();
+				this.setState({
+					loading: false,
+				});
 			});
 	}
 
@@ -96,6 +100,11 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			"warning"
 		).then(value => {
 			if (value) {
+				type DataType = {
+					status: "successful" | "unsuccessful";
+					error: string;
+				};
+
 				this.setState(
 					{
 						loading: true,
@@ -109,15 +118,9 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 						);
 						form_data.append("status", status);
 
-						fetch("/faculty/api/application_change_status/", {
-							method: "POST",
-							body: form_data,
-							headers: {
-								"X-CSRFToken": this.context.getCookie("csrftoken"),
-							},
-						})
-							.then(resp => resp.json())
-							.then(data => {
+						instance
+							.post("application_change_status/", form_data)
+							.then(({ data }: { data: DataType }) => {
 								if (data.status === "successful") {
 									this.fetch_applicants();
 
@@ -163,15 +166,9 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 								this.props.match.params.project_uuid
 							);
 
-							fetch("/faculty/api/change_project_status/", {
-								method: "POST",
-								body: form_data,
-								headers: {
-									"X-CSRFToken": this.context.getCookie("csrftoken"),
-								},
-							})
-								.then(resp => resp.json())
-								.then((data: DataType) => {
+							instance
+								.post("change_project_status/", form_data)
+								.then(({ data }: { data: DataType }) => {
 									if (data.status === "successful") {
 										this.props.history.replace(`/faculty/home`);
 									} else {
