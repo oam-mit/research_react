@@ -66,7 +66,7 @@ const Home = () => {
 							className="form-control"
 							id="inlineFormInputGroup"
 							placeholder="Search"
-							//onChange={event => search(event.target.value)}
+							onChange={event => state.search(event.target.value)}
 						/>
 					</div>
 				</div>

@@ -9,9 +9,10 @@ export const DepartmentContext = createContext<ContextType>({
 	projects: [],
 	department_name: null,
 	department_slug: null,
+	filter: () => {},
 });
 
-class DepartmentProvider extends Component<PropsType, ContextType> {
+class DepartmentProvider extends Component<PropsType, StateType> {
 	constructor(props: PropsType) {
 		super(props);
 		this.state = {
@@ -19,6 +20,7 @@ class DepartmentProvider extends Component<PropsType, ContextType> {
 			projects: [],
 			department_name: null,
 			department_slug: this.props.match.params.department_slug,
+			_projects: [],
 		};
 	}
 
@@ -38,6 +40,7 @@ class DepartmentProvider extends Component<PropsType, ContextType> {
 						loading: false,
 						department_name: data.department_name,
 						projects: data.projects,
+						_projects: data.projects,
 					});
 				}
 			})
@@ -49,9 +52,41 @@ class DepartmentProvider extends Component<PropsType, ContextType> {
 			});
 	}
 
+	private filter = (tags: Array<string>) => {
+		if (tags.length === 0) {
+			this.setState({
+				projects: this.state._projects,
+			});
+		} else {
+			let result_set = new Set<ProjectType>();
+
+			for (let i = 0; i < tags.length; i++) {
+				//console.log(tags[i]);
+				this.state._projects.map(project => {
+					if (project.tags.includes(tags[i])) {
+						result_set.add(project);
+					}
+					return null;
+				});
+			}
+
+			this.setState({
+				projects: Array.from(result_set),
+			});
+		}
+	};
+
 	render() {
 		return (
-			<DepartmentContext.Provider value={this.state}>
+			<DepartmentContext.Provider
+				value={{
+					loading: this.state.loading,
+					projects: this.state.projects,
+					department_name: this.state.department_name,
+					department_slug: this.state.department_slug,
+					filter: this.filter,
+				}}
+			>
 				{this.props.children}
 			</DepartmentContext.Provider>
 		);
@@ -65,6 +100,15 @@ type ContextType = {
 	projects: Array<ProjectType>;
 	department_name: string | null;
 	department_slug: string | null;
+	filter: (tags: Array<string>) => void;
+};
+
+type StateType = {
+	loading: boolean;
+	projects: Array<ProjectType>;
+	department_name: string | null;
+	department_slug: string | null;
+	_projects: Array<ProjectType>;
 };
 
 interface PropsType extends RouteComponentProps<{ department_slug: string }> {}
