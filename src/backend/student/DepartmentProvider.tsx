@@ -2,6 +2,7 @@ import React, { Component, createContext } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
 import { showNetworkError } from "../../services/AlertService";
 import { ProjectType } from "../common/ProjectType";
+import instance from "./axiosInstance";
 
 export const DepartmentContext = createContext<ContextType>({
 	loading: true,
@@ -22,9 +23,14 @@ class DepartmentProvider extends Component<PropsType, ContextType> {
 	}
 
 	componentDidMount() {
-		fetch(`/student/api/get_projects/${this.state.department_slug}/`)
-			.then(resp => resp.json())
-			.then(data => {
+		type DataType = {
+			status: "successful" | "slug does not exist";
+			department_name: string;
+			projects: Array<ProjectType>;
+		};
+		instance
+			.get(`get_projects/${this.state.department_slug}/`)
+			.then(({ data }: { data: DataType }) => {
 				if (data.status === "slug does not exist") {
 					this.props.history.replace("/student/not-found");
 				} else {
@@ -35,7 +41,7 @@ class DepartmentProvider extends Component<PropsType, ContextType> {
 					});
 				}
 			})
-			.catch(err => {
+			.catch(() => {
 				showNetworkError();
 				this.setState({
 					loading: false,

@@ -1,5 +1,6 @@
 import { Component, createContext } from "react";
 import { showNetworkError } from "../../services/AlertService";
+import instance from "./axiosInstance";
 
 export const HomeContext = createContext<ContextType>({
 	loading: true,
@@ -13,14 +14,18 @@ class HomeProvider extends Component<{}, ContextType> {
 			loading: true,
 			departments: [],
 		};
+
 		document.body.scrollTop = 0;
 		document.documentElement.scrollTop = 0;
 	}
 
 	componentDidMount() {
-		fetch("/student/api/get_departments/")
-			.then((response: any) => response.json())
-			.then((data: any) => {
+		type DataType = {
+			departments: Array<DepartmentType>;
+		};
+		instance
+			.get("get_departments/")
+			.then(({ data }: { data: DataType }) => {
 				this.setState({
 					departments: data.departments,
 					loading: false,

@@ -7,6 +7,7 @@ import {
 	showSuccessAlert,
 } from "../../services/AlertService";
 import UserProvider from "../../providers/UserProvider";
+import instance from "./axiosInstance";
 
 class ProjectProvider extends Component<IProps, ContextType> {
 	constructor(props: IProps) {
@@ -21,9 +22,13 @@ class ProjectProvider extends Component<IProps, ContextType> {
 	}
 
 	componentDidMount() {
-		fetch(`/student/api/get_projects/${this.state.department_slug}/`)
-			.then(resp => resp.json())
-			.then(data => {
+		type DataType = {
+			status: "slug does not exist" | "successful";
+			projects: Array<ProjectType>;
+		};
+		instance
+			.get(`get_projects/${this.state.department_slug}/`)
+			.then(({ data }: { data: DataType }) => {
 				if (data.status === "slug does not exist") {
 					this.props.history.replace("/student/not-found");
 				} else {
@@ -33,7 +38,7 @@ class ProjectProvider extends Component<IProps, ContextType> {
 					});
 				}
 			})
-			.catch(err => {
+			.catch(() => {
 				showNetworkError();
 				this.setState({
 					loading: false,
@@ -50,6 +55,10 @@ class ProjectProvider extends Component<IProps, ContextType> {
 	};
 
 	submit_application = (uuid_field: string) => {
+		type DataType = {
+			status: "successful" | "unsuccessful";
+			error: string;
+		};
 		this.setState(
 			{
 				submitted: true,
@@ -58,13 +67,9 @@ class ProjectProvider extends Component<IProps, ContextType> {
 				let form_data = new FormData();
 				form_data.append("project_uuid_field", uuid_field);
 
-				fetch("/student/api/submit_application/", {
-					method: "POST",
-					body: form_data,
-					headers: { "X-CSRFToken": this.context.getCookie("csrftoken") },
-				})
-					.then(resp => resp.json())
-					.then(data => {
+				instance
+					.post("submit_application/", form_data)
+					.then(({ data }: { data: DataType }) => {
 						if (data.status === "successful") {
 							showSuccessAlert(
 								"Application Submitted Successfully",
@@ -76,12 +81,6 @@ class ProjectProvider extends Component<IProps, ContextType> {
 							});
 							showErrorAlert(data.error);
 						}
-					})
-					.catch(err => {
-						showNetworkError();
-						this.setState({
-							submitted: false,
-						});
 					});
 			}
 		);

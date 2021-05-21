@@ -1,6 +1,7 @@
 import { Component, createContext } from "react";
 import { showNetworkError } from "../../services/AlertService";
 import { FacultyType } from "../common/UserTypes";
+import instance from "./axiosInstance";
 
 export const ApplicationContext = createContext<ApplicationContextType>({
 	loading: true,
@@ -17,15 +18,18 @@ class ApplicationProvider extends Component<{}, ApplicationContextType> {
 	}
 
 	componentDidMount() {
-		fetch("/student/api/get_applied_projects/")
-			.then(resp => resp.json())
-			.then(data => {
+		type DataType = {
+			projects: Array<ApplicationProjectType>;
+		};
+		instance
+			.get("get_applied_projects/")
+			.then(({ data }: { data: DataType }) => {
 				this.setState({
-					loading: false,
 					projects: data.projects,
+					loading: false,
 				});
 			})
-			.catch(err => {
+			.catch(() => {
 				showNetworkError();
 				this.setState({
 					loading: false,

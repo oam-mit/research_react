@@ -8,16 +8,17 @@ import Footer from "./Footer";
 
 import Spinner from "../common/Spinner";
 import HomeCard from "../../widgets/student/HomeCard";
-import {
-	DepartmentType,
-	HomeContext,
-} from "../../backend/student/HomeProvider";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
+import { HomeContext } from "../../backend/student/HomeProvider";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Fade from "react-reveal/Fade";
 
 const Home = () => {
-	const render_departments = (departments: Array<DepartmentType>) => {
-		let department_output = departments.map((department, index) => {
+	const render_departments = () => {
+		let department_output = state.departments.map((department, index) => {
 			return (
 				<HomeCard
 					key={index}
@@ -50,11 +51,29 @@ const Home = () => {
 			<div className="container section-title-1 text-center m-auto">
 				<h1 className="m-auto">Projects sorted department wise!</h1>
 			</div>
+
 			<hr />
 			<div className="container-fluid">
+				<div className="container section-title-1 text-center m-auto">
+					<div className="input-group mb-2">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon={faSearch} />
+							</div>
+						</div>
+						<input
+							type="text"
+							className="form-control"
+							id="inlineFormInputGroup"
+							placeholder="Search"
+							//onChange={event => search(event.target.value)}
+						/>
+					</div>
+				</div>
+
 				<div className="row">
 					{!state.loading ? (
-						render_departments(state.departments)
+						render_departments()
 					) : (
 						<Spinner size={50} position={"relative"} />
 					)}
