@@ -23,14 +23,12 @@ const DepartmentCard = ({
 
 	return (
 		<Fade bottom>
-			<div
-				className="col-lg-3"
-				style={{ cursor: "pointer" }}
-				onClick={event => {
-					navigateToProject(event);
-				}}
-			>
+			<div className="col-lg-3">
 				<div
+					style={{ cursor: "pointer" }}
+					onClick={event => {
+						navigateToProject(event);
+					}}
 					className="card department-card-design"
 					data-aos="fade-up"
 					data-aos-duration="500"

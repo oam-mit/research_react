@@ -1,3 +1,6 @@
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const FilterTag = ({
 	tag,
 	onSelect,
@@ -23,6 +26,13 @@ const FilterTag = ({
 			onClick={() => toggle()}
 			className={`badge badge-${selected ? "success" : "danger"} mr-1`}
 		>
+			<span className="badge badge-light">
+				{!selected ? (
+					<FontAwesomeIcon icon={faTimes} />
+				) : (
+					<FontAwesomeIcon icon={faCheck} />
+				)}
+			</span>{" "}
 			{tag}
 		</span>
 	);

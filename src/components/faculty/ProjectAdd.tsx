@@ -48,7 +48,7 @@ class ProjectAdd extends Component<{}, StateType> {
 		let start_date = new Date(this.state.submit_data.start_date);
 		let end_date = new Date(this.state.submit_data.end_date);
 		let diff = (end_date.getTime() - start_date.getTime()) / 1000;
-		diff /= 60 * 60 * 24 * 7 * 4;
+		diff /= 60 * 60 * 24 * 7;
 		return Math.abs(Math.round(diff));
 	}
 
@@ -319,7 +319,7 @@ class ProjectAdd extends Component<{}, StateType> {
 								type="text"
 								className="form-control-plaintext"
 								id="duration"
-								value={`${this.render_difference_between_dates()} months`}
+								value={`${this.render_difference_between_dates()} weeks`}
 							/>
 						</div>
 					</div>

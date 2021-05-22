@@ -4,6 +4,8 @@ import Spinner from "../common/Spinner";
 import DepartmentCard from "../../widgets/student/DepartmentCard";
 import { DepartmentContext } from "../../backend/student/DepartmentProvider";
 import FilterTag from "../../widgets/student/FilterTag";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 
 const Department = () => {
 	const render_projects = () => {
@@ -80,6 +82,12 @@ const Department = () => {
 		});
 	};
 
+	const resetFilter = () => {
+		setselectedTags([]);
+		setfiltered(false);
+		state.filter([]);
+	};
+
 	let state = useContext(DepartmentContext);
 	const [selectedTags, setselectedTags] = useState<Array<string>>([]);
 	const [filtered, setfiltered] = useState<boolean>(false);
@@ -101,26 +109,52 @@ const Department = () => {
 						Projects related to that department !
 					</p>
 				</div>
-				<div className="container-fluid ">
-					<div className="row">
-						<div className="col-12 text-center">{render_tags()}</div>
-					</div>
-				</div>
-				<div className="container-fluid ">
-					<div className="row">
-						<div className="col-12 text-center">
-							<button
-								className="btn btn-primary mt-1"
-								onClick={() => {
-									state.filter(selectedTags);
-									setfiltered(selectedTags.length !== 0);
-								}}
-							>
-								Apply Filter
-							</button>
+				{state.projects.length > 0 ? (
+					<>
+						<div className="container-fluid ">
+							<div className="row">
+								<div className="col-12 text-center">{render_tags()}</div>
+							</div>
 						</div>
-					</div>
-				</div>
+						<div className="container-fluid ">
+							<div className="row">
+								<div className="col-12 text-center">
+									<div
+										className="btn-group mt-1"
+										role="group"
+										aria-label="Basic example"
+									>
+										<span
+											data-toggle="tooltip"
+											data-placement="bottom"
+											className="btn btn-primary"
+											title={"Reset Filter"}
+											onClick={event => resetFilter()}
+										>
+											<FontAwesomeIcon icon={faWindowClose} />
+										</span>
+										<span
+											className="btn btn-primary"
+											onClick={() => {
+												state.filter(selectedTags);
+												setfiltered(selectedTags.length !== 0);
+											}}
+										>
+											{selectedTags.length === 0 && filtered
+												? "Reset Filter"
+												: "Apply Filters"}{" "}
+											<span className="badge badge-light">
+												{selectedTags.length}
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</>
+				) : (
+					<></>
+				)}
 
 				<div className="container-fluid ">
 					<div className="row">{render_projects()}</div>
