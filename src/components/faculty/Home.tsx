@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import NoProjects from "../../backend/common/NoProjectToShow";
 import { HomeContext } from "../../backend/faculty/HomeProvider";
+import LoadingCard from "../../widgets/common/LoadingCard";
 import HomeCard from "../../widgets/faculty/HomeCard";
-import Spinner from "../common/Spinner";
 
 const Home = () => {
 	const [activeProjectsShown, setactiveProjectsShown] = useState<boolean>(true);
@@ -14,6 +14,9 @@ const Home = () => {
 	const history = useHistory();
 
 	const render_active_projects = () => {
+		if (state.loading) {
+			return <LoadingCard count={4} />;
+		}
 		if (activeProjectsShown) {
 			if (state.active_projects.length > 0) {
 				let projects = state.active_projects.map(project => (
@@ -30,6 +33,9 @@ const Home = () => {
 	};
 
 	const render_past_projects = () => {
+		if (state.loading) {
+			return <LoadingCard count={4} />;
+		}
 		if (pastProjectsShown) {
 			if (state.past_projects.length > 0) {
 				let output = state.past_projects.map(project => (
@@ -103,43 +109,36 @@ const Home = () => {
 					<h5>Add Project</h5>{" "}
 				</button>
 			</div>
-			{!state.loading ? (
-				<>
-					<div className="container-fluid">
-						<div className="row text-center">
-							<div className="col-12">
-								<h2
-									className="sub-heading-faculty"
-									onClick={() => toggle_show_variable("active_projects_shown")}
-									style={{ cursor: "pointer" }}
-								>
-									Active Projects {render_arrow(activeProjectsShown)}
-								</h2>
-							</div>
-						</div>
-						<div className="row align-items-center">
-							{render_active_projects()}
-						</div>
-					</div>
 
-					<div className="container-fluid">
-						<div className="row text-center">
-							<div className="col-12">
-								<h2
-									className="sub-heading-faculty"
-									onClick={() => toggle_show_variable("past_projects_shown")}
-									style={{ cursor: "pointer" }}
-								>
-									Past Projects {render_arrow(pastProjectsShown)}
-								</h2>
-							</div>
-						</div>
-						<div className="row">{render_past_projects()}</div>
+			<div className="container-fluid">
+				<div className="row text-center">
+					<div className="col-12">
+						<h2
+							className="sub-heading-faculty"
+							onClick={() => toggle_show_variable("active_projects_shown")}
+							style={{ cursor: "pointer" }}
+						>
+							Active Projects {render_arrow(activeProjectsShown)}
+						</h2>
 					</div>
-				</>
-			) : (
-				<Spinner size={50} position={"absolute"} />
-			)}
+				</div>
+				<div className="row align-items-center">{render_active_projects()}</div>
+			</div>
+
+			<div className="container-fluid">
+				<div className="row text-center">
+					<div className="col-12">
+						<h2
+							className="sub-heading-faculty"
+							onClick={() => toggle_show_variable("past_projects_shown")}
+							style={{ cursor: "pointer" }}
+						>
+							Past Projects {render_arrow(pastProjectsShown)}
+						</h2>
+					</div>
+				</div>
+				<div className="row">{render_past_projects()}</div>
+			</div>
 		</>
 	);
 };

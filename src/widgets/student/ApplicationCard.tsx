@@ -7,7 +7,6 @@ import {
 	REJECTED,
 } from "../../components/common/ProjectStatus";
 import Tags from "../../components/common/Tags";
-import Fade from "react-reveal/Fade";
 
 const ApplicationCard = ({
 	department_slug,
@@ -30,43 +29,41 @@ const ApplicationCard = ({
 	};
 
 	return (
-		<Fade bottom>
+		<div
+			className="col-lg-3"
+			style={{ cursor: "pointer" }}
+			onClick={() => {
+				history.push(`/student/${department_slug}/project/${uuid_field}`);
+			}}
+		>
 			<div
-				className="col-lg-3"
-				style={{ cursor: "pointer" }}
-				onClick={() => {
-					history.push(`/student/${department_slug}/project/${uuid_field}`);
-				}}
+				className="card department-card-design"
+				data-aos="fade-up"
+				data-aos-duration="500"
+				data-aos-delay="400"
 			>
-				<div
-					className="card department-card-design"
-					data-aos="fade-up"
-					data-aos-duration="500"
-					data-aos-delay="400"
-				>
-					{render_status(status)}
-					<div className="text-content">
-						<span className="department-card-design-title">
-							<strong>{title}</strong>
-						</span>
-						<p className="department-card-design-p">
-							<strong>Faculty:</strong> {faculty.first_name} {faculty.last_name}
-						</p>
-						<p className="department-card-design-p">
-							<strong>Start Date: </strong>
-							<DateComponent
-								date={start_date}
-								locale={"en-GB"}
-								year={"numeric"}
-								day={"numeric"}
-								month={"long"}
-							/>
-						</p>
-						<button className="btn btn-mystyle">Know More</button>
-					</div>
+				{render_status(status)}
+				<div className="text-content">
+					<span className="department-card-design-title">
+						<strong>{title}</strong>
+					</span>
+					<p className="department-card-design-p">
+						<strong>Faculty:</strong> {faculty.first_name} {faculty.last_name}
+					</p>
+					<p className="department-card-design-p">
+						<strong>Start Date: </strong>
+						<DateComponent
+							date={start_date}
+							locale={"en-GB"}
+							year={"numeric"}
+							day={"numeric"}
+							month={"long"}
+						/>
+					</p>
+					<button className="btn btn-mystyle">Know More</button>
 				</div>
 			</div>
-		</Fade>
+		</div>
 	);
 };
 

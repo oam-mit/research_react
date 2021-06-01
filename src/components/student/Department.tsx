@@ -1,14 +1,19 @@
-import { useContext, useState } from "react";
-import Footer from "./Footer";
-import Spinner from "../common/Spinner";
-import DepartmentCard from "../../widgets/student/DepartmentCard";
-import { DepartmentContext } from "../../backend/student/DepartmentProvider";
-import FilterTag from "../../widgets/student/FilterTag";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext, useState } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { DepartmentContext } from "../../backend/student/DepartmentProvider";
+import DepartmentCard from "../../widgets/student/DepartmentCard";
+import FilterTag from "../../widgets/student/FilterTag";
+import LoadingCard from "../../widgets/common/LoadingCard";
+import Footer from "./Footer";
 
 const Department = () => {
 	const render_projects = () => {
+		if (state.loading) {
+			return <LoadingCard count={4} />;
+		}
+
 		if (state.projects.length > 0) {
 			let projects_temp = state.projects.map(project => (
 				<DepartmentCard
@@ -92,77 +97,79 @@ const Department = () => {
 	const [selectedTags, setselectedTags] = useState<Array<string>>([]);
 	const [filtered, setfiltered] = useState<boolean>(false);
 
-	if (state.loading) {
-		return <Spinner size={100} position={"absolute"} />;
-	} else {
-		return (
-			<>
-				<title>{state.department_name}</title>
-				<div
-					className="jumbotron jumbotron-fluid text-white text-center my-3"
-					id="jumbo-color"
-				>
-					<h3 className="display-1" id="jumbo-text">
-						{state.department_name}
-					</h3>
-					<p className="lead my-4" style={{ fontFamily: "Quicksand" }}>
-						Projects related to that department !
-					</p>
-				</div>
-				{state.projects.length > 0 ? (
-					<>
-						<div className="container-fluid ">
-							<div className="row">
-								<div className="col-12 text-center">{render_tags()}</div>
-							</div>
+	return (
+		<>
+			<title>{state.department_name}</title>
+			<div
+				className="jumbotron jumbotron-fluid text-white text-center my-3"
+				id="jumbo-color"
+			>
+				<h3 className="display-1" id="jumbo-text">
+					{state.loading ? (
+						<SkeletonTheme color="#009ffd" highlightColor="#fff">
+							<Skeleton style={{ padding: "10px" }} />
+						</SkeletonTheme>
+					) : (
+						state.department_name
+					)}
+				</h3>
+				<p className="lead my-4" style={{ fontFamily: "Quicksand" }}>
+					Projects related to that department !
+				</p>
+			</div>
+			{state.projects.length > 0 ? (
+				<>
+					<div className="container-fluid ">
+						<div className="row">
+							<div className="col-12 text-center">{render_tags()}</div>
 						</div>
-						<div className="container-fluid ">
-							<div className="row">
-								<div className="col-12 text-center">
-									<div
-										className="btn-group mt-1"
-										role="group"
-										aria-label="Basic example"
+					</div>
+					<div className="container-fluid ">
+						<div className="row">
+							<div className="col-12 text-center">
+								<div
+									className="btn-group mt-1"
+									role="group"
+									aria-label="Basic example"
+								>
+									<span
+										data-toggle="tooltip"
+										data-placement="bottom"
+										className="btn btn-primary"
+										title={"Reset Filter"}
+										onClick={event => resetFilter()}
 									>
-										<span
-											data-toggle="tooltip"
-											data-placement="bottom"
-											className="btn btn-primary"
-											title={"Reset Filter"}
-											onClick={event => resetFilter()}
-										>
-											<FontAwesomeIcon icon={faWindowClose} />
+										<FontAwesomeIcon icon={faWindowClose} />
+									</span>
+									<span
+										className="btn btn-primary"
+										onClick={() => {
+											state.filter(selectedTags);
+											setfiltered(selectedTags.length !== 0);
+										}}
+									>
+										{selectedTags.length === 0 && filtered
+											? "Reset Filter"
+											: "Apply Filters"}{" "}
+										<span className="badge badge-light">
+											{selectedTags.length}
 										</span>
-										<span
-											className="btn btn-primary"
-											onClick={() => {
-												state.filter(selectedTags);
-												setfiltered(selectedTags.length !== 0);
-											}}
-										>
-											{selectedTags.length === 0 && filtered
-												? "Reset Filter"
-												: "Apply Filters"}{" "}
-											<span className="badge badge-light">
-												{selectedTags.length}
-											</span>
-										</span>
-									</div>
+									</span>
 								</div>
 							</div>
 						</div>
-					</>
-				) : (
-					<></>
-				)}
+					</div>
+				</>
+			) : (
+				<></>
+			)}
 
-				<div className="container-fluid ">
-					<div className="row">{render_projects()}</div>
-				</div>
+			<div className="container-fluid ">
+				<div className="row">{render_projects()}</div>
+			</div>
 
-				{state.projects.length > 0 ? <Footer /> : <></>}
-			</>
-		);
-	}
+			{state.projects.length > 0 ? <Footer /> : <></>}
+		</>
+	);
 };
 export default Department;

@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import SideNav from "./SideNav";
-import "w3-css/w3.css";
-import Project from "./Project";
-
-import Spinner from "../../common/Spinner";
+import { Component } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
-import { ProjectContext } from "../../../backend/student/ProjectProvider";
-import { ContextType } from "../../../backend/student/ProjectProvider";
+import "w3-css/w3.css";
+import {
+	ContextType,
+	ProjectContext,
+} from "../../../backend/student/ProjectProvider";
+import Project from "./Project";
+import SideNav from "./SideNav";
 
 class ProjectRoot extends Component<IProps, StateType> {
 	static getDerivedStateFromProps(props: IProps, state: StateType) {
@@ -50,23 +50,23 @@ class ProjectRoot extends Component<IProps, StateType> {
 	render() {
 		return (
 			<ProjectContext.Consumer>
-				{props =>
-					props.loading ? (
-						<Spinner size={100} position={"absolute"} />
-					) : (
-						<>
-							<SideNav
-								projects={props.projects}
-								selected_project={this.state.selected_project}
-								department_slug={this.props.match.params.department_slug}
-								select_project={(project_uuid_field: string) =>
-									this.select_project(project_uuid_field, props)
-								}
-							/>
-							<Project project={this.return_project(props)} />
-						</>
-					)
-				}
+				{props => (
+					<>
+						<SideNav
+							projects={props.projects}
+							selected_project={this.state.selected_project}
+							department_slug={this.props.match.params.department_slug}
+							select_project={(project_uuid_field: string) =>
+								this.select_project(project_uuid_field, props)
+							}
+							loading={props.loading}
+						/>
+						<Project
+							loading={props.loading}
+							project={this.return_project(props)}
+						/>
+					</>
+				)}
 			</ProjectContext.Consumer>
 		);
 	}

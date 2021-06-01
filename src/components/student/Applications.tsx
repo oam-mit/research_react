@@ -1,15 +1,14 @@
 import { useContext } from "react";
-import Spinner from "../common/Spinner";
-
 import { ApplicationContext } from "../../backend/student/ApplicationProvider";
 import ApplicationCard from "../../widgets/student/ApplicationCard";
+import LoadingCard from "../../widgets/common/LoadingCard";
 
 const Applications = () => {
 	let state = useContext(ApplicationContext);
 
 	const render_projects = () => {
 		if (state.loading) {
-			return <Spinner size={50} position={"absolute"} />;
+			return <LoadingCard count={4} />;
 		} else {
 			if (state.projects.length > 0) {
 				let projects = state.projects.map(project => {

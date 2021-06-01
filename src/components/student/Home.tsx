@@ -1,20 +1,14 @@
-import React, { useContext } from "react";
-
-import TopButton from "./TopButton";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import Fade from "react-reveal/Fade";
 import "../../assets/home.css";
 import logo from "../../assets/iste_logo.png";
-
-import Footer from "./Footer";
-
-import Spinner from "../common/Spinner";
-import HomeCard from "../../widgets/student/HomeCard";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
 import { HomeContext } from "../../backend/student/HomeProvider";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import Fade from "react-reveal/Fade";
+import HomeCard from "../../widgets/student/HomeCard";
+import LoadingCard from "../../widgets/common/LoadingCard";
+import Footer from "./Footer";
+import TopButton from "./TopButton";
 
 const Home = () => {
 	const render_departments = () => {
@@ -72,11 +66,7 @@ const Home = () => {
 				</div>
 
 				<div className="row">
-					{!state.loading ? (
-						render_departments()
-					) : (
-						<Spinner size={50} position={"relative"} />
-					)}
+					{!state.loading ? render_departments() : <LoadingCard count={4} />}
 				</div>
 			</div>
 

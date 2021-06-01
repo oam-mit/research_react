@@ -13,14 +13,9 @@ import { showLoadingAlert, yesNoAlert } from "../../../services/AlertService";
 import { RouteComponentProps, withRouter } from "react-router";
 
 import Fade from "react-reveal/Fade";
+import Spinner from "../../common/Spinner";
 
 class Project extends Component<IProps, IState> {
-	componentDidMount() {
-		if (!this.props.project) {
-			this.props.history.replace("/student/not-found");
-		}
-	}
-
 	submit_application(props: ContextType) {
 		yesNoAlert(
 			"Confirmation",
@@ -91,6 +86,10 @@ class Project extends Component<IProps, IState> {
 	}
 
 	render() {
+		if (this.props.loading) {
+			return <Spinner size={50} position={"absolute"} />;
+		}
+
 		if (this.props.project) {
 			let cv_null = this.context.user.cv === null;
 			return (
@@ -190,7 +189,7 @@ class Project extends Component<IProps, IState> {
 				</>
 			);
 		} else {
-			return <></>;
+			this.props.history.replace("/student/not-found");
 		}
 	}
 }
@@ -201,6 +200,7 @@ type IState = {};
 
 interface IProps extends RouteComponentProps<{}> {
 	project: ProjectType | undefined;
+	loading: boolean;
 }
 
 export default withRouter(Project);
