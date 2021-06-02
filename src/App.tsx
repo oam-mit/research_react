@@ -4,15 +4,16 @@ import FacultyRoot from "./components/faculty/FacultyRoot";
 import { Route, Switch } from "react-router";
 import UserProvider, { StateType } from "./providers/UserProvider";
 import Spinner from "./components/common/Spinner";
+import { FacultyType, StudentType } from "./backend/common/UserTypes";
 
-class App extends Component<{}, StateType> 
-{
+class App extends Component<{}, StateType> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
 			loading: true,
 			user: null,
 			getCookie: this.getCookie,
+			updateUser: this.updateUser,
 		};
 	}
 
@@ -30,6 +31,12 @@ class App extends Component<{}, StateType>
 			}
 		}
 		return cookieValue;
+	};
+
+	updateUser = (user: StudentType | FacultyType | null) => {
+		this.setState({
+			user: user,
+		});
 	};
 
 	componentDidMount() {

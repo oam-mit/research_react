@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import "../../assets/edit_prof.css";
 
 import UserProvider from "../../providers/UserProvider";
+import { showSuccessAlert } from "../../services/AlertService";
 import Spinner from "../common/Spinner";
 
 class Profile extends Component {
@@ -102,6 +103,7 @@ class Profile extends Component {
 									cv: null,
 								},
 								() => {
+									showSuccessAlert("Successfully uploaded your CV");
 									this.context.updateUser(data.user);
 								}
 							);
