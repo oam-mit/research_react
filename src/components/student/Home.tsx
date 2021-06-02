@@ -1,7 +1,7 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import Fade from "react-reveal/Fade";
+
 import "../../assets/home.css";
 import logo from "../../assets/iste_logo.png";
 import { HomeContext } from "../../backend/student/HomeProvider";
@@ -76,73 +76,71 @@ const Home = () => {
 					<div className="border"></div>
 
 					<div className="services-container">
-						<Fade>
-							<div className="service-box">
-								<div className="service-icon">
-									<i className="fas fa-paint-brush"></i>
-								</div>
-								<div className="service-title">Upload CV</div>
-								<div className="service-desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-									eaque ratione rem porro, nihil.
-								</div>
+						<div className="service-box">
+							<div className="service-icon">
+								<i className="fas fa-paint-brush"></i>
 							</div>
+							<div className="service-title">Upload CV</div>
+							<div className="service-desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
+								eaque ratione rem porro, nihil.
+							</div>
+						</div>
 
-							<div className="service-box">
-								<div className="service-icon">
-									<i className="fas fa-code"></i>
-								</div>
-								<div className="service-title">All in one place</div>
-								<div className="service-desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-									eaque ratione rem porro, nihil.
-								</div>
+						<div className="service-box">
+							<div className="service-icon">
+								<i className="fas fa-code"></i>
 							</div>
+							<div className="service-title">All in one place</div>
+							<div className="service-desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
+								eaque ratione rem porro, nihil.
+							</div>
+						</div>
 
-							<div className="service-box">
-								<div className="service-icon">
-									<i className="fas fa-brush"></i>
-								</div>
-								<div className="service-title">Separate Departments</div>
-								<div className="service-desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-									eaque ratione rem porro, nihil.
-								</div>
+						<div className="service-box">
+							<div className="service-icon">
+								<i className="fas fa-brush"></i>
 							</div>
+							<div className="service-title">Separate Departments</div>
+							<div className="service-desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
+								eaque ratione rem porro, nihil.
+							</div>
+						</div>
 
-							<div className="service-box">
-								<div className="service-icon">
-									<i className="fas fa-object-ungroup"></i>
-								</div>
-								<div className="service-title">Your Profile</div>
-								<div className="service-desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-									eaque ratione rem porro, nihil.
-								</div>
+						<div className="service-box">
+							<div className="service-icon">
+								<i className="fas fa-object-ungroup"></i>
 							</div>
+							<div className="service-title">Your Profile</div>
+							<div className="service-desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
+								eaque ratione rem porro, nihil.
+							</div>
+						</div>
 
-							<div className="service-box">
-								<div className="service-icon">
-									<i className="fas fa-database"></i>
-								</div>
-								<div className="service-title">Connect with Professors</div>
-								<div className="service-desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-									eaque ratione rem porro, nihil.
-								</div>
+						<div className="service-box">
+							<div className="service-icon">
+								<i className="fas fa-database"></i>
 							</div>
+							<div className="service-title">Connect with Professors</div>
+							<div className="service-desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
+								eaque ratione rem porro, nihil.
+							</div>
+						</div>
 
-							<div className="service-box">
-								<div className="service-icon">
-									<i className="fab fa-android"></i>
-								</div>
-								<div className="service-title">Another Feature</div>
-								<div className="service-desc">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-									eaque ratione rem porro, nihil.
-								</div>
+						<div className="service-box">
+							<div className="service-icon">
+								<i className="fab fa-android"></i>
 							</div>
-						</Fade>
+							<div className="service-title">Another Feature</div>
+							<div className="service-desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
+								eaque ratione rem porro, nihil.
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -152,29 +150,29 @@ const Home = () => {
 					<div className="col-lg-5">
 						<img src={logo} alt="logo" className="m-auto" width="300" />
 					</div>
-					<Fade left>
-						<div
-							className="col-lg-6 m-auto"
-							data-aos="fade-left"
-							data-aos-offset="300"
-							data-aos-duration="800"
-							data-aos-easing="ease-in-sine"
-						>
-							<h1 className="sub-text">
-								Indian Society for Technical Education, Manipal
-							</h1>
 
-							<p className="style-text">
-								This is a text about the vision for research portal and the
-								working on the project. This is a text about the vision for
-								research portal and the working on the project. This is a text
-								about the vision for research portal and the working on the
-								project. This is a text about the vision for research portal and
-								the working on the project. This is a text about the vision for
-								research portal and the working on the project.{" "}
-							</p>
-						</div>
-					</Fade>
+					<div
+						className="col-lg-6 m-auto"
+						data-aos="fade-left"
+						data-aos-offset="300"
+						data-aos-duration="800"
+						data-aos-easing="ease-in-sine"
+					>
+						<h1 className="sub-text">
+							Indian Society for Technical Education, Manipal
+						</h1>
+
+						<p className="style-text">
+							This is a text about the vision for research portal and the
+							working on the project. This is a text about the vision for
+							research portal and the working on the project. This is a text
+							about the vision for research portal and the working on the
+							project. This is a text about the vision for research portal and
+							the working on the project. This is a text about the vision for
+							research portal and the working on the project.{" "}
+						</p>
+					</div>
+
 					<hr
 						style={{
 							border: "1px solid rgb(58, 57, 57)",
@@ -189,26 +187,25 @@ const Home = () => {
 							className="m-auto d-lg-none"
 						/>
 					</div>
-					<Fade right>
-						<div
-							className="col-lg-6 m-auto"
-							data-aos="fade-right"
-							data-aos-offset="300"
-							data-aos-duration="800"
-							data-aos-easing="ease-in-sine"
-						>
-							<h1 className="sub-text">Manipal Insitute of Technology</h1>
-							<p className="style-text">
-								This is a text about the vision for research portal and the
-								working on the project. This is a text about the vision for
-								research portal and the working on the project. This is a text
-								about the vision for research portal and the working on the
-								project. This is a text about the vision for research portal and
-								the working on the project. This is a text about the vision for
-								research portal and the working on the project.{" "}
-							</p>
-						</div>
-					</Fade>
+
+					<div
+						className="col-lg-6 m-auto"
+						data-aos="fade-right"
+						data-aos-offset="300"
+						data-aos-duration="800"
+						data-aos-easing="ease-in-sine"
+					>
+						<h1 className="sub-text">Manipal Insitute of Technology</h1>
+						<p className="style-text">
+							This is a text about the vision for research portal and the
+							working on the project. This is a text about the vision for
+							research portal and the working on the project. This is a text
+							about the vision for research portal and the working on the
+							project. This is a text about the vision for research portal and
+							the working on the project. This is a text about the vision for
+							research portal and the working on the project.{" "}
+						</p>
+					</div>
 
 					<div className="col-lg-5 m-auto d-none d-lg-block images-mobile">
 						<img

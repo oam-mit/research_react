@@ -3,6 +3,10 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 const LoadingCard = ({ count }: { count: number }) => {
 	let cardArray: Array<JSX.Element> = [];
 
+	const style = {
+		color: "#808a89",
+	};
+
 	for (let i = 0; i < count; i++) {
 		cardArray.push(
 			<div className="col-lg-3">
@@ -14,12 +18,12 @@ const LoadingCard = ({ count }: { count: number }) => {
 				>
 					<div className="text-content">
 						<span className="department-card-design-title">
-							<SkeletonTheme color="#c3c3c3" highlightColor="#fff">
+							<SkeletonTheme color={style.color} highlightColor="#fff">
 								<Skeleton />
 							</SkeletonTheme>
 						</span>
 						<p className="department-card-design-p">
-							<SkeletonTheme color="#c3c3c3" highlightColor="#fff">
+							<SkeletonTheme color={style.color} highlightColor="#fff">
 								<Skeleton />
 							</SkeletonTheme>
 						</p>

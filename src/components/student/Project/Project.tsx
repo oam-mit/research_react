@@ -12,7 +12,7 @@ import {
 import { showLoadingAlert, yesNoAlert } from "../../../services/AlertService";
 import { RouteComponentProps, withRouter } from "react-router";
 
-import Fade from "react-reveal/Fade";
+import Fade from "react-awesome-reveal";
 import Spinner from "../../common/Spinner";
 
 class Project extends Component<IProps, IState> {
@@ -121,7 +121,7 @@ class Project extends Component<IProps, IState> {
 							</div>
 						</div>
 
-						<Fade bottom>
+						<Fade>
 							<div className="w3-container mt-2 text-center">
 								<div className="w3-container" style={{ marginBottom: "6%" }}>
 									<div className="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue w3-hover-border-indigo">
