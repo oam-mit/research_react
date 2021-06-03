@@ -1,9 +1,6 @@
 import { useHistory } from "react-router";
 import { ProjectType } from "../../backend/common/ProjectType";
-
 import DateComponent from "../../components/common/Date";
-
-import Fade from "react-awesome-reveal";
 
 const HomeCard = ({ project }: { project: ProjectType }) => {
 	let history = useHistory();

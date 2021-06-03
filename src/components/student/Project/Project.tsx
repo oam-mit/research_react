@@ -190,6 +190,7 @@ class Project extends Component<IProps, IState> {
 			);
 		} else {
 			this.props.history.replace("/student/not-found");
+			return <></>;
 		}
 	}
 }
