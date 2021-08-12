@@ -19,8 +19,8 @@ const Home = () => {
 		}
 		if (activeProjectsShown) {
 			if (state.active_projects.length > 0) {
-				let projects = state.active_projects.map(project => (
-					<HomeCard project={project} />
+				let projects = state.active_projects.map((project, index) => (
+					<HomeCard project={project} key={index} />
 				));
 
 				return projects;
@@ -38,8 +38,8 @@ const Home = () => {
 		}
 		if (pastProjectsShown) {
 			if (state.past_projects.length > 0) {
-				let output = state.past_projects.map(project => (
-					<HomeCard project={project} />
+				let output = state.past_projects.map((project, index) => (
+					<HomeCard project={project} key={index} />
 				));
 
 				return output;

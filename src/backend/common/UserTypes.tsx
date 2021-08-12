@@ -9,6 +9,7 @@ interface UserType {
 
 export interface FacultyType extends UserType {
 	profile_picture: string;
+	designation: string;
 }
 
 export interface StudentType extends UserType {

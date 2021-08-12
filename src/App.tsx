@@ -40,9 +40,12 @@ class App extends Component<{}, StateType> {
 	};
 
 	componentDidMount() {
+		type DataType = {
+			user: StudentType | FacultyType;
+		};
 		fetch("/api/get_logged_in_user/")
 			.then(response => response.json())
-			.then(data => {
+			.then((data: DataType) => {
 				this.setState({
 					user: data.user,
 					loading: false,

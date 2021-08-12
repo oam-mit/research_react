@@ -10,7 +10,7 @@ const Spinner = ({ size, position }: { size: number; position: string }) => {
 		left: 50%;
 		margin-left: -50px;
 		background-size: 100%;
-		z-index: 100000;
+		z-index: 100000000;
 	`;
 	return <PuffLoader css={override} color="#009ffd" size={size} />;
 };

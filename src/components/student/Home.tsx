@@ -82,8 +82,8 @@ const Home = () => {
 							</div>
 							<div className="service-title">Upload CV</div>
 							<div className="service-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-								eaque ratione rem porro, nihil.
+								Get noticed by top research professors with a single click;
+								upload your cv and join us.
 							</div>
 						</div>
 
@@ -93,8 +93,8 @@ const Home = () => {
 							</div>
 							<div className="service-title">All in one place</div>
 							<div className="service-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-								eaque ratione rem porro, nihil.
+								Find the best research professors to guide you and help you
+								discover new knowledge at every step.
 							</div>
 						</div>
 
@@ -104,8 +104,8 @@ const Home = () => {
 							</div>
 							<div className="service-title">Separate Departments</div>
 							<div className="service-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-								eaque ratione rem porro, nihil.
+								Discover qualified professors from various admired technical
+								departments ranging from Computer Science to Biotechnology.
 							</div>
 						</div>
 
@@ -115,8 +115,8 @@ const Home = () => {
 							</div>
 							<div className="service-title">Your Profile</div>
 							<div className="service-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-								eaque ratione rem porro, nihil.
+								Create your profile, engage with professors, and keep track of
+								your activity, information, and interactions here.
 							</div>
 						</div>
 
@@ -126,12 +126,13 @@ const Home = () => {
 							</div>
 							<div className="service-title">Connect with Professors</div>
 							<div className="service-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-								eaque ratione rem porro, nihil.
+								Ranging from a brief introduction to arranging a time for
+								further discussion, connect and communicate with accomplished
+								research professors.
 							</div>
 						</div>
 
-						<div className="service-box">
+						{/* <div className="service-box">
 							<div className="service-icon">
 								<i className="fab fa-android"></i>
 							</div>
@@ -140,7 +141,7 @@ const Home = () => {
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
 								eaque ratione rem porro, nihil.
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>
@@ -163,13 +164,14 @@ const Home = () => {
 						</h1>
 
 						<p className="style-text">
-							This is a text about the vision for research portal and the
-							working on the project. This is a text about the vision for
-							research portal and the working on the project. This is a text
-							about the vision for research portal and the working on the
-							project. This is a text about the vision for research portal and
-							the working on the project. This is a text about the vision for
-							research portal and the working on the project.{" "}
+							A Multi-disciplinary club, Indian Society for Technical Education
+							(ISTE) is one of the reputed and esteemed Technical Clubs in
+							Manipal. We are well known for hosting ACUMEN, the most popular
+							category in TECHTATVA; and various internal/external workshops,
+							webinars and, summer and winter schools which help in the overall
+							development of our members. We provide a platform for our members
+							to learn technical and non-technical skills with great flexibility
+							and put forward their ideas into implementation.
 						</p>
 					</div>
 
@@ -197,13 +199,15 @@ const Home = () => {
 					>
 						<h1 className="sub-text">Manipal Insitute of Technology</h1>
 						<p className="style-text">
-							This is a text about the vision for research portal and the
-							working on the project. This is a text about the vision for
-							research portal and the working on the project. This is a text
-							about the vision for research portal and the working on the
-							project. This is a text about the vision for research portal and
-							the working on the project. This is a text about the vision for
-							research portal and the working on the project.{" "}
+							The Manipal Institute of Technology (MIT), Manipal was established
+							in 1957 as one of the first self-financing engineering colleges in
+							the country. MIT offers a Bachelor’s and Master’s program in
+							engineering streams. It also gives students the option to carry
+							out full-time or part-time research. The institute undertakes
+							sponsored research programs supported by funding agencies such as
+							DST, CSIR, AICTE, and the Ministry of Environmental Sciences. It
+							has collaborative research programs in association with premier
+							research laboratories and institutes in India and abroad.
 						</p>
 					</div>
 

@@ -131,7 +131,7 @@ class Project extends Component<IProps, IState> {
 									<div className="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue w3-hover-border-indigo">
 										<h1>Faculty In-charge</h1>
 										<p>
-											<b>Name:</b> {this.props.project.faculty.first_name}{" "}
+											<b>Name:</b> {this.props.project.faculty.designation}  {this.props.project.faculty.first_name}{" "}
 											{this.props.project.faculty.last_name}
 										</p>
 										<p>

@@ -9,7 +9,7 @@ const LoadingCard = ({ count }: { count: number }) => {
 
 	for (let i = 0; i < count; i++) {
 		cardArray.push(
-			<div className="col-lg-3">
+			<div key={i} className="col-lg-3">
 				<div
 					className="card department-card-design"
 					data-aos="fade-up"

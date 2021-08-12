@@ -29,7 +29,7 @@ class AcceptedApplicationsProvider extends Component<PropsType, ContextType> {
 		this.state = {
 			isAllowed: false,
 			applications: [],
-			loading: false,
+			loading: true,
 			project_title: "",
 			//project_uuid:this.props.match.params.project_uuid
 		};

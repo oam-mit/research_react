@@ -3,6 +3,7 @@ import logo from "../../assets/iste_logo.png";
 import { Link, NavLink } from "react-router-dom";
 import "../../assets/navbar.css";
 import UserProvider from "../../providers/UserProvider";
+import { showReactAlert } from "../../services/AlertService";
 
 const Navbar = () => {
 	return (
@@ -54,19 +55,69 @@ const Navbar = () => {
 							Home
 						</NavLink>
 					</li>
-					<li className="nav-item">
+					{/* <li className="nav-item">
 						<a className="nav-link" href="/">
 							About Us
 						</a>
-					</li>
-					<li className="nav-item">
+					</li> */}
+					{/* <li className="nav-item">
 						<a className="nav-link" href="/">
 							Blogs
 						</a>
-					</li>
-					<li className="nav-item">
+					</li> */}
+					{/* <li className="nav-item">
 						<a className="nav-link" href="/">
 							Members
+						</a>
+					</li> */}
+					<li className="nav-item">
+						<a
+							href="/"
+							className="nav-link"
+							onClick={event => {
+								event.preventDefault();
+								showReactAlert(
+									"Contact Details",
+									<>
+										<table
+											className={'table'}
+											style={{
+												width: "100%",
+												fontFamily: "arial, sans-serif",
+												borderCollapse: "collapse",
+											}}
+										>
+											<tr>
+												<th>Name</th>
+												<th>Contact Number</th>
+											</tr>
+											<tr>
+												<td>Omkar Masur</td>
+												<td>+919930147279</td>
+											</tr>
+											<tr>
+												<td>Insha Manowar</td>
+												<td>+91352453653</td>
+											</tr>
+											<tr>
+												<td>Tinku Chowdhary</td>
+												<td>+91205924850</td>
+											</tr>
+										</table>
+
+										<span>OR</span>
+										<br />
+										<button className={"mt-1 btn btn-primary"}>
+											{" "}
+											<a href={"mailto:contactus@istemanipal.com"}>MAIL US </a>
+										</button>
+										<br />
+									</>,
+									"info"
+								);
+							}}
+						>
+							Contact Us
 						</a>
 					</li>
 				</ul>

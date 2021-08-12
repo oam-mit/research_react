@@ -42,7 +42,7 @@ const DepartmentCard = ({
 						<strong>{project.title}</strong>
 					</span>
 					<p className="department-card-design-p">
-						<strong>Faculty:</strong> {project.faculty.first_name}{" "}
+						<strong>Faculty:</strong> {project.faculty.designation}.  {project.faculty.first_name}{" "}
 						{project.faculty.last_name}
 					</p>
 					<p className="department-card-design-p">

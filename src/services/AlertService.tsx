@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const yesNoAlert = async (
 	title: string,
@@ -57,5 +58,20 @@ export const showNetworkError = () => {
 		title: "Error",
 		text: "Please check your internet connection",
 		icon: "error",
+	});
+};
+
+export const showReactAlert = (
+	title: string,
+	body: JSX.Element,
+	icon: "error" | "info"
+) => {
+	const ReactSwal = withReactContent(Swal);
+
+	ReactSwal.fire({
+		title: title,
+		icon: icon,
+
+		html: body,
 	});
 };
