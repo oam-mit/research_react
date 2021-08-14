@@ -70,7 +70,7 @@ const Applications = () => {
 				id="jumbo-color"
 			>
 				<h3 className="display-1" id="jumbo-text">
-					Pending Applicantions
+					Pending Applications
 				</h3>
 				<button
 					onClick={() =>

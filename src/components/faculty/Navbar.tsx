@@ -80,6 +80,7 @@ const Navbar = () => {
 												fontFamily: "arial, sans-serif",
 												borderCollapse: "collapse",
 											}}
+											className={'table'}
 										>
 											<tr>
 												<th>Name</th>
@@ -91,11 +92,11 @@ const Navbar = () => {
 											</tr>
 											<tr>
 												<td>Insha Manowar</td>
-												<td>+91352453653</td>
+												<td>+919477281022</td>
 											</tr>
 											<tr>
 												<td>Tinku Chowdhary</td>
-												<td>+91205924850</td>
+												<td>+919680411907</td>
 											</tr>
 										</table>
 
