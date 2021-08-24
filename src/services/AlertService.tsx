@@ -75,3 +75,16 @@ export const showReactAlert = (
 		html: body,
 	});
 };
+
+export const showFeedback = () =>{
+	Swal.fire({
+		title: "Feedback",
+		text: "Write something interesting:",
+		input: 'text',
+		showCancelButton: true        
+	}).then((result) => {
+		if (result.value) {
+			console.log("Result: " + result.value);
+		}
+	});
+}

@@ -1,4 +1,5 @@
 import { ApplicantType } from "../../backend/faculty/types/ApplicantType";
+import { showFeedback } from "../../services/AlertService";
 
 type PropsType = {
 	applicant: ApplicantType;
@@ -24,6 +25,16 @@ const AcceptedApplicationCard = ({ applicant }: PropsType) => {
 			</th>
 			<th>
 				<a href={`mailto:${applicant.email}`}>{applicant.email}</a>
+			</th>
+			<th>
+				<a
+					href={applicant.feedback}
+					target="_blank"
+					rel="noreferrer"
+					style={{ color: "red" }}
+				>
+				<button onClick={showFeedback} style={{ color: "red", border: "none", backgroundColor: "white", outline: "none"}}>Click Here</button>
+				</a>
 			</th>
 		</tr>
 	);

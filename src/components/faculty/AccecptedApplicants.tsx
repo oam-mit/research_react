@@ -21,6 +21,7 @@ const AcceptedApplications = () => {
 								<th scope="col">Branch</th>
 								<th scope="col">View CV</th>
 								<th scope="col">Email ID</th>
+								<th scope="col">Feedback</th>
 							</tr>
 						</thead>
 						<tbody>

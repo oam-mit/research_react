@@ -5,4 +5,5 @@ export type ApplicantType = {
 	department: string;
 	cv: string;
 	email: string;
+	feedback: string;
 };
