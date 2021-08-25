@@ -15,4 +15,5 @@ export interface FacultyType extends UserType {
 export interface StudentType extends UserType {
 	registration_number: string;
 	cv: string;
+	domains_of_interest:string;
 }

@@ -11,4 +11,7 @@ export type ProjectType = {
 	start_date: string;
 	end_date: string;
 	is_active: boolean;
+	outcome:string;
+	is_extendable:string;
+	hours_per_week:number;
 };
