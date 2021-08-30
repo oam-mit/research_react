@@ -129,9 +129,14 @@ class Project extends Component<IProps, IState> {
 										<p>{this.props.project.description}</p>
 									</div>
 									<div className="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue w3-hover-border-indigo">
+										<h1>Outcome</h1>
+										<p>{this.props.project.outcome}</p>
+									</div>
+									<div className="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue w3-hover-border-indigo">
 										<h1>Faculty In-charge</h1>
 										<p>
-											<b>Name:</b> {this.props.project.faculty.designation}  {this.props.project.faculty.first_name}{" "}
+											<b>Name:</b> {this.props.project.faculty.designation}{" "}
+											{this.props.project.faculty.first_name}{" "}
 											{this.props.project.faculty.last_name}
 										</p>
 										<p>
@@ -167,6 +172,17 @@ class Project extends Component<IProps, IState> {
 												day={"numeric"}
 												month={"long"}
 											/>
+										</p>
+										<p>
+											{this.props.project.is_extendable ? (
+												<b>
+													<h3>This project can be extended</h3>
+												</b>
+											) : (
+												<b>
+													<h3>This project will not be extended</h3>
+												</b>
+											)}
 										</p>
 									</div>
 									<hr />

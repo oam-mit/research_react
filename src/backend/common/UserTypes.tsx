@@ -4,7 +4,7 @@ interface UserType {
 	first_name: string;
 	last_name: string;
 	is_faculty: boolean;
-	is_strudent: boolean;
+	is_student: boolean;
 }
 
 export interface FacultyType extends UserType {
@@ -15,5 +15,5 @@ export interface FacultyType extends UserType {
 export interface StudentType extends UserType {
 	registration_number: string;
 	cv: string;
-	domains_of_interest:string;
+	domains_of_interest: string | null;
 }

@@ -1,5 +1,6 @@
 import { ApplicantType } from "../../backend/faculty/types/ApplicantType";
 import { ACCEPTED, REJECTED } from "../../components/common/ProjectStatus";
+import Tags from "../../components/common/Tags";
 
 type PropsType = {
 	applicant: ApplicantType;
@@ -21,6 +22,17 @@ const ApplicationCard = ({
 				{applicant.first_name} {applicant.last_name}
 			</th>
 			<th>{applicant.department}</th>
+			<th>
+				{" "}
+				<Tags
+					tag_string={
+						applicant.domains_of_interest
+							? applicant.domains_of_interest
+							: "Not Provided"
+					}
+					bootstrap_color="secondary"
+				/>{" "}
+			</th>
 			<th>
 				<a
 					href={applicant.cv}

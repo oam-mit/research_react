@@ -1,16 +1,24 @@
 import { Component } from "react";
 import { createContext } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
-import { showNetworkError } from "../../services/AlertService";
+import {
+	showErrorAlert,
+	showFeedback,
+	showLoadingAlert,
+	showNetworkError,
+	showSuccessAlert,
+	submitFeedbackAlert,
+} from "../../services/AlertService";
 import instance from "./axiosInstance";
 import { ApplicantType } from "./types/ApplicantType";
+import { FeedbackType } from "./types/FeedbackType";
 
 export type ContextType = {
 	isAllowed: boolean;
 	applications: Array<ApplicantType>;
 	loading: boolean;
 	project_title: string;
-	//project_uuid:string
+	feedbackHandler: (applicant: ApplicantType) => void;
 };
 
 interface PropsType extends RouteComponentProps<{ project_uuid: string }> {}
@@ -20,7 +28,7 @@ export const AcceptedApplicationsContext = createContext<ContextType>({
 	applications: [],
 	loading: false,
 	project_title: "",
-	//project_uuid:''
+	feedbackHandler: () => {},
 });
 
 class AcceptedApplicationsProvider extends Component<PropsType, ContextType> {
@@ -31,7 +39,7 @@ class AcceptedApplicationsProvider extends Component<PropsType, ContextType> {
 			applications: [],
 			loading: true,
 			project_title: "",
-			//project_uuid:this.props.match.params.project_uuid
+			feedbackHandler: this.feedbackHandler,
 		};
 	}
 
@@ -65,6 +73,56 @@ class AcceptedApplicationsProvider extends Component<PropsType, ContextType> {
 				});
 			});
 	}
+
+	feedbackHandler = (applicant: ApplicantType) => {
+		type DataType = {
+			status: "submitted" | "not submitted";
+			feedback: FeedbackType | null;
+		};
+		showLoadingAlert();
+		instance
+			.get(
+				`check_feedback_submitted/${this.props.match.params.project_uuid}/${applicant.email}`
+			)
+			.then(({ data }: { data: DataType }) => {
+				if (data.status === "submitted") {
+					showFeedback(data.feedback!);
+				} else {
+					submitFeedbackAlert((feedback: string, complete: boolean) =>
+						this.submitFeedback(feedback, complete, applicant)
+					);
+				}
+			})
+			.catch(() => {
+				showErrorAlert("Error");
+			});
+	};
+
+	submitFeedback = (
+		feedback: string,
+		complete: boolean,
+		applicant: ApplicantType
+	) => {
+		showLoadingAlert();
+		let formdata = {
+			email: applicant.email,
+			project_uuid: this.props.match.params.project_uuid,
+			feedback: feedback,
+			project_is_complete: complete,
+		};
+		instance
+			.post("submit_feedback", formdata)
+			.then(({ data }) => {
+				if (data.status === "successful") {
+					showSuccessAlert("Feedback Submitted Successfully");
+				} else {
+					showErrorAlert("Error occurred");
+				}
+			})
+			.catch(() => {
+				showNetworkError();
+			});
+	};
 
 	render() {
 		return (

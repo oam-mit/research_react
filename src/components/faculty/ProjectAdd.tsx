@@ -24,6 +24,9 @@ class ProjectAdd extends Component<{}, StateType> {
 				max_students: 1,
 				start_date: "",
 				end_date: "",
+				is_extendable: false,
+				outcome: "",
+				hours_per_week: 0,
 			},
 			page: 1,
 		};
@@ -90,6 +93,18 @@ class ProjectAdd extends Component<{}, StateType> {
 						></textarea>
 					</div>
 					<div className="form-group">
+						<label htmlFor="exampleFormControlTextarea2">Outcome</label>
+						<textarea
+							value={this.state.submit_data.outcome}
+							onChange={event => this.changeHandler(event)}
+							name="outcome"
+							className="form-control"
+							id="exampleFormControlTextarea2"
+							rows={4}
+							placeholder="Outcome (example Publication)"
+						></textarea>
+					</div>
+					<div className="form-group">
 						<label htmlFor="tags">
 							Tags (Separate each one with '<b>,</b>')
 						</label>
@@ -113,7 +128,8 @@ class ProjectAdd extends Component<{}, StateType> {
 							disabled={
 								this.state.submit_data.title.length === 0 ||
 								this.state.submit_data.description.length === 0 ||
-								this.state.submit_data.tags.length === 0
+								this.state.submit_data.tags.length === 0 ||
+								this.state.submit_data.outcome.length === 0
 							}
 							onClick={event => {
 								this.togglePage(event, 2);
@@ -148,8 +164,34 @@ class ProjectAdd extends Component<{}, StateType> {
 								type="checkbox"
 								id="department_specific"
 							/>
+
 							<label className="form-check-label" htmlFor="department_specific">
 								Is your project restricted to your department?
+							</label>
+						</div>
+					</div>
+					<div className="form-group">
+						<div className="form-check">
+							<input
+								checked={this.state.submit_data.is_extendable}
+								name="is_extendable"
+								onChange={event =>
+									this.setState(prev => {
+										return {
+											submit_data: {
+												...prev.submit_data,
+												is_extendable: event.target.checked,
+											},
+										};
+									})
+								}
+								className="form-check-input"
+								type="checkbox"
+								id="department_specific"
+							/>
+
+							<label className="form-check-label" htmlFor="department_specific">
+								Is there a possibility your project will need an extension ?
 							</label>
 						</div>
 					</div>
@@ -163,6 +205,18 @@ class ProjectAdd extends Component<{}, StateType> {
 							name="max_students"
 							min={1}
 							value={this.state.submit_data.max_students}
+						/>
+					</div>
+					<div className="form-group ">
+						<label htmlFor="hrs">Hours per week</label>
+						<input
+							onChange={event => this.changeHandler(event)}
+							type="number"
+							className="form-control col-2"
+							id="hrs"
+							name="hours_per_week"
+							min={1}
+							value={this.state.submit_data.hours_per_week}
 						/>
 					</div>
 					<div className="form-row">
@@ -207,7 +261,8 @@ class ProjectAdd extends Component<{}, StateType> {
 								disabled={
 									this.state.submit_data.max_students === 0 ||
 									this.state.submit_data.start_date.length === 0 ||
-									this.state.submit_data.end_date.length === 0
+									this.state.submit_data.end_date.length === 0 ||
+									this.state.submit_data.hours_per_week === 0
 								}
 								onClick={event => this.togglePage(event, 3)}
 								style={{ backgroundColor: "#1d1e4e", color: "white" }}
@@ -251,6 +306,20 @@ class ProjectAdd extends Component<{}, StateType> {
 						</div>
 					</div>
 					<div className="form-group row">
+						<label htmlFor="description" className="col-sm-2 col-form-label">
+							Outcome
+						</label>
+						<div className="col-sm-10">
+							<textarea
+								readOnly
+								rows={3}
+								className="form-control-plaintext"
+								id="descripion"
+								value={this.state.submit_data.outcome}
+							/>
+						</div>
+					</div>
+					<div className="form-group row">
 						<label htmlFor="tags" className="col-sm-2 col-form-label">
 							Tags
 						</label>
@@ -277,6 +346,21 @@ class ProjectAdd extends Component<{}, StateType> {
 						</div>
 					</div>
 					<div className="form-group row">
+						<label
+							htmlFor="is_department_specific"
+							className="col-sm-2 col-form-label"
+						>
+							Is there a possibility your project will need an extension ?
+						</label>
+						<div className="col-sm-10">
+							{this.state.submit_data.is_extendable ? (
+								<Tags tag_string={"Yes"} bootstrap_color={"success"} />
+							) : (
+								<Tags tag_string={"No"} bootstrap_color={"success"} />
+							)}
+						</div>
+					</div>
+					<div className="form-group row">
 						<label htmlFor="max_students" className="col-sm-2 col-form-label">
 							Maximum number of students
 						</label>
@@ -287,6 +371,20 @@ class ProjectAdd extends Component<{}, StateType> {
 								className="form-control-plaintext"
 								id="max_students"
 								value={this.state.submit_data.max_students}
+							/>
+						</div>
+					</div>
+					<div className="form-group row">
+						<label htmlFor="max_students" className="col-sm-2 col-form-label">
+							Hours per week
+						</label>
+						<div className="col-sm-10">
+							<input
+								type="text"
+								readOnly
+								className="form-control-plaintext"
+								id="max_students"
+								value={this.state.submit_data.hours_per_week}
 							/>
 						</div>
 					</div>

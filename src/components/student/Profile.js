@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import Swal from "sweetalert2";
 import "../../assets/edit_prof.css";
+import instance from "../../backend/student/axiosInstance";
 
 import UserProvider from "../../providers/UserProvider";
-import { showSuccessAlert } from "../../services/AlertService";
+import {
+	showNetworkError,
+	showSuccessAlert,
+} from "../../services/AlertService";
 import Spinner from "../common/Spinner";
+import Tags from "../common/Tags";
 
 class Profile extends Component {
 	constructor(props) {
@@ -15,6 +20,7 @@ class Profile extends Component {
 			student: null,
 			is_editable: false,
 			cv: null,
+			edit_details: null,
 		};
 
 		this.changeHandler = this.changeHandler.bind(this);
@@ -127,13 +133,55 @@ class Profile extends Component {
 		);
 	}
 
+	submitProfileUpdate = event => {
+		event.preventDefault();
+		this.setState(
+			{
+				submitted: true,
+			},
+			() => {
+				let form_data = this.state.edit_details;
+
+				instance
+					.post("change_domains_of_interest/", form_data)
+					.then(({ data }) => {
+						if (data.status === "successful") {
+							this.setState(
+								{
+									submitted: false,
+								},
+								() => {
+									showSuccessAlert("Successfully Updated your profile");
+									this.context.updateUser(this.state.edit_details);
+								}
+							);
+						} else {
+							this.setState(
+								{
+									submitted: false,
+								},
+								() => {
+									Swal.fire({
+										title: "Error",
+										icon: "error",
+										text: data.error,
+									});
+								}
+							);
+						}
+					})
+					.catch(_ => showNetworkError());
+			}
+		);
+	};
+
 	render_edit_detials() {
 		return (
 			<div className="container prof_details" style={{ height: "95vh" }}>
 				<div className="row">
 					<div className="col-lg-7 details_prof">
 						<span className="sub_text">About me</span>
-						{/* <span
+						<span
 							className="icon-edit"
 							onClick={() =>
 								this.setState(prev => {
@@ -154,10 +202,10 @@ class Profile extends Component {
 									d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"
 								/>
 							</svg>
-						</span> */}
+						</span>
 						<br />
 						<div className="wrap_details">
-							<form>
+							<form onSubmit={this.submitProfileUpdate}>
 								<fieldset disabled={!this.state.is_editable}>
 									<legend>Details</legend>
 									<div className="form-row">
@@ -167,13 +215,13 @@ class Profile extends Component {
 											</label>
 											<input
 												type="text"
+												readOnly
 												name="first_name"
-												className={`form-control${
-													!this.state.is_editable ? "-plaintext" : ""
-												}`}
+												className={`form-control-plaintext
+												`}
 												id="first_name"
 												value={this.state.edit_details.first_name}
-												onChange={this.changeHandler}
+												// onChange={this.changeHandler}
 											/>
 										</div>
 										<div className="col-md-6 mb-3">
@@ -182,19 +230,57 @@ class Profile extends Component {
 											</label>
 											<input
 												type="text"
+												readOnly
 												name="last_name"
-												className={`form-control${
-													!this.state.is_editable ? "-plaintext" : ""
-												}`}
+												className={`form-control-plaintext
+												`}
 												id="last_name"
 												value={this.state.edit_details.last_name}
+												// onChange={this.changeHandler}
+											/>
+										</div>
+										<div className="col-md-12 mb-3">
+											<label htmlFor="last_name" className="label-style">
+												Domains of interest (Separate by commas ',' )
+											</label>
+											<input
+												type="text"
+												name="domains_of_interest"
+												className={`form-control
+												`}
+												id="last_name"
+												value={this.state.edit_details.domains_of_interest}
 												onChange={this.changeHandler}
 											/>
+											<span
+												id="passwordHelpBlock"
+												className="form-text text-muted"
+											>
+												<Tags
+													tag_string={
+														this.state.edit_details.domains_of_interest
+															? this.state.edit_details.domains_of_interest
+															: ""
+													}
+													bootstrap_color={"secondary"}
+												/>
+											</span>
 										</div>
 									</div>
 									{this.state.is_editable ? (
 										<div className="center-btn text-center">
-											{/* <button className="btn btn-mystyle">Submit</button> */}
+											<button
+												disabled={
+													this.state.edit_details.domains_of_interest ===
+														null ||
+													this.state.edit_details.domains_of_interest.length ===
+														0
+												}
+												type="submit"
+												className="btn btn-mystyle"
+											>
+												Submit
+											</button>
 										</div>
 									) : (
 										<></>

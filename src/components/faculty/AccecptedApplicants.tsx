@@ -19,6 +19,7 @@ const AcceptedApplications = () => {
 								<th scope="col">Registration Number</th>
 								<th scope="col">Name</th>
 								<th scope="col">Branch</th>
+								<th>Domains of Interest</th>
 								<th scope="col">View CV</th>
 								<th scope="col">Email ID</th>
 								<th scope="col">Feedback</th>
@@ -27,7 +28,11 @@ const AcceptedApplications = () => {
 						<tbody>
 							{state.applications.map((applicant, index) => {
 								return (
-									<AcceptedApplicationCard key={index} applicant={applicant} />
+									<AcceptedApplicationCard
+										feebackHandler={state.feedbackHandler}
+										key={index}
+										applicant={applicant}
+									/>
 								);
 							})}
 						</tbody>

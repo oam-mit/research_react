@@ -18,6 +18,7 @@ const Applications = () => {
 								<th scope="col">Registration Number</th>
 								<th scope="col">Name</th>
 								<th scope="col">Branch</th>
+								<th scope="col">Domains of Interest</th>
 								<th scope="col">View CV</th>
 								<th scope="col">Email ID</th>
 								<th scope="col">Action</th>

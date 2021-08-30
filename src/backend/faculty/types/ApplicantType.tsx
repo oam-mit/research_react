@@ -6,4 +6,5 @@ export type ApplicantType = {
 	cv: string;
 	email: string;
 	feedback: string;
+	domains_of_interest: string | null;
 };

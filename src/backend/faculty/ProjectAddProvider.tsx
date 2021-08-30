@@ -18,9 +18,12 @@ export type ContextType = {
 export type SubmitDataType = {
 	title: string;
 	description: string;
+	outcome:string;
 	tags: string;
 	is_department_specific: boolean;
+	is_extendable:boolean;
 	max_students: number;
+	hours_per_week:number;
 	start_date: string;
 	end_date: string;
 };

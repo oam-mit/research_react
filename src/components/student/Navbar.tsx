@@ -80,7 +80,7 @@ const Navbar = () => {
 									"Contact Details",
 									<>
 										<table
-											className={'table'}
+											className={"table"}
 											style={{
 												width: "100%",
 												fontFamily: "arial, sans-serif",

@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { FeedbackType } from "../backend/faculty/types/FeedbackType";
+import FeedbackForm from "../widgets/faculty/FeedbackForm";
 
 export const yesNoAlert = async (
 	title: string,
@@ -76,15 +78,25 @@ export const showReactAlert = (
 	});
 };
 
-export const showFeedback = () =>{
+export const showFeedback = (feedback: FeedbackType) => {
 	Swal.fire({
-		title: "Feedback",
-		text: "Write something interesting:",
-		input: 'text',
-		showCancelButton: true        
-	}).then((result) => {
-		if (result.value) {
-			console.log("Result: " + result.value);
-		}
+		title: "Your Feedback",
+		text: feedback.feedback,
+		footer: feedback.project_is_complete
+			? "Student completed the project"
+			: "Student did not complete the project",
 	});
-}
+};
+
+export const submitFeedbackAlert = (
+	submitHandler: (feedback: string, completed: boolean) => void
+) => {
+	const ReactSwal = withReactContent(Swal);
+
+	ReactSwal.fire({
+		title: "Feedback Form",
+		html: <FeedbackForm submit_handler={submitHandler} />,
+		showCancelButton: true,
+		showConfirmButton: false,
+	});
+};
