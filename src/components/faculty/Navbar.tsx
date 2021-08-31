@@ -3,7 +3,10 @@ import logo from "../../assets/iste_logo.png";
 import { Link, NavLink } from "react-router-dom";
 import UserProvider from "../../providers/UserProvider";
 import "../../assets/navbar.css";
-import { showReactAlert } from "../../services/AlertService";
+import {
+	showContactUsAlert,
+	showReactAlert,
+} from "../../services/AlertService";
 
 const Navbar = () => {
 	return (
@@ -71,45 +74,7 @@ const Navbar = () => {
 							className="nav-link"
 							onClick={event => {
 								event.preventDefault();
-								showReactAlert(
-									"Contact Details",
-									<>
-										<table
-											style={{
-												width: "100%",
-												fontFamily: "arial, sans-serif",
-												borderCollapse: "collapse",
-											}}
-											className={'table'}
-										>
-											<tr>
-												<th>Name</th>
-												<th>Contact Number</th>
-											</tr>
-											<tr>
-												<td>Omkar Masur</td>
-												<td>+919930147279</td>
-											</tr>
-											<tr>
-												<td>Insha Manowar</td>
-												<td>+919477281022</td>
-											</tr>
-											<tr>
-												<td>Tinku Chowdhary</td>
-												<td>+919680411907</td>
-											</tr>
-										</table>
-
-										<span>OR</span>
-										<br />
-										<button className={"btn btn-primary"}>
-											{" "}
-											<a href={"mailto:contactus@istemanipal.com"}>MAIL US </a>
-										</button>
-										<br />
-									</>,
-									"info"
-								);
+								showContactUsAlert();
 							}}
 						>
 							Contact Us
