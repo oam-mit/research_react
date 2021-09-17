@@ -191,7 +191,8 @@ class ProjectAdd extends Component<{}, StateType> {
 							/>
 
 							<label className="form-check-label" htmlFor="department_specific">
-								Is there a possibility your project will need an extension ?
+								Is there a possibility of extending this project to a longer
+								duration (more than a year) ?
 							</label>
 						</div>
 					</div>
@@ -350,7 +351,8 @@ class ProjectAdd extends Component<{}, StateType> {
 							htmlFor="is_department_specific"
 							className="col-sm-2 col-form-label"
 						>
-							Is there a possibility your project will need an extension ?
+							Is there a possibility of extending this project to a longer
+							duration (more than a year) ?
 						</label>
 						<div className="col-sm-10">
 							{this.state.submit_data.is_extendable ? (
