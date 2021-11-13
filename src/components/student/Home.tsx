@@ -78,7 +78,7 @@ const Home = () => {
 					<div className="services-container">
 						<div className="service-box">
 							<div className="service-icon">
-								<i className="fas fa-paint-brush"></i>
+								<i className="fas fa-file"></i>
 							</div>
 							<div className="service-title">Upload CV</div>
 							<div className="service-desc">
@@ -100,7 +100,7 @@ const Home = () => {
 
 						<div className="service-box">
 							<div className="service-icon">
-								<i className="fas fa-brush"></i>
+								<i className="fas fa-building"></i>
 							</div>
 							<div className="service-title">Separate Departments</div>
 							<div className="service-desc">
@@ -111,7 +111,7 @@ const Home = () => {
 
 						<div className="service-box">
 							<div className="service-icon">
-								<i className="fas fa-object-ungroup"></i>
+								<i className="fas fa-users"></i>
 							</div>
 							<div className="service-title">Your Profile</div>
 							<div className="service-desc">
@@ -122,7 +122,7 @@ const Home = () => {
 
 						<div className="service-box">
 							<div className="service-icon">
-								<i className="fas fa-database"></i>
+								<i className="fas fa-graduation-cap"></i>
 							</div>
 							<div className="service-title">Connect with Professors</div>
 							<div className="service-desc">

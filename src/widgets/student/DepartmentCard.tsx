@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { ProjectType } from "../../backend/common/ProjectType";
 import DateComponent from "../../components/common/Date";
 import Tags from "../../components/common/Tags";
+import { showProjectAlert } from "../../services/AlertService";
 
 const DepartmentCard = ({
 	project,
@@ -14,7 +15,7 @@ const DepartmentCard = ({
 	let history = useHistory();
 
 	const navigateToProject = (
-		event: React.MouseEvent<HTMLDivElement, MouseEvent>
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
 		event.preventDefault();
 		history.push(`/student/${department_slug}/project/${project.uuid_field}`);
@@ -23,10 +24,6 @@ const DepartmentCard = ({
 	return (
 		<div className="col-lg-3">
 			<div
-				style={{ cursor: "pointer" }}
-				onClick={event => {
-					navigateToProject(event);
-				}}
 				className="card department-card-design"
 				data-aos="fade-up"
 				data-aos-duration="500"
@@ -37,13 +34,25 @@ const DepartmentCard = ({
 				) : (
 					<></>
 				)}
+				{project.is_active ? (
+					<Tags
+						className="mt-1"
+						tag_string={"Active"}
+						bootstrap_color={"success"}
+					/>
+				) : (
+					<></>
+				)}
 				<div className="text-content">
-					<span className="department-card-design-title">
+					<span
+						onClick={() => showProjectAlert(project)}
+						className="department-card-design-title"
+					>
 						<strong>{project.title}</strong>
 					</span>
 					<p className="department-card-design-p">
-						<strong>Faculty:</strong> {project.faculty.designation}.  {project.faculty.first_name}{" "}
-						{project.faculty.last_name}
+						<strong>Faculty:</strong> {project.faculty.designation}.{" "}
+						{project.faculty.first_name} {project.faculty.last_name}
 					</p>
 					<p className="department-card-design-p">
 						<strong>Start Date: </strong>
@@ -55,7 +64,14 @@ const DepartmentCard = ({
 							month={"long"}
 						/>
 					</p>
-					<button className="btn btn-mystyle">Know More</button>
+					<button
+						onClick={event => {
+							navigateToProject(event);
+						}}
+						className="btn btn-mystyle"
+					>
+						Know More
+					</button>
 				</div>
 			</div>
 		</div>

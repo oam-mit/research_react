@@ -1,6 +1,8 @@
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { ProjectType } from "../backend/common/ProjectType";
 import { FeedbackType } from "../backend/faculty/types/FeedbackType";
+import DateComponent from "../components/common/Date";
 import FeedbackForm from "../widgets/faculty/FeedbackForm";
 
 export const yesNoAlert = async (
@@ -75,6 +77,7 @@ export const showReactAlert = (
 		icon: icon,
 
 		html: body,
+		confirmButtonColor: "#0069d9",
 	});
 };
 
@@ -101,6 +104,10 @@ export const showContactUsAlert = () => {
 				<tr>
 					<td>Insha Manowar</td>
 					<td>+919477281022</td>
+				</tr>
+				<tr>
+					<td>Varshil Shah</td>
+					<td>+919328608339</td>
 				</tr>
 				<tr>
 					<td>Tinku Chowdhary</td>
@@ -140,5 +147,53 @@ export const submitFeedbackAlert = (
 		html: <FeedbackForm submit_handler={submitHandler} />,
 		showCancelButton: true,
 		showConfirmButton: false,
+	});
+};
+
+export const showProjectAlert = (project: ProjectType) => {
+	const ReactSwal = withReactContent(Swal);
+
+	ReactSwal.fire({
+		title: project.title,
+		showCancelButton: false,
+		html: (
+			<>
+				<div className="card">
+					<div className="card-body">
+						<h4 className="font-weight-bold card-title">Faculty In-Charge</h4>
+						<p className="card-text">
+							{project.faculty.designation}. {project.faculty.first_name}{" "}
+							{project.faculty.last_name}
+						</p>
+					</div>
+				</div>
+				<div className="card">
+					<div className="card-body">
+						<h4 className="font-weight-bold card-title">Outcome</h4>
+						<p className="card-text">{project.outcome}</p>
+					</div>
+				</div>
+				<div className="card">
+					<div className="card-body">
+						<h4 className="font-weight-bold card-title">Important Dates</h4>
+						<p className="card-text">
+							Start Date:{" "}
+							<DateComponent
+								date={project.start_date}
+								locale={"en-GB"}
+								year={"numeric"}
+								day={"numeric"}
+								month={"long"}
+							/>{" "}
+						</p>
+					</div>
+				</div>
+			</>
+		),
+		showClass: {
+			popup: "animated fadeInDown",
+			icon: "animated heartBeat delay-1s",
+		},
+		confirmButtonColor: "#0069d9",
 	});
 };

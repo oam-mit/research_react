@@ -7,6 +7,7 @@ import {
 	showContactUsAlert,
 	showReactAlert,
 } from "../../services/AlertService";
+import { FacultyType } from "../../backend/common/UserTypes";
 
 const Navbar = () => {
 	return (
@@ -97,6 +98,7 @@ const Navbar = () => {
 									context.user ? (
 										<>
 											{" "}
+											{(context.user as FacultyType).designation}.{" "}
 											{context.user.first_name} {context.user.last_name}
 										</>
 									) : (

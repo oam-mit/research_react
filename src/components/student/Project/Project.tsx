@@ -65,7 +65,14 @@ class Project extends Component<IProps, IState> {
 		} else {
 			if (cv_null) {
 				return (
-					<button className="btn btn-mystyle" disabled={true}>
+					<button
+						className="btn btn-mystyle"
+						onClick={event => {
+							event.preventDefault();
+							this.props.history.push(`/student/profile`);
+							document.body.scrollTop = document.documentElement.scrollTop = 0;
+						}}
+					>
 						Please submit your resume
 					</button>
 				);
