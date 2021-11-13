@@ -69,8 +69,11 @@ class ProjectAdd extends Component<{}, StateType> {
 				<>
 					<legend>Basic Information</legend>
 					<div className="form-group">
-						<label htmlFor="exampleFormControlInput1">Title</label>
+						<label htmlFor="exampleFormControlInput1">
+							Title (Max Length: 160)
+						</label>
 						<input
+							maxLength={160}
 							value={this.state.submit_data.title}
 							onChange={event => this.changeHandler(event)}
 							name="title"
@@ -79,6 +82,16 @@ class ProjectAdd extends Component<{}, StateType> {
 							id="exampleFormControlInput1"
 							placeholder="What is the project called?"
 						/>
+						<span id="passwordHelpBlock" className="form-text text-muted">
+							Length:{" "}
+							<span
+								className={`${
+									this.state.submit_data.title.length > 130 ? "text-danger" : ""
+								}`}
+							>
+								{this.state.submit_data.title.length}
+							</span>
+						</span>
 					</div>
 					<div className="form-group">
 						<label htmlFor="exampleFormControlTextarea1">Description</label>

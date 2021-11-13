@@ -151,6 +151,8 @@ class Project extends Component<IProps, IState> {
 										</p>
 										{this.props.project.faculty.profile_picture ? (
 											<img
+												width={"400"}
+												height={"400"}
 												alt=""
 												src={this.props.project.faculty.profile_picture}
 											/>

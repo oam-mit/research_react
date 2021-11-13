@@ -24,7 +24,7 @@ const ApplicationCard = ({
 		} else if (status === REJECTED) {
 			return <Tags tag_string="Rejected" bootstrap_color={"danger"} />;
 		} else if (status === APPLIED) {
-			return <Tags tag_string="Applied" bootstrap_color={"info"} />;
+			return <Tags tag_string="Applied" bootstrap_color={"primary"} />;
 		}
 	};
 

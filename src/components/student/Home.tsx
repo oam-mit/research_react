@@ -89,17 +89,6 @@ const Home = () => {
 
 						<div className="service-box">
 							<div className="service-icon">
-								<i className="fas fa-code"></i>
-							</div>
-							<div className="service-title">All in one place</div>
-							<div className="service-desc">
-								Find the best research professors to guide you and help you
-								discover new knowledge at every step.
-							</div>
-						</div>
-
-						<div className="service-box">
-							<div className="service-icon">
 								<i className="fas fa-building"></i>
 							</div>
 							<div className="service-title">Separate Departments</div>
@@ -129,6 +118,16 @@ const Home = () => {
 								Ranging from a brief introduction to arranging a time for
 								further discussion, connect and communicate with accomplished
 								research professors.
+							</div>
+						</div>
+						<div className="service-box">
+							<div className="service-icon">
+								<i className="fas fa-map"></i>
+							</div>
+							<div className="service-title">All in one place</div>
+							<div className="service-desc">
+								Find the best research professors to guide you and help you
+								discover new knowledge at every step.
 							</div>
 						</div>
 

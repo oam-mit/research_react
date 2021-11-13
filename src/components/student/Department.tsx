@@ -114,7 +114,7 @@ const Department = () => {
 					)}
 				</h3>
 				<p className="lead my-4" style={{ fontFamily: "Quicksand" }}>
-					Projects related to that department !
+					Projects related to the department
 				</p>
 			</div>
 			{state.projects.length > 0 ? (

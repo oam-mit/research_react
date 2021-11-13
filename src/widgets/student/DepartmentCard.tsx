@@ -30,7 +30,7 @@ const DepartmentCard = ({
 				data-aos-delay="400"
 			>
 				{project.applied ? (
-					<Tags tag_string={"Applied"} bootstrap_color={"success"} />
+					<Tags tag_string={"Applied"} bootstrap_color={"primary"} />
 				) : (
 					<></>
 				)}
@@ -45,10 +45,14 @@ const DepartmentCard = ({
 				)}
 				<div className="text-content">
 					<span
+						style={{ textOverflow: "ellipsis" }}
 						onClick={() => showProjectAlert(project)}
 						className="department-card-design-title"
 					>
-						<strong>{project.title}</strong>
+						<strong>
+							{project.title.substring(0, 90)}
+							{project.title.length > 90 ? " ..." : ""}
+						</strong>
 					</span>
 					<p className="department-card-design-p">
 						<strong>Faculty:</strong> {project.faculty.designation}.{" "}

@@ -63,7 +63,7 @@ const ApplicationCard = ({
 					<div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<button
 							onClick={() =>
-								change_application_status(applicant, ACCEPTED, "accepted")
+								change_application_status(applicant, ACCEPTED, "accept")
 							}
 							className="dropdown-item"
 						>
@@ -71,7 +71,7 @@ const ApplicationCard = ({
 						</button>
 						<button
 							onClick={() =>
-								change_application_status(applicant, REJECTED, "rejected")
+								change_application_status(applicant, REJECTED, "reject")
 							}
 							className="dropdown-item"
 						>

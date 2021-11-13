@@ -1,5 +1,6 @@
 import { Component, createContext } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
+import { ACCEPTED } from "../../components/common/ProjectStatus";
 import UserProvider from "../../providers/UserProvider";
 import {
 	showErrorAlert,
@@ -15,6 +16,8 @@ export type ContextType = {
 	applications: Array<ApplicantType>;
 	loading: boolean;
 	project_title: string;
+	count_accepted: number;
+	count_max: number;
 	is_active: boolean;
 	change_applicant_status: (
 		applicant: ApplicantType,
@@ -34,6 +37,8 @@ export const ApplicationsContext = createContext<ContextType>({
 	is_active: true,
 	change_applicant_status: () => {},
 	change_project_status: () => {},
+	count_accepted: 0,
+	count_max: 0,
 });
 
 class ApplicationsProvider extends Component<PropsType, ContextType> {
@@ -45,6 +50,8 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			loading: true,
 			project_title: "",
 			is_active: false,
+			count_accepted: 0,
+			count_max: 0,
 			change_applicant_status: this.change_application_status,
 			change_project_status: this.change_project_status,
 		};
@@ -60,6 +67,8 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			applications: Array<ApplicantType>;
 			is_active: boolean;
 			title: string;
+			count_max: number;
+			count_accepted: number;
 		};
 
 		instance
@@ -72,6 +81,8 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 						is_active: data.is_active,
 						loading: false,
 						isAllowed: true,
+						count_max: data.count_max,
+						count_accepted: data.count_accepted,
 					});
 				} else {
 					this.setState({
@@ -87,7 +98,7 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			});
 	}
 
-	change_application_status = (
+	private __change_application_status = (
 		applicant: ApplicantType,
 		status: string,
 		status_show: string
@@ -124,8 +135,12 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 								if (data.status === "successful") {
 									this.fetch_applicants();
 
+									this.setState({
+										count_accepted: this.state.count_accepted + 1,
+									});
+
 									showSuccessAlert(
-										`${applicant.first_name} ${applicant.last_name} has been ${status_show}`
+										`${applicant.first_name} ${applicant.last_name} has been ${status_show}ed`
 									);
 								} else {
 									this.setState(
@@ -145,6 +160,31 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 				);
 			}
 		});
+	};
+
+	change_application_status = (
+		applicant: ApplicantType,
+		status: string,
+		status_show: string
+	) => {
+		if (
+			this.state.count_accepted >= this.state.count_max &&
+			status === ACCEPTED
+		) {
+			yesNoAlert(
+				"Alert",
+				`You have set maximum number of students in the project to ${this.state.count_max}. By accepting this applicant you would exceed this number (Accepted: ${this.state.count_accepted})`,
+				"Accept Anyway",
+				"Cancel",
+				"warning"
+			).then(value => {
+				if (value) {
+					this.__change_application_status(applicant, status, status_show);
+				}
+			});
+		} else {
+			this.__change_application_status(applicant, status, status_show);
+		}
 	};
 
 	change_project_status = () => {

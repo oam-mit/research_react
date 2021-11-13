@@ -85,26 +85,35 @@ const Applications = () => {
 				</button>
 			</div>
 			<div className="container">
-				<div className="row justify-content-center">
-					<div className="dropdown">
-						<button
-							className="btn btn-danger dropdown-toggle"
-							type="button"
-							id="dropdownMenuButton"
-							data-toggle="dropdown"
-							aria-haspopup="true"
-							aria-expanded="false"
-						>
-							{state.project_title}
-						</button>
-						<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a
-								className="dropdown-item"
-								href="/"
-								onClick={event => change_project_status(event)}
+				<div className="row">
+					<div
+						className="col-sm-12 col-12 text-center"
+						style={{ width: "100vw" }}
+					>
+						<div className="dropdown">
+							<button
+								style={{ whiteSpace: "normal" }}
+								className="btn btn-danger dropdown-toggle"
+								type="button"
+								id="dropdownMenuButton"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
 							>
-								{`Make Project ${state.is_active ? "Inactive" : "Active"}`}
-							</a>
+								{state.project_title}
+							</button>
+							<div
+								className="dropdown-menu"
+								aria-labelledby="dropdownMenuButton"
+							>
+								<a
+									className="dropdown-item"
+									href="/"
+									onClick={event => change_project_status(event)}
+								>
+									{`Make Project ${state.is_active ? "Inactive" : "Active"}`}
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -150,7 +150,10 @@ export const submitFeedbackAlert = (
 	});
 };
 
-export const showProjectAlert = (project: ProjectType) => {
+export const showProjectAlert = (
+	project: ProjectType,
+	showDescription: boolean = false
+) => {
 	const ReactSwal = withReactContent(Swal);
 
 	ReactSwal.fire({
@@ -186,8 +189,28 @@ export const showProjectAlert = (project: ProjectType) => {
 								month={"long"}
 							/>{" "}
 						</p>
+						<p className="card-text">
+							End Date:{" "}
+							<DateComponent
+								date={project.end_date}
+								locale={"en-GB"}
+								year={"numeric"}
+								day={"numeric"}
+								month={"long"}
+							/>{" "}
+						</p>
 					</div>
 				</div>
+				{showDescription ? (
+					<div className="card">
+						<div className="card-body">
+							<h4 className="font-weight-bold card-title">Description</h4>
+							<p className="card-text">{project.description}</p>
+						</div>
+					</div>
+				) : (
+					<></>
+				)}
 			</>
 		),
 		showClass: {
