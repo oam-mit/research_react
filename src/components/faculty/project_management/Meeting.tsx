@@ -12,6 +12,7 @@ import MeetingCard from "../../../widgets/common/MeetingCard";
 import Spinner from "../../common/Spinner";
 import LoadingCard from "../../../widgets/common/LoadingCard";
 import getTimeZone from "../../../services/TimezoneService";
+import { showErrorAlert } from "../../../services/AlertService";
 
 const Meeting = () => {
 	const state = useContext(MeetingContext);
@@ -197,12 +198,14 @@ const Meeting = () => {
 
 				{!state.logged_in ? (
 					<GoogleLogin
-						clientId="241052852049-sdhjiektnulfo2qte44iinkdf3l0m9i9.apps.googleusercontent.com"
+						clientId="241052852049-q2i2tmdhpj2mrtfk1io78i833jkf0lh8.apps.googleusercontent.com"
 						buttonText="Login to Google to create a meeting"
 						onSuccess={(response) => {
 							state.log_in((response as GoogleLoginResponse).accessToken);
 						}}
-						onFailure={() => {}}
+						onFailure={(error) => {
+							console.error(error);
+						}}
 						cookiePolicy={"single_host_origin"}
 						scope={
 							"openid email profile https://www.googleapis.com/auth/calendar"
