@@ -6,7 +6,7 @@ import {
 	showErrorAlert,
 	showNetworkError,
 	showSuccessAlert,
-	yesNoAlert,
+	showYesNoAlert,
 } from "../../services/AlertService";
 import instance from "./axiosInstance";
 import { ApplicantType } from "./types/ApplicantType";
@@ -103,13 +103,13 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 		status: string,
 		status_show: string
 	) => {
-		yesNoAlert(
+		showYesNoAlert(
 			"Confirmation",
 			`Are you sure you want to ${status_show} ${applicant.first_name} ${applicant.last_name}?`,
 			"Yes",
 			"No",
 			"warning"
-		).then(value => {
+		).then((value) => {
 			if (value) {
 				type DataType = {
 					status: "successful" | "unsuccessful";
@@ -171,13 +171,13 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			this.state.count_accepted >= this.state.count_max &&
 			status === ACCEPTED
 		) {
-			yesNoAlert(
+			showYesNoAlert(
 				"Alert",
 				`You have set maximum number of students in the project to ${this.state.count_max}. By accepting this applicant you would exceed this number (Accepted: ${this.state.count_accepted})`,
 				"Accept Anyway",
 				"Cancel",
 				"warning"
-			).then(value => {
+			).then((value) => {
 				if (value) {
 					this.__change_application_status(applicant, status, status_show);
 				}
@@ -192,37 +192,41 @@ class ApplicationsProvider extends Component<PropsType, ContextType> {
 			status: "successful" | "unsuccessful";
 			error: string;
 		};
-		yesNoAlert("Confirmation", "Are you sure?", "Yes", "No", "warning").then(
-			value => {
-				if (value) {
-					this.setState(
-						{
-							loading: true,
-						},
-						() => {
-							let form_data = new FormData();
-							form_data.append(
-								"uuid_field",
-								this.props.match.params.project_uuid
-							);
+		showYesNoAlert(
+			"Confirmation",
+			"Are you sure?",
+			"Yes",
+			"No",
+			"warning"
+		).then((value) => {
+			if (value) {
+				this.setState(
+					{
+						loading: true,
+					},
+					() => {
+						let form_data = new FormData();
+						form_data.append(
+							"uuid_field",
+							this.props.match.params.project_uuid
+						);
 
-							instance
-								.post("change_project_status/", form_data)
-								.then(({ data }: { data: DataType }) => {
-									if (data.status === "successful") {
-										this.props.history.replace(`/faculty/home`);
-									} else {
-										showErrorAlert(data.error);
-									}
-								})
-								.catch(err => {
-									showNetworkError();
-								});
-						}
-					);
-				}
+						instance
+							.post("change_project_status/", form_data)
+							.then(({ data }: { data: DataType }) => {
+								if (data.status === "successful") {
+									this.props.history.replace(`/faculty/home`);
+								} else {
+									showErrorAlert(data.error);
+								}
+							})
+							.catch((err) => {
+								showNetworkError();
+							});
+					}
+				);
 			}
-		);
+		});
 	};
 
 	render() {

@@ -6,7 +6,7 @@ import {
 	showLoadingAlert,
 	showNetworkError,
 	showSuccessAlert,
-	yesNoAlert,
+	showYesNoAlert,
 } from "../../services/AlertService";
 import instance from "./axiosInstance";
 
@@ -18,12 +18,12 @@ export type ContextType = {
 export type SubmitDataType = {
 	title: string;
 	description: string;
-	outcome:string;
+	outcome: string;
 	tags: string;
 	is_department_specific: boolean;
-	is_extendable:boolean;
+	is_extendable: boolean;
 	max_students: number;
-	hours_per_week:number;
+	hours_per_week: number;
 	start_date: string;
 	end_date: string;
 };
@@ -47,13 +47,13 @@ class ProjectAddProvider extends Component<PropsType, ContextType> {
 
 	submit_data = (data: SubmitDataType) => {
 		console.log(data);
-		yesNoAlert(
+		showYesNoAlert(
 			"Confirmation",
 			"Are you sure you want to publish the proeject?",
 			"Yes",
 			"Cancel",
 			"warning"
-		).then(value => {
+		).then((value) => {
 			if (value) {
 				showLoadingAlert();
 				this.setState(

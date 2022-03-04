@@ -77,6 +77,16 @@ const AcceptedApplications = () => {
 				>
 					<h5>View Applicants</h5>
 				</button>
+				<button
+					onClick={() =>
+						history.push(
+							`/faculty/project_management/meeting/${params.project_uuid}`
+						)
+					}
+					className="btn-mystyle"
+				>
+					<h5>Schedule Meeting</h5>
+				</button>
 			</div>
 			<div className="container">
 				<div className="table-scroll">{render_applications(state)}</div>

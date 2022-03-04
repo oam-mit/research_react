@@ -21,8 +21,11 @@
     "react-awesome-reveal": "^3.7.1",
     "react-css-modules": "^4.7.11",
     "react-date-picker": "^8.1.0",
+    "react-datetime-picker": "^3.5.0",
     "react-dom": "^17.0.1",
+    "react-google-login": "^5.2.2",
     "react-loading-skeleton": "^2.2.0",
+    "react-multi-select-component": "^4.2.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
@@ -60,11 +63,11 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.2",
+    "@types/react-datetime-picker": "^3.4.1",
     "@types/react-dom": "^17.0.5",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
     "react-spinners": "^0.10.6"
   },
   "proxy": "http://127.0.0.1:8000/"
-
 }

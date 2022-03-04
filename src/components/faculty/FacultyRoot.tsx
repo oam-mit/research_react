@@ -9,6 +9,7 @@ import HomeProvider from "../../backend/faculty/HomeProvider";
 import ProjectAddProvider from "../../backend/faculty/ProjectAddProvider";
 import AcceptedApplicationsProvider from "../../backend/faculty/AcceptedApplicationsProvider";
 import ApplicationsProvider from "../../backend/faculty/ApplicationsProvider";
+import ProjectManagementRoot from "./project_management/ProjectManagementRoot";
 
 const FacultyRoot = () => {
 	return (
@@ -54,6 +55,10 @@ const FacultyRoot = () => {
 							<ProjectAdd />
 						</ProjectAddProvider>
 					)}
+				/>
+				<Route
+					path="/faculty/project_management"
+					component={() => <ProjectManagementRoot />}
 				/>
 			</Switch>
 		</>

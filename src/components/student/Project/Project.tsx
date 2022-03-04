@@ -9,7 +9,10 @@ import {
 	ContextType,
 	ProjectContext,
 } from "../../../backend/student/ProjectProvider";
-import { showLoadingAlert, yesNoAlert } from "../../../services/AlertService";
+import {
+	showLoadingAlert,
+	showYesNoAlert,
+} from "../../../services/AlertService";
 import { RouteComponentProps, withRouter } from "react-router";
 
 import Fade from "react-awesome-reveal";
@@ -17,13 +20,13 @@ import Spinner from "../../common/Spinner";
 
 class Project extends Component<IProps, IState> {
 	submit_application(props: ContextType) {
-		yesNoAlert(
+		showYesNoAlert(
 			"Confirmation",
 			"Are you sure you want to proceed?",
 			"Yes",
 			"No",
 			"warning"
-		).then(res => {
+		).then((res) => {
 			if (res && this.props.project) {
 				showLoadingAlert();
 				props.submit_application(this.props.project.uuid_field);
@@ -45,7 +48,7 @@ class Project extends Component<IProps, IState> {
 		) {
 			return (
 				<ProjectContext.Consumer>
-					{props => (
+					{(props) => (
 						<button
 							disabled={props.submitted}
 							onClick={() => this.submit_application(props)}
@@ -67,7 +70,7 @@ class Project extends Component<IProps, IState> {
 				return (
 					<button
 						className="btn btn-mystyle"
-						onClick={event => {
+						onClick={(event) => {
 							event.preventDefault();
 							this.props.history.push(`/student/profile`);
 							document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -115,7 +118,7 @@ class Project extends Component<IProps, IState> {
 							<div className="w3-container">
 								<button
 									className="w3-button w3-xlarge"
-									onClick={event => this.clickHandler(event)}
+									onClick={(event) => this.clickHandler(event)}
 								>
 									<i
 										className="fas fa-angle-left"

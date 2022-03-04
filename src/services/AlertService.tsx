@@ -5,7 +5,7 @@ import { FeedbackType } from "../backend/faculty/types/FeedbackType";
 import DateComponent from "../components/common/Date";
 import FeedbackForm from "../widgets/faculty/FeedbackForm";
 
-export const yesNoAlert = async (
+export const showYesNoAlert = async (
 	title: string,
 	text: string,
 	confirmButtonText: string,
