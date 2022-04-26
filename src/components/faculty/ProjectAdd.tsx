@@ -6,6 +6,7 @@ import {
 	SubmitDataType,
 	ContextType,
 } from "../../backend/faculty/ProjectAddProvider";
+import Jumbotron from "../../widgets/common/Jumbotron";
 
 type StateType = {
 	submit_data: SubmitDataType;
@@ -37,7 +38,7 @@ class ProjectAdd extends Component<{}, StateType> {
 			| React.ChangeEvent<HTMLInputElement>
 			| React.ChangeEvent<HTMLTextAreaElement>
 	) {
-		this.setState(prev => {
+		this.setState((prev) => {
 			return {
 				submit_data: {
 					...prev.submit_data,
@@ -75,7 +76,7 @@ class ProjectAdd extends Component<{}, StateType> {
 						<input
 							maxLength={160}
 							value={this.state.submit_data.title}
-							onChange={event => this.changeHandler(event)}
+							onChange={(event) => this.changeHandler(event)}
 							name="title"
 							type="text"
 							className="form-control"
@@ -97,7 +98,7 @@ class ProjectAdd extends Component<{}, StateType> {
 						<label htmlFor="exampleFormControlTextarea1">Description</label>
 						<textarea
 							value={this.state.submit_data.description}
-							onChange={event => this.changeHandler(event)}
+							onChange={(event) => this.changeHandler(event)}
 							name="description"
 							className="form-control"
 							id="exampleFormControlTextarea1"
@@ -109,7 +110,7 @@ class ProjectAdd extends Component<{}, StateType> {
 						<label htmlFor="exampleFormControlTextarea2">Outcome</label>
 						<textarea
 							value={this.state.submit_data.outcome}
-							onChange={event => this.changeHandler(event)}
+							onChange={(event) => this.changeHandler(event)}
 							name="outcome"
 							className="form-control"
 							id="exampleFormControlTextarea2"
@@ -127,7 +128,7 @@ class ProjectAdd extends Component<{}, StateType> {
 							id="tags"
 							name="tags"
 							value={this.state.submit_data.tags}
-							onChange={event => this.changeHandler(event)}
+							onChange={(event) => this.changeHandler(event)}
 						/>
 						<span id="passwordHelpBlock" className="form-text text-muted">
 							<Tags
@@ -144,7 +145,7 @@ class ProjectAdd extends Component<{}, StateType> {
 								this.state.submit_data.tags.length === 0 ||
 								this.state.submit_data.outcome.length === 0
 							}
-							onClick={event => {
+							onClick={(event) => {
 								this.togglePage(event, 2);
 							}}
 							className="btn btn-mystyle"
@@ -163,8 +164,8 @@ class ProjectAdd extends Component<{}, StateType> {
 							<input
 								checked={this.state.submit_data.is_department_specific}
 								name="is_department_specific"
-								onChange={event =>
-									this.setState(prev => {
+								onChange={(event) =>
+									this.setState((prev) => {
 										return {
 											submit_data: {
 												...prev.submit_data,
@@ -188,8 +189,8 @@ class ProjectAdd extends Component<{}, StateType> {
 							<input
 								checked={this.state.submit_data.is_extendable}
 								name="is_extendable"
-								onChange={event =>
-									this.setState(prev => {
+								onChange={(event) =>
+									this.setState((prev) => {
 										return {
 											submit_data: {
 												...prev.submit_data,
@@ -212,7 +213,7 @@ class ProjectAdd extends Component<{}, StateType> {
 					<div className="form-group ">
 						<label htmlFor="max">Maximum number of students</label>
 						<input
-							onChange={event => this.changeHandler(event)}
+							onChange={(event) => this.changeHandler(event)}
 							type="number"
 							className="form-control col-2"
 							id="max"
@@ -224,7 +225,7 @@ class ProjectAdd extends Component<{}, StateType> {
 					<div className="form-group ">
 						<label htmlFor="hrs">Hours per week</label>
 						<input
-							onChange={event => this.changeHandler(event)}
+							onChange={(event) => this.changeHandler(event)}
 							type="number"
 							className="form-control col-2"
 							id="hrs"
@@ -239,7 +240,7 @@ class ProjectAdd extends Component<{}, StateType> {
 							<input
 								value={this.state.submit_data.start_date}
 								type="date"
-								onChange={event => this.changeHandler(event)}
+								onChange={(event) => this.changeHandler(event)}
 								name="start_date"
 								className="form-control"
 							/>
@@ -250,7 +251,7 @@ class ProjectAdd extends Component<{}, StateType> {
 								<input
 									value={this.state.submit_data.end_date}
 									type="date"
-									onChange={event => this.changeHandler(event)}
+									onChange={(event) => this.changeHandler(event)}
 									min={this.state.submit_data.start_date}
 									name="end_date"
 									className="form-control"
@@ -265,7 +266,7 @@ class ProjectAdd extends Component<{}, StateType> {
 						<div className="btn-group" role="group" aria-label="Basic example">
 							<button
 								className="btn mr-1"
-								onClick={event => this.togglePage(event, 1)}
+								onClick={(event) => this.togglePage(event, 1)}
 								style={{ backgroundColor: "#1d1e4e", color: "white" }}
 							>
 								Previous
@@ -278,7 +279,7 @@ class ProjectAdd extends Component<{}, StateType> {
 									this.state.submit_data.end_date.length === 0 ||
 									this.state.submit_data.hours_per_week === 0
 								}
-								onClick={event => this.togglePage(event, 3)}
+								onClick={(event) => this.togglePage(event, 3)}
 								style={{ backgroundColor: "#1d1e4e", color: "white" }}
 							>
 								Next
@@ -441,7 +442,7 @@ class ProjectAdd extends Component<{}, StateType> {
 						<div className="btn-group" role="group" aria-label="Basic example">
 							<button
 								className="btn mr-1"
-								onClick={event => this.togglePage(event, 2)}
+								onClick={(event) => this.togglePage(event, 2)}
 								style={{ backgroundColor: "#1d1e4e", color: "white" }}
 							>
 								Previous
@@ -478,14 +479,7 @@ class ProjectAdd extends Component<{}, StateType> {
 		return (
 			<>
 				<title>Faculty | New Project</title>
-				<div
-					className="jumbotron jumbotron-fluid text-white text-center my-3"
-					id="jumbo-color"
-				>
-					<h3 className="display-1" id="jumbo-text">
-						Add a new Project
-					</h3>
-				</div>
+				<Jumbotron title="Add a new project" subtitle="" />
 				<div className="container padding-custom">
 					<div className="progress" style={{ height: "5px" }}>
 						<div
@@ -500,9 +494,9 @@ class ProjectAdd extends Component<{}, StateType> {
 						></div>
 					</div>
 					<ProjectAddContext.Consumer>
-						{props => (
+						{(props) => (
 							<form
-								onSubmit={event => this.submit_handler(event, props)}
+								onSubmit={(event) => this.submit_handler(event, props)}
 								className="my-4"
 							>
 								{this.render_form(props)}

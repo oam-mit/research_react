@@ -5,6 +5,7 @@ import {
 	ContextType,
 } from "../../backend/faculty/AcceptedApplicationsProvider";
 import UserProvider from "../../providers/UserProvider";
+import Jumbotron from "../../widgets/common/Jumbotron";
 import AcceptedApplicationCard from "../../widgets/faculty/AcceptedApplicationCard";
 import Spinner from "../common/Spinner";
 
@@ -62,13 +63,7 @@ const AcceptedApplications = () => {
 	return (
 		<>
 			<title>Applications</title>
-			<div
-				className="jumbotron jumbotron-fluid text-white text-center my-3"
-				id="jumbo-color"
-			>
-				<h3 className="display-1" id="jumbo-text">
-					Accepted Applicants
-				</h3>
+			<Jumbotron title="Accepted Applicants" subtitle="">
 				<button
 					onClick={() =>
 						history.push(`/faculty/applications/${params.project_uuid}`)
@@ -80,14 +75,14 @@ const AcceptedApplications = () => {
 				<button
 					onClick={() =>
 						history.push(
-							`/faculty/project_management/meeting/${params.project_uuid}`
+							`/faculty/project_management/meetings/${params.project_uuid}`
 						)
 					}
 					className="btn-mystyle"
 				>
 					<h5>Schedule Meeting</h5>
 				</button>
-			</div>
+			</Jumbotron>
 			<div className="container">
 				<div className="table-scroll">{render_applications(state)}</div>
 			</div>

@@ -45,30 +45,32 @@ const TaskCard = (props: FacultyEditingType | StudentNonEditingType) => {
 					</div>
 					<div className="d-flex flex-row align-items-center">
 						<div className="d-flex flex-column mr-2">
-							<i
-								style={{ cursor: "pointer" }}
-								className="fa fa-ellipsis-h"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false"
-							></i>
 							{props.is_editable ? (
-								<div className="dropdown-menu">
-									<span
+								<>
+									<i
 										style={{ cursor: "pointer" }}
-										className="dropdown-item"
-										onClick={() => {
-											props.change_task_status(
-												props.task.pk,
-												!props.task.status
-											);
-										}}
-									>
-										{props.task.status
-											? "Mark Not completed"
-											: "Mark completed"}
-									</span>
-								</div>
+										className="fa fa-ellipsis-h"
+										data-toggle="dropdown"
+										aria-haspopup="true"
+										aria-expanded="false"
+									></i>
+									<div className="dropdown-menu">
+										<span
+											style={{ cursor: "pointer" }}
+											className="dropdown-item"
+											onClick={() => {
+												props.change_task_status(
+													props.task.pk,
+													!props.task.status
+												);
+											}}
+										>
+											{props.task.status
+												? "Mark Not completed"
+												: "Mark completed"}
+										</span>
+									</div>
+								</>
 							) : (
 								<></>
 							)}

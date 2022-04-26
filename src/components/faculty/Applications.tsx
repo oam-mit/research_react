@@ -4,6 +4,7 @@ import {
 	ApplicationsContext,
 	ContextType,
 } from "../../backend/faculty/ApplicationsProvider";
+import Jumbotron from "../../widgets/common/Jumbotron";
 import ApplicationCard from "../../widgets/faculty/ApplicationsCard";
 import Spinner from "../common/Spinner";
 
@@ -25,7 +26,7 @@ const Applications = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{state.applications.map(applicant => (
+							{state.applications.map((applicant) => (
 								<ApplicationCard
 									key={applicant.email}
 									applicant={applicant}
@@ -66,13 +67,7 @@ const Applications = () => {
 	return (
 		<>
 			<title>Applications</title>
-			<div
-				className="jumbotron jumbotron-fluid text-white text-center my-3"
-				id="jumbo-color"
-			>
-				<h3 className="display-1" id="jumbo-text">
-					Pending Applications
-				</h3>
+			<Jumbotron title="Pending Applications" subtitle="">
 				<button
 					onClick={() =>
 						history.push(
@@ -83,7 +78,7 @@ const Applications = () => {
 				>
 					<h5>View Accepted Applicants</h5>
 				</button>
-			</div>
+			</Jumbotron>
 			<div className="container">
 				<div className="row">
 					<div
@@ -109,7 +104,7 @@ const Applications = () => {
 								<a
 									className="dropdown-item"
 									href="/"
-									onClick={event => change_project_status(event)}
+									onClick={(event) => change_project_status(event)}
 								>
 									{`Make Project ${state.is_active ? "Inactive" : "Active"}`}
 								</a>

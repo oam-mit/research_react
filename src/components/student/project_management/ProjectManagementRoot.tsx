@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router";
-import MeetingProvider from "../../../backend/faculty/project_management/MeetingProvider";
-import TaskManagerProvider from "../../../backend/faculty/project_management/TaskManagerProvider";
+import MeetingProvider from "../../../backend/student/project_management/MeetingProvider";
+import TaskManagerProvider from "../../../backend/student/project_management/TaskManagerProvider";
 import Meeting from "./Meeting";
 import TaskManager from "./TaskManager";
 
@@ -9,7 +9,7 @@ const ProjectManagementRoot = () => {
 		<Switch>
 			<Route
 				exact
-				path="/faculty/project_management/meetings/:project_uuid"
+				path="/student/project_management/meetings/:project_uuid"
 				component={() => (
 					<MeetingProvider>
 						<Meeting />
@@ -18,7 +18,7 @@ const ProjectManagementRoot = () => {
 			/>
 			<Route
 				exact
-				path="/faculty/project_management/tasks/:project_uuid"
+				path="/student/project_management/tasks/:project_uuid"
 				component={() => (
 					<TaskManagerProvider>
 						<TaskManager />

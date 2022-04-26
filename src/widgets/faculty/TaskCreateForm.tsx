@@ -54,8 +54,8 @@ const TaskCreateForm = (props: PropsType) => {
 					aria-label="Default select example"
 				>
 					<option selected>Open this select menu</option>
-					{props.accepted_applications.map((applicant) => (
-						<option value={applicant.email}>
+					{props.accepted_applications.map((applicant, index) => (
+						<option value={applicant.email} key={index}>
 							{applicant.first_name} {applicant.last_name} -{" "}
 							{applicant.registration_number}
 						</option>

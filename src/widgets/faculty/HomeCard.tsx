@@ -21,7 +21,7 @@ const HomeCard = ({ project }: { project: ProjectType }) => {
 		},
 		{
 			name: "Meeting Manager",
-			url: `/faculty/project_management/meeting/${project.uuid_field}`,
+			url: `/faculty/project_management/meetings/${project.uuid_field}`,
 		},
 		{
 			name: "Task Manager",

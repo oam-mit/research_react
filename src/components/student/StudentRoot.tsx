@@ -14,6 +14,7 @@ import ApplicationProvider from "../../backend/student/ApplicationProvider";
 import ProjectProvider from "../../backend/student/ProjectProvider";
 import WorkingOn from "./WorkingOn";
 import WorkingOnProvider from "../../backend/student/WorkingOnProvider";
+import ProjectManagementRoot from "./project_management/ProjectManagementRoot";
 
 class StudentRoot extends Component<{}, StateType> {
 	constructor(props: any) {
@@ -37,6 +38,7 @@ class StudentRoot extends Component<{}, StateType> {
 				{this.state.showNavbar && <Navbar />}
 				<Switch>
 					<Route
+						exact
 						path="/student/home"
 						render={() => (
 							<HomeProvider>
@@ -45,9 +47,10 @@ class StudentRoot extends Component<{}, StateType> {
 						)}
 					/>
 
-					<Route path="/student/profile" render={() => <Profile />} />
+					<Route exact path="/student/profile" render={() => <Profile />} />
 
 					<Route
+						exact
 						path="/student/department/:department_slug"
 						render={() => (
 							<DepartmentProvider>
@@ -70,6 +73,7 @@ class StudentRoot extends Component<{}, StateType> {
 					/>
 
 					<Route
+						exact
 						path="/student/applications"
 						render={() => (
 							<ApplicationProvider>
@@ -79,12 +83,17 @@ class StudentRoot extends Component<{}, StateType> {
 					/>
 
 					<Route
+						exact
 						path="/student/working_on"
 						render={() => (
 							<WorkingOnProvider>
 								<WorkingOn />
 							</WorkingOnProvider>
 						)}
+					/>
+					<Route
+						path="/student/project_management"
+						render={() => <ProjectManagementRoot />}
 					/>
 
 					<Route path="/student/not-found" render={() => <NotFound />} />

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ApplicationContext } from "../../backend/student/ApplicationProvider";
 import ApplicationCard from "../../widgets/student/ApplicationCard";
 import LoadingCard from "../../widgets/common/LoadingCard";
+import Jumbotron from "../../widgets/common/Jumbotron";
 
 const Applications = () => {
 	let state = useContext(ApplicationContext);
@@ -11,7 +12,7 @@ const Applications = () => {
 			return <LoadingCard count={4} />;
 		} else {
 			if (state.projects.length > 0) {
-				let projects = state.projects.map(project => {
+				let projects = state.projects.map((project) => {
 					return (
 						<ApplicationCard
 							key={project.uuid_field}
@@ -40,18 +41,10 @@ const Applications = () => {
 	return (
 		<>
 			<title>Student|Applications</title>
-			<div
-				className="jumbotron jumbotron-fluid text-white text-center my-3"
-				id="jumbo-color"
-			>
-				<h3 className="display-1" id="jumbo-text">
-					Your Applications
-				</h3>
-				<p className="lead my-4" style={{ fontFamily: "Quicksand" }}>
-					You can view all your applications here
-				</p>
-				<br />
-			</div>
+			<Jumbotron
+				title="Your Applications"
+				subtitle="You can view all your applications here"
+			/>
 
 			<div className="container-fluid ">
 				<div className="row">{render_projects()}</div>

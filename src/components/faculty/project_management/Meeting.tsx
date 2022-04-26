@@ -13,6 +13,7 @@ import Spinner from "../../common/Spinner";
 import LoadingCard from "../../../widgets/common/LoadingCard";
 import getTimeZone from "../../../services/TimezoneService";
 import { showErrorAlert } from "../../../services/AlertService";
+import Jumbotron from "../../../widgets/common/Jumbotron";
 
 const Meeting = () => {
 	const state = useContext(MeetingContext);
@@ -188,14 +189,7 @@ const Meeting = () => {
 	return (
 		<>
 			<title>Meeting Management </title>
-			<div
-				className="jumbotron jumbotron-fluid text-white text-center my-3"
-				id="jumbo-color"
-			>
-				<h3 className="display-1" id="jumbo-text">
-					Meeting Management
-				</h3>
-
+			<Jumbotron title="Meeting Management" subtitle="">
 				{!state.logged_in ? (
 					<GoogleLogin
 						clientId="241052852049-q2i2tmdhpj2mrtfk1io78i833jkf0lh8.apps.googleusercontent.com"
@@ -215,7 +209,7 @@ const Meeting = () => {
 				) : (
 					<></>
 				)}
-			</div>
+			</Jumbotron>
 			{render_page()}
 		</>
 	);

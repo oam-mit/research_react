@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import NoProjects from "../../backend/common/NoProjectToShow";
 import { HomeContext } from "../../backend/faculty/HomeProvider";
+import Jumbotron from "../../widgets/common/Jumbotron";
 import LoadingCard from "../../widgets/common/LoadingCard";
 import HomeCard from "../../widgets/faculty/HomeCard";
 
@@ -89,18 +90,10 @@ const Home = () => {
 	return (
 		<>
 			<title>Faculty | Home</title>
-			<div
-				className="jumbotron jumbotron-fluid text-white text-center my-3"
-				id="jumbo-color"
+			<Jumbotron
+				title="Your Projects"
+				subtitle="View applicants, schedule meetings, assign tasks and more!"
 			>
-				<h3 className="display-1" id="jumbo-text">
-					Your Projects
-				</h3>
-				<p className="lead my-4" style={{ fontFamily: "Quicksand" }}>
-					View applications and add more!
-				</p>
-				<br />
-
 				<button
 					onClick={() => history.push("/faculty/project/add")}
 					className="btn-mystyle"
@@ -108,7 +101,7 @@ const Home = () => {
 					{" "}
 					<h5>Add Project</h5>{" "}
 				</button>
-			</div>
+			</Jumbotron>
 
 			<div className="container-fluid">
 				<div className="row text-center">

@@ -238,9 +238,10 @@ export const showProjectOptions = (
 	showReactAlert(
 		"Select One of the following options",
 		<>
-			{options.map((option) => {
+			{options.map((option, index) => {
 				return (
 					<button
+						key={index}
 						className="btn-mystyle"
 						onClick={(event) => {
 							event.preventDefault();

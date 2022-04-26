@@ -9,6 +9,7 @@ import HomeCard from "../../widgets/student/HomeCard";
 import LoadingCard from "../../widgets/common/LoadingCard";
 import Footer from "./Footer";
 import TopButton from "./TopButton";
+import Jumbotron from "../../widgets/common/Jumbotron";
 
 const Home = () => {
 	const render_departments = () => {
@@ -31,17 +32,10 @@ const Home = () => {
 	return (
 		<>
 			<title>Home</title>
-			<div
-				className="jumbotron jumbotron-fluid text-white text-center my-3"
-				id="jumbo-color"
-			>
-				<h3 className="display-1" id="jumbo-text">
-					Welcome to the Research Portal!
-				</h3>
-				<p className="lead my-4" style={{ fontFamily: "Quicksand" }}>
-					Finding projects finally made easy!
-				</p>
-			</div>
+			<Jumbotron
+				title="Welcome to RPMP"
+				subtitle="Finding projects made easy!"
+			/>
 			<div className="container section-title-1 text-center m-auto">
 				<h1 className="m-auto">Projects sorted department wise!</h1>
 			</div>
@@ -60,7 +54,7 @@ const Home = () => {
 							className="form-control"
 							id="inlineFormInputGroup"
 							placeholder="Search"
-							onChange={event => state.search(event.target.value)}
+							onChange={(event) => state.search(event.target.value)}
 						/>
 					</div>
 				</div>
