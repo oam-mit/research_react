@@ -7,25 +7,17 @@ import {
 	showProjectOptions,
 } from "../../services/AlertService";
 
-const HomeCard = ({ project }: { project: ProjectType }) => {
+const WorkingOnProjectCard = ({ project }: { project: ProjectType }) => {
 	let history = useHistory();
 
 	let options: OptionsType[] = [
 		{
-			name: "Accepted Applications",
-			url: `/faculty/applications/accepted/${project.uuid_field}`,
+			name: "Meeting Schedule",
+			url: `/student/project_management/meetings/${project.uuid_field}`,
 		},
 		{
-			name: "Received Applications",
-			url: `/faculty/applications/${project.uuid_field}`,
-		},
-		{
-			name: "Meeting Manager",
-			url: `/faculty/project_management/meeting/${project.uuid_field}`,
-		},
-		{
-			name: "Task Manager",
-			url: `/faculty/project_management/tasks/${project.uuid_field}`,
+			name: "View Tasks",
+			url: `/student/project_management/tasks/${project.uuid_field}`,
 		},
 	];
 
@@ -72,4 +64,4 @@ const HomeCard = ({ project }: { project: ProjectType }) => {
 	);
 };
 
-export default HomeCard;
+export default WorkingOnProjectCard;

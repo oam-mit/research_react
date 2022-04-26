@@ -12,6 +12,8 @@ import DepartmentProvider from "../../backend/student/DepartmentProvider";
 import HomeProvider from "../../backend/student/HomeProvider";
 import ApplicationProvider from "../../backend/student/ApplicationProvider";
 import ProjectProvider from "../../backend/student/ProjectProvider";
+import WorkingOn from "./WorkingOn";
+import WorkingOnProvider from "../../backend/student/WorkingOnProvider";
 
 class StudentRoot extends Component<{}, StateType> {
 	constructor(props: any) {
@@ -73,6 +75,15 @@ class StudentRoot extends Component<{}, StateType> {
 							<ApplicationProvider>
 								<Applications />
 							</ApplicationProvider>
+						)}
+					/>
+
+					<Route
+						path="/student/working_on"
+						render={() => (
+							<WorkingOnProvider>
+								<WorkingOn />
+							</WorkingOnProvider>
 						)}
 					/>
 

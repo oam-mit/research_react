@@ -45,9 +45,13 @@ export const showSuccessAlert = (text: string, onOkFunction?: () => void) => {
 	});
 };
 
-export const showErrorAlert = (text: string, onOkFunction?: () => void) => {
+export const showErrorAlert = (
+	text: string,
+	onOkFunction?: () => void,
+	errorText = "Error"
+) => {
 	Swal.fire({
-		title: "Error",
+		title: errorText,
 		text: text,
 		icon: "error",
 	}).then(() => {
@@ -68,7 +72,8 @@ export const showNetworkError = () => {
 export const showReactAlert = (
 	title: string,
 	body: JSX.Element,
-	icon: "error" | "info"
+	icon: "error" | "info",
+	confirmButtonText = "OK"
 ) => {
 	const ReactSwal = withReactContent(Swal);
 
@@ -78,6 +83,7 @@ export const showReactAlert = (
 
 		html: body,
 		confirmButtonColor: "#0069d9",
+		confirmButtonText: confirmButtonText,
 	});
 };
 
@@ -219,4 +225,35 @@ export const showProjectAlert = (
 		},
 		confirmButtonColor: "#0069d9",
 	});
+};
+
+export type OptionsType = {
+	name: string;
+	url: string;
+};
+export const showProjectOptions = (
+	options: OptionsType[],
+	pushFunction: (url: string) => void
+) => {
+	showReactAlert(
+		"Select One of the following options",
+		<>
+			{options.map((option) => {
+				return (
+					<button
+						className="btn-mystyle"
+						onClick={(event) => {
+							event.preventDefault();
+							pushFunction(option.url);
+							Swal.close();
+						}}
+					>
+						<h5>{option.name}</h5>
+					</button>
+				);
+			})}
+		</>,
+		"info",
+		"CLOSE"
+	);
 };

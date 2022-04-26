@@ -29,7 +29,7 @@ const Navbar = () => {
 			<a
 				className="navbar-brand"
 				href="/"
-				onClick={event => event.preventDefault()}
+				onClick={(event) => event.preventDefault()}
 			>
 				<img
 					src={logo}
@@ -42,7 +42,7 @@ const Navbar = () => {
 			<a
 				className="navbar-brand"
 				href="/"
-				onClick={event => event.preventDefault()}
+				onClick={(event) => event.preventDefault()}
 			>
 				ISTE Manipal
 			</a>
@@ -56,6 +56,15 @@ const Navbar = () => {
 							to="/student/home"
 						>
 							Home
+						</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink
+							activeClassName="active"
+							className="nav-link"
+							to="/student/working_on"
+						>
+							Your Projects
 						</NavLink>
 					</li>
 					{/* <li className="nav-item">
@@ -77,7 +86,7 @@ const Navbar = () => {
 						<a
 							href="/"
 							className="nav-link"
-							onClick={event => {
+							onClick={(event) => {
 								event.preventDefault();
 								showContactUsAlert();
 							}}
@@ -98,7 +107,7 @@ const Navbar = () => {
 							aria-expanded="false"
 						>
 							<UserProvider.Consumer>
-								{context =>
+								{(context) =>
 									context.user ? (
 										<>
 											{" "}
