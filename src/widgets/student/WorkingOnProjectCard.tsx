@@ -31,7 +31,10 @@ const WorkingOnProjectCard = ({ project }: { project: ProjectType }) => {
 			>
 				<div className="text-content">
 					<span className="department-card-design-title">
-						<strong>{project.title}</strong>
+						<strong>
+							{project.title.substring(0, 50)}
+							{project.title.length > 50 ? " ..." : ""}
+						</strong>
 					</span>
 					<p className="department-card-design-p">
 						<strong>Start Date:</strong>{" "}

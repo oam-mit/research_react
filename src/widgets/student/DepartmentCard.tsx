@@ -50,8 +50,8 @@ const DepartmentCard = ({
 						className="department-card-design-title"
 					>
 						<strong>
-							{project.title.substring(0, 90)}
-							{project.title.length > 90 ? " ..." : ""}
+							{project.title.substring(0, 50)}
+							{project.title.length > 50 ? " ..." : ""}
 						</strong>
 					</span>
 					<p className="department-card-design-p">
@@ -69,7 +69,7 @@ const DepartmentCard = ({
 						/>
 					</p>
 					<button
-						onClick={event => {
+						onClick={(event) => {
 							navigateToProject(event);
 						}}
 						className="btn btn-mystyle"
